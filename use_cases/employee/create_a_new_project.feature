@@ -10,5 +10,5 @@ Scenario: Create a new project
 Scenario: Create a new project without name 
 	Given that a name for the project is not provided 
 	When the project manager creates a new project 
-	Then the system provides an error message “The project has no name. Please choose a name for the project. ” 
+	Then the system provides an error message “The project has no name. Please choose a name for the project” 
 	
