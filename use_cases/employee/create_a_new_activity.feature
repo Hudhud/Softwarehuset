@@ -10,4 +10,4 @@ Scenario:  create an activity for a project
 Scenario:  a project with the provided ID does not exist
 	Given that the project manager provides the ID of a project, which has not been created
 	When the project manager creates an activity
-	Then the system provides an error message “A project with the given ID does not exist”	
+	Then the system provides an error message "A project with the given ID does not exist"	
