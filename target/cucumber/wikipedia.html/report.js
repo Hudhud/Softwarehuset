@@ -13,25 +13,32 @@ formatter.step({
   "name": "that a name for the project is provided",
   "keyword": "Given "
 });
-formatter.match({});
+formatter.match({
+  "location": "employeeSteps.thatANameForTheProjectIsProvided()"
+});
 formatter.result({
-  "status": "undefined"
+  "error_message": "cucumber.api.PendingException: TODO: implement me\r\n\tat tests.employeeSteps.thatANameForTheProjectIsProvided(employeeSteps.java:12)\r\n\tat ✽.that a name for the project is provided(use_cases\\employee\\create_a_new_project.feature:6)\r\n",
+  "status": "pending"
 });
 formatter.step({
   "name": "a new project is created",
   "keyword": "When "
 });
-formatter.match({});
+formatter.match({
+  "location": "employeeSteps.aNewProjectIsCreated()"
+});
 formatter.result({
-  "status": "undefined"
+  "status": "skipped"
 });
 formatter.step({
   "name": "the system creates a project with the provided name and a consecutive number.",
   "keyword": "Then "
 });
-formatter.match({});
+formatter.match({
+  "location": "employeeSteps.theSystemCreatesAProjectWithTheProvidedNameAndAConsecutiveNumber()"
+});
 formatter.result({
-  "status": "undefined"
+  "status": "skipped"
 });
 formatter.scenario({
   "name": "Create a new project without name",
@@ -42,17 +49,22 @@ formatter.step({
   "name": "that a name for the project is not provided",
   "keyword": "Given "
 });
-formatter.match({});
+formatter.match({
+  "location": "employeeSteps.thatANameForTheProjectIsNotProvided()"
+});
 formatter.result({
-  "status": "undefined"
+  "error_message": "cucumber.api.PendingException: TODO: implement me\r\n\tat tests.employeeSteps.thatANameForTheProjectIsNotProvided(employeeSteps.java:30)\r\n\tat ✽.that a name for the project is not provided(use_cases\\employee\\create_a_new_project.feature:11)\r\n",
+  "status": "pending"
 });
 formatter.step({
   "name": "the project manager creates a new project",
   "keyword": "When "
 });
-formatter.match({});
+formatter.match({
+  "location": "employeeSteps.theProjectManagerCreatesANewProject()"
+});
 formatter.result({
-  "status": "undefined"
+  "status": "skipped"
 });
 formatter.step({
   "name": "the system provides an error message �The project has no name. Please choose a name for the project�",
