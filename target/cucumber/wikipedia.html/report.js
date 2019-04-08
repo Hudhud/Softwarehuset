@@ -1,4 +1,4 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("use_cases/employee/create_a_new_project.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("use_cases\\employee\\create_a_new_project.feature");
 formatter.feature({
   "name": "create a new project",
   "description": "",
@@ -55,7 +55,7 @@ formatter.result({
   "status": "undefined"
 });
 formatter.step({
-  "name": "the system provides an error message �The project has no name. Please choose a name for the project. �",
+  "name": "the system provides an error message �The project has no name. Please choose a name for the project�",
   "keyword": "Then "
 });
 formatter.match({});
