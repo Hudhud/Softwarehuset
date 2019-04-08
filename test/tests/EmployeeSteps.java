@@ -4,7 +4,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class employeeSteps {
+public class EmployeeSteps {
 	
 	@Given("that a name for the project is provided")
 	public void thatANameForTheProjectIsProvided( ) {
