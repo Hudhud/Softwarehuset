@@ -61,12 +61,6 @@ public class ProjectManagerSteps {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
-
-	@Then("the project manager gets the error {string}")
-	public void the_project_manager_gets_the_error(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
-	}
 	
 	//from create-a-new-activity.feature
 	
@@ -90,12 +84,6 @@ public class ProjectManagerSteps {
 
 	@Given("that the project manager provides the ID of a project, which has not been created")
 	public void that_the_project_manager_provides_the_ID_of_a_project_which_has_not_been_created() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
-	}
-
-	@Then("the system provides an error message {string}")
-	public void the_system_provides_an_error_message(String string) {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new cucumber.api.PendingException();
 	}
