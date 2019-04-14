@@ -32,12 +32,6 @@ public class ProjectManagerSteps {
 	    throw new cucumber.api.PendingException();
 	}
 
-	@Then("the system provides an error message {string}")
-	public void the_system_provides_an_error_message(String string) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
-	}
-
 
 	
 	// from assign-an-employee-to-activity.feature
