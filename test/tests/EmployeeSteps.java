@@ -1,36 +1,37 @@
 package tests;
 
-import static org.hamcrest.CoreMatchers.*;
-
 import static org.junit.Assert.assertEquals;
-//import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertThat;
-
 //import static org.junit.Assert.assertThat;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import exceptions.ErrorMessageHolder;
 import exceptions.OperationNotAllowedException;
+import main.Softwarehuset;
 import project.Project;
 
 public class EmployeeSteps {
-	Project p; 
-	String projectName;
+	//private Softwarehuset softwarehuset;
+	private String projectName;
 	private ErrorMessageHolder errorMessageHolder;
+	private Project p;
 	
 	// from create-a-new-project.feature
 	
-	@Given("that a name for the project is provided")
-	public void thatANameForTheProjectIsProvided() {
-		projectName = null;
+	@Given("that a name {string} for the project is provided")
+	public void thatANameForTheProjectIsProvided(String projectName) {
+		System.out.println("test "+ projectName);
+		this.projectName = projectName;
 	}
+	
+
 
 	@When("a new project is created")
 	public void a_new_project_is_created() throws Exception {
-		
+		Softwarehuset softwarehuset = new Softwarehuset();
 		try {
-			p = new Project(projectName);
+//			p = softwarehuset.createP(projectName);
+			softwarehuset.addProjectToProjectlist(projectName);
 		} catch (OperationNotAllowedException e) {
 			System.out.println(e.getMessage());
 			errorMessageHolder.setErrorMessage(e.getMessage());
@@ -50,11 +51,11 @@ public class EmployeeSteps {
 //		this.projectName = projectName;
 //	}
 	
-	@Then("the system provides an error message {string}")
-	public void theSystemProvidesAnErrorMessage(String errorMessage) throws Exception {
-		System.out.println(errorMessageHolder.getErrorMessage());
-		assertThat(errorMessageHolder.getErrorMessage(),is(equalTo(errorMessage)));
-	}
+//	@Then("the system provides an error message {string}")
+//	public void theSystemProvidesAnErrorMessage(String errorMessage) throws Exception {
+//		System.out.println(errorMessageHolder.getErrorMessage());
+//		assertThat(errorMessageHolder.getErrorMessage(),is(equalTo(errorMessage)));
+//	}
 	
 //	
 //	//from create-a-permanent-activity.feature
