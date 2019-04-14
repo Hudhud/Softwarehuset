@@ -4,7 +4,6 @@ public class ErrorMessageHolder {
 	private String errorMessage;
 	
 	public String getErrorMessage() {
-		System.out.println(errorMessage+ "ejg");
 		return errorMessage;
 	}
 	

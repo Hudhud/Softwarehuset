@@ -26,8 +26,9 @@ public class Softwarehuset {
 			int idIntFormat = Integer.parseInt(lastId)+1;
 			idStringFormat = String.format("%06d", idIntFormat);
 		}
-		System.out.println("id " + year+idStringFormat);
-		return year+idStringFormat;
+		String projectID = year+idStringFormat;
+		
+		return projectID;
 	}
 	
 	public Project createP(String projectName) throws Exception {
