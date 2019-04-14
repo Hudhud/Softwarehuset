@@ -1,6 +1,8 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 //import static org.junit.Assert.assertThat;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -14,53 +16,43 @@ public class EmployeeSteps {
 	private Softwarehuset softwarehuset;
 	private String projectName;
 	private ErrorMessageHolder errorMessageHolder;
-	private Project p;
-	
+
 	public EmployeeSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder) {
 		this.softwarehuset = softwarehuset;
 		this.errorMessageHolder = errorMessageHolder;
 	}
-	
+
 	// from create-a-new-project.feature
-	
+
 	@Given("that a name {string} for the project is provided")
 	public void thatANameForTheProjectIsProvided(String projectName) {
-		System.out.println("test "+ projectName);
 		this.projectName = projectName;
 	}
-	
-
 
 	@When("a new project is created")
 	public void a_new_project_is_created() throws Exception {
 		try {
-//			p = softwarehuset.createP(projectName);
 			softwarehuset.addProjectToProjectlist(projectName);
 		} catch (OperationNotAllowedException e) {
-			System.out.println(e.getMessage());
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 	}
 
-	
-	@Then("the system creates a project with the provided name {string} and a consecutive number.")
+	@Then("the system creates a project with the provided name {string} and a consecutive number")
 	public void theSystemCreatesAProjectWithTheProvidedNameAndAConsecutiveNumber(String projectName) {
-		//assertEquals(projectName, p.getProjectName());
+		assertTrue(softwarehuset.getProjectsFromProjectList().contains(softwarehuset.searchForProject(projectName)));
 	}
 
+	@Given("that a name for the project is not provided")
+	public void thatANameForTheProjectIsNotProvided() {
+		projectName = "";
+	}
 
-//	@Given("that a name {string} for the project is not provided")
-//	public void thatANameForTheProjectIsNotProvided(String projectName) {
-//		System.out.println("dada "+ this.projectName);
-//		this.projectName = projectName;
-//	}
-	
-//	@Then("the system provides an error message {string}")
-//	public void theSystemProvidesAnErrorMessage(String errorMessage) throws Exception {
-//		System.out.println(errorMessageHolder.getErrorMessage());
-//		assertThat(errorMessageHolder.getErrorMessage(),is(equalTo(errorMessage)));
-//	}
-	
+	@Then("the system provides an error message {string}")
+	public void theSystemProvidesAnErrorMessage(String errorMessage) throws Exception {
+		assertEquals(errorMessage, errorMessageHolder.getErrorMessage());
+	}
+
 //	
 //	//from create-a-permanent-activity.feature
 //	
@@ -131,6 +123,5 @@ public class EmployeeSteps {
 //	    // Write code here that turns the phrase above into concrete actions
 //	    throw new cucumber.api.PendingException();
 //	}
-
 
 }

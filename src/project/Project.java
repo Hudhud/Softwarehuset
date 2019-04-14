@@ -6,13 +6,13 @@ public class Project {
 	private String projectName;
 	private String id;
 	
-	public Project(String projectName, String str) throws Exception {
+	public Project(String projectName, String projectID) throws Exception {
 		if (projectName.length() < 1) {
 				throw new OperationNotAllowedException("The project has no name. Please choose a name for the project");
 			} 
 
 	this.projectName = projectName;
-	this.id = id;
+	this.id = projectID;
 	
 	}
 

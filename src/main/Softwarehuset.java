@@ -1,15 +1,15 @@
 package main;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Scanner;
-
 import project.Project;
 
 
 public class Softwarehuset {
 	private ArrayList<Project> projectList = new  ArrayList<Project>();
-	private Scanner console = new Scanner(System.in);
-	private String str = console.nextLine();
+//	private Scanner console = new Scanner(System.in);
+//	private String str = console.nextLine();
 	private String id;
 	private Project p;
 			
@@ -39,5 +39,20 @@ public class Softwarehuset {
 	public void addProjectToProjectlist(String projectName) throws Exception{
 		this.p = createP(projectName);
 		projectList.add(this.p);
+	}
+	
+	public ArrayList<Project> getProjectsFromProjectList() {
+		return projectList;
+	}
+	
+	public Project searchForProject(String projectName) {
+
+		for (Project project : projectList) {
+			if (project.getProjectName().equals(projectName)) {
+				p = project;
+			}
+			
+		}
+		return p;
 	}
 }
