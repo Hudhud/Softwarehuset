@@ -13,9 +13,11 @@ formatter.step({
   "name": "that a name \"Project_1\" for the project is provided",
   "keyword": "Given "
 });
-formatter.match({});
+formatter.match({
+  "location": "EmployeeSteps.thatANameForTheProjectIsProvided(String)"
+});
 formatter.result({
-  "status": "undefined"
+  "status": "passed"
 });
 formatter.step({
   "name": "a new project is created",
@@ -25,7 +27,7 @@ formatter.match({
   "location": "EmployeeSteps.a_new_project_is_created()"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
 });
 formatter.step({
   "name": "the system creates a project with the provided name \"Project_1\" and a consecutive number.",
@@ -35,7 +37,7 @@ formatter.match({
   "location": "EmployeeSteps.theSystemCreatesAProjectWithTheProvidedNameAndAConsecutiveNumber(String)"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
 });
 formatter.scenario({
   "name": "Create a new project without name",
@@ -64,10 +66,8 @@ formatter.step({
   "name": "the system provides an error message \"The project has no name. Please choose a name for the project\"",
   "keyword": "Then "
 });
-formatter.match({
-  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
-});
+formatter.match({});
 formatter.result({
-  "status": "skipped"
+  "status": "undefined"
 });
 });

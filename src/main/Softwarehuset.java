@@ -12,7 +12,7 @@ public class Softwarehuset {
 	private String str = console.nextLine();
 	private String id;
 	private Project p;
-	
+			
 	public String projectIdGenerator() {
 		int id;
 		String lastId;
@@ -26,6 +26,7 @@ public class Softwarehuset {
 			int idIntFormat = Integer.parseInt(lastId)+1;
 			idStringFormat = String.format("%06d", idIntFormat);
 		}
+		System.out.println("id " + year+idStringFormat);
 		return year+idStringFormat;
 	}
 	
