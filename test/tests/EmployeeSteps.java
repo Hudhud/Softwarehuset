@@ -29,7 +29,7 @@ public class EmployeeSteps {
 	@When("a new project is created")
 	public void a_new_project_is_created() throws Exception {
 		try {
-			softwarehuset.addProjectToProjectlist(projectName);
+			softwarehuset.addProjectToProjectList(projectName);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -37,7 +37,7 @@ public class EmployeeSteps {
 
 	@Then("the system creates a project with the provided name {string} and a consecutive number")
 	public void theSystemCreatesAProjectWithTheProvidedNameAndAConsecutiveNumber(String projectName) {
-		assertTrue(softwarehuset.getProjectsFromProjectList().contains(softwarehuset.searchForProject(projectName)));
+		assertTrue(softwarehuset.getProjectsFromProjectList().contains(softwarehuset.searchForProjectByName(projectName)));
 	}
 
 	@Given("that a name for the project is not provided")
