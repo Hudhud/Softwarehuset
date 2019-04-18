@@ -104,26 +104,29 @@ public class Softwarehuset {
 		return p.searchForActivity(activityName);
 	}
 
-	public static void main(String[] args) {
-		
-		// We assume there are 50 employees. 
+	public List<Employee> generateEmployees() {
+		// We assume there are 50 employees.
 		for (int i = 0; i < 50; i++) {
 			employee = new Employee();
 			employeeList.add(employee);
 		}
-		// Generate 50 id's for the employees. 
+		// Generate 50 id's for the employees.
 		ArrayList<String> generatedIds = new ArrayList<String>();
-		while(generatedIds.size() < 50) {
+		while (generatedIds.size() < 50) {
 			String id = employeeIdGenerator();
-			if(!generatedIds.contains(id)) {
+			if (!generatedIds.contains(id)) {
 				generatedIds.add(id);
 			}
 		}
-		// Assign the id's to the employees. 
+		// Assign the id's to the employees.
 		for (int i = 0; i < 50; i++) {
 			employeeList.get(i).setEmployeeID(generatedIds.get(i));
 		}
-		
-		
+		return employeeList;
+	}
+
+	public static void main(String[] args) {
+		Softwarehuset softwarehuset = new Softwarehuset(); 
+		softwarehuset.generateEmployees();
 	}
 }

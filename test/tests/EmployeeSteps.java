@@ -18,36 +18,13 @@ public class EmployeeSteps {
 	private Softwarehuset softwarehuset;
 	private String projectName;
 	private ErrorMessageHolder errorMessageHolder;
-	private List<Employee> employeeList = new ArrayList<Employee>();
+	private List<Employee> employeeList;
 	private Employee employee;
 	
-	public List<Employee> generateEmployees() {
-		// We assume there are 50 employees. 
-				for (int i = 0; i < 50; i++) {
-					employee = new Employee();
-					System.out.println(employee);
-					employeeList.add(employee);
-					//System.out.println(employeeList);
-				}
-				// Generate 50 id's for the employees. 
-				ArrayList<String> generatedIds = new ArrayList<String>();
-				while(generatedIds.size() < 50) {
-					String id = Softwarehuset.employeeIdGenerator();
-					if(!generatedIds.contains(id)) {
-						generatedIds.add(id);
-					}
-				}
-				// Assign the id's to the employees. 
-				for (int i = 0; i < 50; i++) {
-					employeeList.get(i).setEmployeeID(generatedIds.get(i));
-				}
-				return employeeList;
-	}
-
 	public EmployeeSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder) {
 		this.softwarehuset = softwarehuset;
 		this.errorMessageHolder = errorMessageHolder;
-		generateEmployees();
+		this.employeeList = softwarehuset.generateEmployees();
 	}
 
 	// from create-a-new-project.feature
