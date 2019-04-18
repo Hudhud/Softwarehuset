@@ -6,7 +6,7 @@ import cucumber.api.*;
 import cucumber.api.junit.*;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "use_cases", 
+@CucumberOptions(features = "use_cases/employee/create_a_new_project.feature", 
 	plugin = { "html:target/cucumber/wikipedia.html"}, 
 	monochrome=true, 
 	snippets = SnippetType.CAMELCASE)

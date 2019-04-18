@@ -1,9 +1,9 @@
 Feature: create a new project 
 # Description: the project manager or employee creates a new project
-# Actors: Employee or project manager 
+# Actors: Employee, project manager or administrator 
 
 Scenario: Create a new project 
-	Given that a name "Project_1" for the project is provided 
+	Given that a name "Project_1" for the project is provided
 	When a new project is created 
 	Then the system creates a project with the provided name "Project_1" and a consecutive number 
 	

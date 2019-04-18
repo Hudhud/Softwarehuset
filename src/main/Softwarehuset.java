@@ -1,10 +1,13 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
+import employee.Employee;
 import exceptions.OperationNotAllowedException;
 import project.Activity;
 import project.Project;
@@ -15,6 +18,19 @@ public class Softwarehuset {
 //	private String str = console.nextLine();
 	private String id;
 	private Project p;
+	private static Employee employee;
+	private static ArrayList<Employee> employeeList = new ArrayList<Employee>();
+
+	public static String employeeIdGenerator() {
+		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
+		Random rand = new Random();
+		int idLength = rand.nextInt(4 - 1) + 1;
+		StringBuilder sb = new StringBuilder(idLength);
+		for (int i = 0; i < idLength; i++) {
+			sb.append(alphabet.charAt(rand.nextInt(alphabet.length())));
+		}
+		return sb.toString();
+	}
 
 	public String projectIdGenerator() {
 		int id;
@@ -34,15 +50,13 @@ public class Softwarehuset {
 		return projectID;
 	}
 
-	public Project createP(String projectName) throws Exception {
+	public Project createP(String projectName, Employee employee) throws Exception {
 		id = projectIdGenerator();
-		p = new Project(projectName, id);
-		return p;
+		return employee.createProj(projectName, id);
 	}
 
-	public void addProjectToProjectList(String projectName) throws Exception {
-		this.p = createP(projectName);
-		projectList.add(this.p);
+	public void addProjectToProjectList(String projectName, Employee employee) throws Exception {
+		projectList.add(createP(projectName, employee));
 	}
 
 	public ArrayList<Project> getProjectsFromProjectList() {
@@ -88,5 +102,28 @@ public class Softwarehuset {
 	// direkte?
 	public Activity searchForActivity(String activityName) {
 		return p.searchForActivity(activityName);
+	}
+
+	public static void main(String[] args) {
+		
+		// We assume there are 50 employees. 
+		for (int i = 0; i < 50; i++) {
+			employee = new Employee();
+			employeeList.add(employee);
+		}
+		// Generate 50 id's for the employees. 
+		ArrayList<String> generatedIds = new ArrayList<String>();
+		while(generatedIds.size() < 50) {
+			String id = employeeIdGenerator();
+			if(!generatedIds.contains(id)) {
+				generatedIds.add(id);
+			}
+		}
+		// Assign the id's to the employees. 
+		for (int i = 0; i < 50; i++) {
+			employeeList.get(i).setEmployeeID(generatedIds.get(i));
+		}
+		
+		
 	}
 }

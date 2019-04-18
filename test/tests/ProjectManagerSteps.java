@@ -27,7 +27,7 @@ public class ProjectManagerSteps {
 			throws Exception {
 
 		String projectName = "TestProject";
-		softwarehuset.addProjectToProjectList(projectName);
+		softwarehuset.addProjectToProjectList(projectName, null);
 
 		this.activityName = softwarehuset.getProjectsFromProjectList().get(
 				softwarehuset.getProjectsFromProjectList().indexOf(softwarehuset.searchForProjectByName(projectName)))

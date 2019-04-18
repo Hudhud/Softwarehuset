@@ -2,18 +2,24 @@ package employee;
 import java.util.ArrayList;
 import java.util.Date;
 
+import project.Project;
+
 public class Employee {
 	
 	private String employeeID;
 	private boolean isEmployeePM;
 	private boolean isSignedIn;
 	private boolean vacant;
-	private ArrayList<String> allEmployeeIDs = new ArrayList<String>(); 
+	
+	// This empty constructor is necessary, because sometimes we need it in some methods. 
+	public Employee() {
 		
+	}
+	
 	public Employee(String employeeID) {
 		this.employeeID = employeeID;
 	}
-	
+		
 	public String getEmployeeID() {
 		return employeeID;
 	}
@@ -46,23 +52,12 @@ public class Employee {
 		return vacant;
 	}
 	
-	public boolean checkEmployeeId(String employeeID) {
-		return allEmployeeIDs.contains(employeeID);
-	}
+//	public boolean checkEmployeeId(String employeeID) {
+//		return allEmployeeIDs.contains(employeeID);
+//	}
 	
-	public void registerTime(Date time) {
-		
-	}
-	
-	public void assist() {
-		
-	}
-	
-	public void editAct() {
-		
-	}
-	
-	public void createProj() {
-		
+	public Project createProj(String name, String id) throws Exception {
+		Project p = new Project(name, id);
+		return p;
 	}
 }
