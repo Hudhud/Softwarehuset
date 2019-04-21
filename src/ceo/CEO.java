@@ -10,12 +10,11 @@ public class CEO {
 		//this.id = id;
 	}
 	
-	public void choosePM(String employeeId, String projectId) {
-		Softwarehuset softwarehuset = new Softwarehuset();
-		Employee employee = softwarehuset.getEmployeeList().get(Softwarehuset.getEmployeeList()
+	public void choosePM(String employeeId, String projectId,Softwarehuset softwarehuset) {
+		Employee employee = softwarehuset.getEmployeeList().get(softwarehuset.getEmployeeList()
 				.indexOf(softwarehuset.searchForEmployeeById(employeeId)));
 		employee.setIsEmployeePM(true);
-		softwarehuset.setPM(employeeId);
+		softwarehuset.setPM(employeeId, projectId);
 	}
 	
 	

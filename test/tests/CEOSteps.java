@@ -13,65 +13,54 @@ import exceptions.ErrorMessageHolder;
 import main.Softwarehuset;
 
 public class CEOSteps {
-	private String ceoId; 
+	private String ceoId;
 	private Softwarehuset softwarehuset;
 	private String projectName;
 	private ErrorMessageHolder errorMessageHolder;
 	private List<Employee> employeeList;
 	private Employee employee;
-	private CEO ceo; 
+	private CEO ceo;
 	private String projectId;
 	private String empId;
-	
-	
+
 	public CEOSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder) {
 		this.softwarehuset = softwarehuset;
 		this.errorMessageHolder = errorMessageHolder;
 		employeeList = softwarehuset.generateEmployees();
 		employee = employeeList.get(0);
-		System.out.println(employee.getEmployeeID());
 	}
-	
-	
-	
+
 	@Given("the CEO provides his id {string}")
 	public void theCEOProvidesHisId(String ceoId) {
-	    this.ceoId = ceoId;
+		this.ceoId = ceoId;
 	}
-	
+
 	@Given("provides the project id {string}")
 	public void providesTheProjectId(String projectId) throws Exception {
 
-	    //softwarehuset.createP(projectId, employee);
 		softwarehuset.addProjectToProjectList(projectId, employee);
 		this.projectId = projectId;
 	}
 
-
 	@Given("the employee with the ID {string} exists")
 	public void theEmployeeWithTheIDExists(String employeeId) {
 		empId = employee.getEmployeeID();
-		System.out.println("Hej" + empId);
-	   assertTrue(employeeList.contains(softwarehuset.searchForEmployeeById(employeeId)));
-	   System.out.println(employeeList.contains(softwarehuset.searchForEmployeeById(employeeId)) + "***");
+		assertTrue(employeeList.contains(softwarehuset.searchForEmployeeById(employeeId)));
 	}
 
 	@When("the CEO chooses an employee with an ID {string} to be a project manager for the project with the ID {string}")
-	public void theCEOChoosesAnEmployeeWithAnIDToBeAProjectManagerForTheProjectWithTheID(String employeeId
-			, String projectId) throws Exception {
-		
-		//this.projectId = projectId;
-		
+	public void theCEOChoosesAnEmployeeWithAnIDToBeAProjectManagerForTheProjectWithTheID(String employeeId,
+			String projectId) throws Exception {
+
+		ceo = new CEO(ceoId);
+		ceo.choosePM(empId, this.projectId, softwarehuset);
+
 	}
-	
+
 	@Then("the system makes the employee a project manager")
 	public void theSystemMakesTheEmployeeAProjectManager() {
-		ceo = new CEO(ceoId);
-		System.out.println("Hest" + empId);
-		System.out.println(projectId);
-		ceo.choosePM(empId, projectId);
-		
-		
+		assertTrue(softwarehuset.searchForEmployeeById(empId).getIsEmployeePM());
+	
 	}
 
 //	@Given("the employee with the ID {string} does not exist")

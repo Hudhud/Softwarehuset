@@ -20,7 +20,7 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "provides the project id \"Project1\"",
+  "name": "provides the project id \"2019000001\"",
   "keyword": "And "
 });
 formatter.match({
@@ -40,7 +40,7 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "the CEO chooses an employee with an ID \"abcd\" to be a project manager for the project with the ID \"TestProject1\"",
+  "name": "the CEO chooses an employee with an ID \"abcd\" to be a project manager for the project with the ID \"2019000001\"",
   "keyword": "When "
 });
 formatter.match({
@@ -57,7 +57,6 @@ formatter.match({
   "location": "CEOSteps.theSystemMakesTheEmployeeAProjectManager()"
 });
 formatter.result({
-  "error_message": "java.lang.NullPointerException\r\n\tat main.Softwarehuset.setPM(Softwarehuset.java:167)\r\n\tat ceo.CEO.choosePM(CEO.java:18)\r\n\tat tests.CEOSteps.theSystemMakesTheEmployeeAProjectManager(CEOSteps.java:72)\r\n\tat ✽.the system makes the employee a project manager(use_cases\\to_be_PM.feature:10)\r\n",
-  "status": "failed"
+  "status": "passed"
 });
 });

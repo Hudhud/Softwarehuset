@@ -74,13 +74,8 @@ public class Project{
 		return a;		
 	}
 
-	public String getPM() {
-		return pmId;
-	}
-
 	public void setPM(String pmId) {
 		this.pmId = pmId;
-		System.out.println("projectClass" + this.pmId);
 	} 
 
 

@@ -4,9 +4,9 @@ Feature: Choose an employee to be a project manager
 
 Scenario:  Choose an employee to be a project manager 
     Given the CEO provides his id "ceo" 
-    And provides the project id "Project1" 
+    And provides the project id "2019000001" 
    	And the employee with the ID "abcd" exists
- 	When the CEO chooses an employee with an ID "abcd" to be a project manager for the project with the ID "TestProject1"
+ 	When the CEO chooses an employee with an ID "abcd" to be a project manager for the project with the ID "2019000001"
  	Then the system makes the employee a project manager
 
 #Scenario:  Choose an employee to be a project manager when the employee does not exist

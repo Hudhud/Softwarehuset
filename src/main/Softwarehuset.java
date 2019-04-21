@@ -67,7 +67,7 @@ public class Softwarehuset {
 
 	public Project searchForProjectByName(String projectName) {
 
-		for (Project project : projectList) {
+		for (Project project : getProjectsFromProjectList()) {
 			if (project.getProjectName().equals(projectName)) {
 				this.project = project;
 			}
@@ -78,7 +78,7 @@ public class Softwarehuset {
 
 	public Project searchForProjectById(String projectId) {
 
-		for (Project project : projectList) {
+		for (Project project : getProjectsFromProjectList()) {
 			if (project.getId().equals(projectId)) {
 				this.project = project;
 			}
@@ -147,7 +147,7 @@ public class Softwarehuset {
 		if (ceoId == "ceo" && searchForEmployeeById(employeeId) != null) {
 		
 			CEO ceo = new CEO(ceoId);
-			ceo.choosePM(employeeId, projectId);
+			ceo.choosePM(employeeId, projectId, this);
 			
 		} else if (ceoId != "ceo") {
 			throw new OperationNotAllowedException("This operation can only be performed by the CEO");
@@ -156,20 +156,12 @@ public class Softwarehuset {
 
 		}
 		
-		
-		
-		
-		
 	}
 	
-	public void setPM(String pmId) {
-		project.setPM(pmId);
+	public void setPM(String pmId, String projectId) {
+		searchForProjectById(projectId).setPM(pmId);
 	}
-	
-	public String getPM() {
-		return project.getPM();
-	}
-	
+		
 	public static void main(String[] args) {
 		Softwarehuset softwarehuset = new Softwarehuset(); 
 		softwarehuset.generateEmployees();
