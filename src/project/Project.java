@@ -9,6 +9,7 @@ public class Project{
 	private String projectName;
 	private String id;
 	private ArrayList<Activity> activityList = new ArrayList<>();
+	private String pmId;
 
 	public Project(String projectName, String projectID) throws Exception {
 		if (projectName.length() < 1) {
@@ -71,6 +72,15 @@ public class Project{
 			
 		}
 		return a;		
+	}
+
+	public String getPM() {
+		return pmId;
+	}
+
+	public void setPM(String pmId) {
+		this.pmId = pmId;
+		System.out.println("projectClass" + this.pmId);
 	} 
 
 

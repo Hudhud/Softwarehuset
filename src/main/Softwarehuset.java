@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import ceo.CEO;
 import employee.Employee;
+import employee.ProjectManager;
 import exceptions.OperationNotAllowedException;
 import project.Activity;
 import project.Project;
@@ -17,7 +19,7 @@ public class Softwarehuset {
 //	private Scanner console = new Scanner(System.in);
 //	private String str = console.nextLine();
 	private String id;
-	private Project p;
+	private Project project;
 	private static Employee employee;
 	private static ArrayList<Employee> employeeList = new ArrayList<Employee>();
 
@@ -67,48 +69,58 @@ public class Softwarehuset {
 
 		for (Project project : projectList) {
 			if (project.getProjectName().equals(projectName)) {
-				p = project;
+				this.project = project;
 			}
 
 		}
-		return p;
+		return project;
 	}
 
 	public Project searchForProjectById(String projectId) {
 
 		for (Project project : projectList) {
 			if (project.getId().equals(projectId)) {
-				p = project;
+				this.project = project;
 			}
 
 		}
-		return p;
+		return project;
 	}
+	
+	public Employee searchForEmployeeById(String employeeId) {
+		for (Employee emp : getEmployeeList()) {
+			if (emp.getEmployeeID().equals(employeeId)) {
+				employee = emp;
+			}
+		}
+		return employee;
+	}
+
 
 	public void createAct(String activityName, int projectID) throws Exception {
 		if (searchForProjectById(Integer.toString(projectID)) == null)
 			throw new OperationNotAllowedException("A project with provided ID does not exist");
 
-		p.addActivityToActivityList(activityName, projectID);
+		project.addActivityToActivityList(activityName, projectID);
 	}
 
 	// er det okay det er af typen Activity, når den ikke skal kende til det
 	// direkte?
 	public ArrayList<Activity> getActivitiesFromActivityList() {
-		return p.getActivities();
+		return project.getActivities();
 	}
 
 	// er det okay det er af returtypen Activity, når den ikke skal kende til det
 	// direkte?
 	public Activity searchForActivity(String activityName) {
-		return p.searchForActivity(activityName);
+		return project.searchForActivity(activityName);
 	}
 
 	public List<Employee> generateEmployees() {
 		// We assume there are 50 employees.
 		for (int i = 0; i < 50; i++) {
 			employee = new Employee();
-			employeeList.add(employee);
+			getEmployeeList().add(employee);
 		}
 		// Generate 50 id's for the employees.
 		ArrayList<String> generatedIds = new ArrayList<String>();
@@ -120,13 +132,50 @@ public class Softwarehuset {
 		}
 		// Assign the id's to the employees.
 		for (int i = 0; i < 50; i++) {
-			employeeList.get(i).setEmployeeID(generatedIds.get(i));
+			getEmployeeList().get(i).setEmployeeID(generatedIds.get(i));
 		}
-		return employeeList;
+		return getEmployeeList();
 	}
 
+	public static ArrayList<Employee> getEmployeeList() {
+		return employeeList;
+	}
+	
+	public void choosePM(String employeeId, String ceoId, String projectId)
+			throws OperationNotAllowedException {
+		
+		if (ceoId == "ceo" && searchForEmployeeById(employeeId) != null) {
+		
+			CEO ceo = new CEO(ceoId);
+			ceo.choosePM(employeeId, projectId);
+			
+		} else if (ceoId != "ceo") {
+			throw new OperationNotAllowedException("This operation can only be performed by the CEO");
+		} else {
+			throw new OperationNotAllowedException("This employee does not exist");
+
+		}
+		
+		
+		
+		
+		
+	}
+	
+	public void setPM(String pmId) {
+		project.setPM(pmId);
+	}
+	
+	public String getPM() {
+		return project.getPM();
+	}
+	
 	public static void main(String[] args) {
 		Softwarehuset softwarehuset = new Softwarehuset(); 
 		softwarehuset.generateEmployees();
 	}
+
+	
+
+	
 }

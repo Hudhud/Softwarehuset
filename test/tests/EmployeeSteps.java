@@ -45,6 +45,7 @@ public class EmployeeSteps {
 
 	@Then("the system creates a project with the provided name {string} and a consecutive number")
 	public void theSystemCreatesAProjectWithTheProvidedNameAndAConsecutiveNumber(String projectName) {
+		System.out.println(softwarehuset.getProjectsFromProjectList().get(0).getProjectName());
 		assertTrue(softwarehuset.getProjectsFromProjectList().contains(softwarehuset.searchForProjectByName(projectName)));
 	}
 

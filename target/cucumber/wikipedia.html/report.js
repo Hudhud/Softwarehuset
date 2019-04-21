@@ -1,77 +1,63 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("use_cases\\employee\\create_a_new_project.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("use_cases\\to_be_PM.feature");
 formatter.feature({
-  "name": "create a new project",
+  "name": "Choose an employee to be a project manager",
   "description": "",
   "keyword": "Feature"
 });
 formatter.scenario({
-  "name": "Create a new project",
+  "name": "Choose an employee to be a project manager",
   "description": "",
   "keyword": "Scenario"
 });
 formatter.step({
-  "name": "that a name \"Project_1\" for the project is provided",
+  "name": "the CEO provides his id \"ceo\"",
   "keyword": "Given "
 });
 formatter.match({
-  "location": "EmployeeSteps.thatANameForTheProjectIsProvided(String)"
+  "location": "CEOSteps.theCEOProvidesHisId(String)"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "a new project is created",
+  "name": "provides the project id \"Project1\"",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "CEOSteps.providesTheProjectId(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee with the ID \"abcd\" exists",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "CEOSteps.theEmployeeWithTheIDExists(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the CEO chooses an employee with an ID \"abcd\" to be a project manager for the project with the ID \"TestProject1\"",
   "keyword": "When "
 });
 formatter.match({
-  "location": "EmployeeSteps.a_new_project_is_created()"
+  "location": "CEOSteps.theCEOChoosesAnEmployeeWithAnIDToBeAProjectManagerForTheProjectWithTheID(String,String)"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "the system creates a project with the provided name \"Project_1\" and a consecutive number",
+  "name": "the system makes the employee a project manager",
   "keyword": "Then "
 });
 formatter.match({
-  "location": "EmployeeSteps.theSystemCreatesAProjectWithTheProvidedNameAndAConsecutiveNumber(String)"
+  "location": "CEOSteps.theSystemMakesTheEmployeeAProjectManager()"
 });
 formatter.result({
-  "status": "passed"
-});
-formatter.scenario({
-  "name": "Create a new project without name",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that a name for the project is not provided",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "EmployeeSteps.thatANameForTheProjectIsNotProvided()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "a new project is created",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "EmployeeSteps.a_new_project_is_created()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system provides an error message \"The project has no name. Please choose a name for the project\"",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
-});
-formatter.result({
-  "status": "passed"
+  "error_message": "java.lang.NullPointerException\r\n\tat main.Softwarehuset.setPM(Softwarehuset.java:167)\r\n\tat ceo.CEO.choosePM(CEO.java:18)\r\n\tat tests.CEOSteps.theSystemMakesTheEmployeeAProjectManager(CEOSteps.java:72)\r\n\tat ✽.the system makes the employee a project manager(use_cases\\to_be_PM.feature:10)\r\n",
+  "status": "failed"
 });
 });
