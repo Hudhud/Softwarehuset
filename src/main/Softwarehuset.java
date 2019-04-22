@@ -86,16 +86,31 @@ public class Softwarehuset {
 		}
 		return project;
 	}
-	
+
 	public Employee searchForEmployeeById(String employeeId) {
+
+		String id = null;
+		Employee e = null;
+		for (int i = 0; i < getEmployeeList().size(); i++) {
+			id = getEmployeeList().get(i).getEmployeeID();
+			if (employeeId.equals(id)) {
+				e = getEmployeeList().get(i);
+			}
+		}
+
+		return e;
+	}
+
+	public boolean employeeExists(String employeeId) {
 		for (Employee emp : getEmployeeList()) {
 			if (emp.getEmployeeID().equals(employeeId)) {
 				employee = emp;
+				return true;
 			}
 		}
-		return employee;
-	}
 
+		return false;
+	}
 
 	public void createAct(String activityName, int projectID) throws Exception {
 		if (searchForProjectById(Integer.toString(projectID)) == null)
@@ -122,6 +137,7 @@ public class Softwarehuset {
 			employee = new Employee();
 			getEmployeeList().add(employee);
 		}
+		employee = null;
 		// Generate 50 id's for the employees.
 		ArrayList<String> generatedIds = new ArrayList<String>();
 		while (generatedIds.size() < 50) {
@@ -140,34 +156,29 @@ public class Softwarehuset {
 	public static ArrayList<Employee> getEmployeeList() {
 		return employeeList;
 	}
-	
-	public void choosePM(String employeeId, String ceoId, String projectId)
-			throws OperationNotAllowedException {
-		
-		if (ceoId == "ceo" && searchForEmployeeById(employeeId) != null) {
-		
+
+	public void choosePM(String employeeId, String ceoId, String projectId) throws OperationNotAllowedException {
+
+		if (ceoId.equals("ceo") && searchForEmployeeById(employeeId) != null) {
+
 			CEO ceo = new CEO(ceoId);
 			ceo.choosePM(employeeId, projectId, this);
-			
-		} else if (ceoId != "ceo") {
+
+		} else if (!ceoId.equals("ceo")) {
 			throw new OperationNotAllowedException("This operation can only be performed by the CEO");
 		} else {
 			throw new OperationNotAllowedException("This employee does not exist");
-
 		}
-		
+
 	}
-	
+
 	public void setPM(String pmId, String projectId) {
 		searchForProjectById(projectId).setPM(pmId);
 	}
-		
+
 	public static void main(String[] args) {
-		Softwarehuset softwarehuset = new Softwarehuset(); 
+		Softwarehuset softwarehuset = new Softwarehuset();
 		softwarehuset.generateEmployees();
 	}
 
-	
-
-	
 }

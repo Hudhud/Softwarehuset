@@ -1,5 +1,6 @@
 package tests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import employee.Employee;
 import exceptions.ErrorMessageHolder;
+import exceptions.OperationNotAllowedException;
 import main.Softwarehuset;
 
 public class CEOSteps {
@@ -27,52 +29,58 @@ public class CEOSteps {
 		this.softwarehuset = softwarehuset;
 		this.errorMessageHolder = errorMessageHolder;
 		employeeList = softwarehuset.generateEmployees();
-		employee = employeeList.get(0);
 	}
 
 	@Given("the CEO provides his id {string}")
 	public void theCEOProvidesHisId(String ceoId) {
+		employee = employeeList.get(0);
 		this.ceoId = ceoId;
 	}
 
-	@Given("provides the project id {string}")
-	public void providesTheProjectId(String projectId) throws Exception {
+	@Given("provides the project id {string} along with the project name {string}")
+	public void providesTheProjectIdAlongWithTheProjectName(String projectId, String projectName) throws Exception {
 
-		softwarehuset.addProjectToProjectList(projectId, employee);
+		softwarehuset.addProjectToProjectList(projectName, employee);
 		this.projectId = projectId;
 	}
 
 	@Given("the employee with the ID {string} exists")
 	public void theEmployeeWithTheIDExists(String employeeId) {
 		empId = employee.getEmployeeID();
-		assertTrue(employeeList.contains(softwarehuset.searchForEmployeeById(employeeId)));
+		assertTrue(employeeList.contains(softwarehuset.searchForEmployeeById(empId)));
 	}
 
 	@When("the CEO chooses an employee with an ID {string} to be a project manager for the project with the ID {string}")
 	public void theCEOChoosesAnEmployeeWithAnIDToBeAProjectManagerForTheProjectWithTheID(String employeeId,
 			String projectId) throws Exception {
 
-		ceo = new CEO(ceoId);
-		ceo.choosePM(empId, this.projectId, softwarehuset);
+//		ceo = new CEO(ceoId);
+
+		try {
+			softwarehuset.choosePM(empId, ceoId, projectId);
+		} catch (OperationNotAllowedException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
 
 	}
 
 	@Then("the system makes the employee a project manager")
 	public void theSystemMakesTheEmployeeAProjectManager() {
 		assertTrue(softwarehuset.searchForEmployeeById(empId).getIsEmployeePM());
-	
 	}
 
-//	@Given("the employee with the ID {string} does not exist")
-//	public void theEmployeeWithTheIDDoesNotExist(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-//
-//	@Given("that a wrong CEO id is provided")
-//	public void thatAWrongCEOIdIsProvided() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
+	@Given("the employee with the ID {string} does not exist")
+	public void theEmployeeWithTheIDDoesNotExist(String employeeId) {
+		empId = employeeId;
+
+		// assertTrue(!employeeList.contains(softwarehuset.searchForEmployeeById(empId)));
+
+	}
+
+	@Given("that a wrong CEO id {string} is provided")
+	public void thatAWrongCEOIdIsProvided(String id) {
+		employee = employeeList.get(0);
+		ceoId = id;
+	}
 
 }
