@@ -5,23 +5,23 @@ import main.Softwarehuset;
 import project.Project;
 
 public class ProjectManager extends Employee{
-	private Softwarehuset softwarehuset;
-
-	
+		
 	public ProjectManager(String employeeID) {
 		super(employeeID);
 	}
 
 
-	public void createActivity(int projectID, String activityName, Project p) throws Exception {
-		if (softwarehuset.searchForProjectById(Integer.toString(projectID)) == null)
+	public void createActivity(String projectID, String activityName, Project p,Softwarehuset softwarehuset) throws Exception {
+		if (softwarehuset.searchForProjectById(projectID) == null)
 			throw new OperationNotAllowedException("A project with provided ID does not exist");
+		
+		System.out.println("No ERROR");
 
 		p.addActivityToActivityList(activityName, projectID);
 	}
 	
 	
-	public void AssignEmp() {
-		
-	}
+//	public void AssignEmp() {
+//		
+//	}
 }

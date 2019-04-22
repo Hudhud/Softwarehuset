@@ -10,6 +10,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import employee.Employee;
+import employee.ProjectManager;
 import exceptions.ErrorMessageHolder;
 import exceptions.OperationNotAllowedException;
 import main.Softwarehuset;
@@ -72,9 +73,9 @@ public class CEOSteps {
 	@Given("the employee with the ID {string} does not exist")
 	public void theEmployeeWithTheIDDoesNotExist(String employeeId) {
 		empId = employeeId;
-
-		// assertTrue(!employeeList.contains(softwarehuset.searchForEmployeeById(empId)));
-
+		assertTrue(!employeeList.contains(softwarehuset.searchForEmployeeById(empId)));
+		
+		
 	}
 
 	@Given("that a wrong CEO id {string} is provided")

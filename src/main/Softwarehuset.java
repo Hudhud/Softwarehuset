@@ -19,9 +19,11 @@ public class Softwarehuset {
 //	private Scanner console = new Scanner(System.in);
 //	private String str = console.nextLine();
 	private String id;
-	private Project project;
+//	private Project project;
 	private static Employee employee;
+	private static ProjectManager projectManager;
 	private static ArrayList<Employee> employeeList = new ArrayList<Employee>();
+	private static ArrayList<ProjectManager> projectManagerList = new ArrayList<ProjectManager>();
 
 	public static String employeeIdGenerator() {
 		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
@@ -58,7 +60,7 @@ public class Softwarehuset {
 	}
 
 	public void addProjectToProjectList(String projectName, Employee employee) throws Exception {
-		projectList.add(createP(projectName, employee));
+		getProjectsFromProjectList().add(createP(projectName, employee));
 	}
 
 	public ArrayList<Project> getProjectsFromProjectList() {
@@ -66,10 +68,10 @@ public class Softwarehuset {
 	}
 
 	public Project searchForProjectByName(String projectName) {
-
-		for (Project project : getProjectsFromProjectList()) {
-			if (project.getProjectName().equals(projectName)) {
-				this.project = project;
+		Project project = null;
+		for (Project p : getProjectsFromProjectList()) {
+			if (p.getProjectName().equals(projectName)) {
+				project = p;
 			}
 
 		}
@@ -78,13 +80,16 @@ public class Softwarehuset {
 
 	public Project searchForProjectById(String projectId) {
 
-		for (Project project : getProjectsFromProjectList()) {
-			if (project.getId().equals(projectId)) {
-				this.project = project;
+		String id = null;
+		Project p = null;
+		for (int i = 0; i < getProjectsFromProjectList().size(); i++) {
+			id = getProjectsFromProjectList().get(i).getId();
+			if (projectId.equals(id)) {
+				p = getProjectsFromProjectList().get(i);
 			}
-
 		}
-		return project;
+
+		return p;
 	}
 
 	public Employee searchForEmployeeById(String employeeId) {
@@ -112,23 +117,28 @@ public class Softwarehuset {
 		return false;
 	}
 
-	public void createAct(String activityName, int projectID) throws Exception {
-		if (searchForProjectById(Integer.toString(projectID)) == null)
-			throw new OperationNotAllowedException("A project with provided ID does not exist");
-
-		project.addActivityToActivityList(activityName, projectID);
+	public void createAct(String activityName, String projectID, String pmId) throws Exception {
+		projectManager = new ProjectManager(pmId);
+		projectManager.createActivity(projectID, activityName, searchForProjectById(projectID),this);
 	}
 
-	// er det okay det er af typen Activity, når den ikke skal kende til det
-	// direkte?
-	public ArrayList<Activity> getActivitiesFromActivityList() {
-		return project.getActivities();
+	public ArrayList<Activity> getActivitiesFromActivityList(String projectId) {
+		return searchForProjectById(projectId).getActivities();
 	}
 
-	// er det okay det er af returtypen Activity, når den ikke skal kende til det
-	// direkte?
-	public Activity searchForActivity(String activityName) {
-		return project.searchForActivity(activityName);
+	public Activity searchForActivity(String activityName, String projectId) {
+
+		String name = null;
+		Activity activity = null;
+		for (int i = 0; i < getEmployeeList().size(); i++) {
+			name = getActivitiesFromActivityList(projectId).get(i).getName();
+			if (activityName.equals(name)) {
+				activity = getActivitiesFromActivityList(projectId).get(i);
+			}
+		}
+
+		return activity;
+
 	}
 
 	public List<Employee> generateEmployees() {
@@ -153,8 +163,12 @@ public class Softwarehuset {
 		return getEmployeeList();
 	}
 
-	public static ArrayList<Employee> getEmployeeList() {
+	public ArrayList<Employee> getEmployeeList() {
 		return employeeList;
+	}
+
+	public ArrayList<ProjectManager> getProjectManagerList() {
+		return projectManagerList;
 	}
 
 	public void choosePM(String employeeId, String ceoId, String projectId) throws OperationNotAllowedException {
@@ -163,6 +177,8 @@ public class Softwarehuset {
 
 			CEO ceo = new CEO(ceoId);
 			ceo.choosePM(employeeId, projectId, this);
+			getProjectManagerList().add(new ProjectManager(employeeId));
+			//getEmployeeList().remove(getEmployeeList().indexOf(searchForEmployeeById(employeeId)));
 
 		} else if (!ceoId.equals("ceo")) {
 			throw new OperationNotAllowedException("This operation can only be performed by the CEO");

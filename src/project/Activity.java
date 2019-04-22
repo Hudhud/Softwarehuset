@@ -7,7 +7,7 @@ public class Activity {
 	private String activityName;
 	private String id;
 
-	public Activity(String activityName, String activityID) throws Exception {
+	public Activity(String activityName) throws Exception {
 		
 		/* Der mangler et scenarie til hvis der ikke angives et navn til en aktivitet */
 		if (activityName.length() < 1) {
@@ -15,12 +15,7 @@ public class Activity {
 			} 
 
 	this.activityName = activityName;
-	this.id = activityID;
 	
-	}
-	
-	public String getId() {
-		return id;
 	}
 	
 	public String getName() {

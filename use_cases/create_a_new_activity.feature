@@ -3,8 +3,8 @@ Feature: Create a new activity
 #Actors: Project manager
 
 Scenario: create an activity for a project
-	Given that the project manager is signed in
-	And provides the ID 123 for a project
+	Given that the project manager provides his id "asd"
+	And provides the ID "2019000001" for a project
 	And provides a name "firstAct" for the activity
 	When the project manager creates an activity
 	Then the system creates an activity with a consecutive number

@@ -11,117 +11,64 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import employee.Employee;
+import employee.ProjectManager;
 import exceptions.ErrorMessageHolder;
 import exceptions.OperationNotAllowedException;
 import main.Softwarehuset;
+import project.Project;
 
 public class ProjectManagerSteps {
 	private Softwarehuset softwarehuset;
 	private ErrorMessageHolder errorMessageHolder;
 	private String activityName;
-	private List<Employee> employees;
-	private int projectId;
+	private String pmId;
+	private String projectId;
+	private Employee employee;
+	private int activityListSize;
 
-	public ProjectManagerSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder) {
+	public ProjectManagerSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder) throws Exception {
 		this.softwarehuset = softwarehuset;
 		this.errorMessageHolder = errorMessageHolder;
 		softwarehuset.generateEmployees();
+		employee = softwarehuset.getEmployeeList().get(0);
+		softwarehuset.addProjectToProjectList("TestProject2", employee);
+		softwarehuset.choosePM(employee.getEmployeeID(), "ceo",	softwarehuset.getProjectsFromProjectList().get(0).getId());
 	}
 
 	// from create-a-new-activity.feature
 
-//	@Given("that the project manager provides the ID {int} for a project and a name {string} for the activity")
-//	public void that_the_project_manager_provides_the_ID_for_a_project(Integer projectId, String activityName)
-//			throws Exception {
-//
-//		String projectName = "TestProject";
-//		softwarehuset.addProjectToProjectList(projectName, employees.get(0));
-//
-//		this.activityName = softwarehuset.getProjectsFromProjectList().get(
-//				softwarehuset.getProjectsFromProjectList().indexOf(softwarehuset.searchForProjectByName(projectName)))
-//				.getProjectName();
-//		this.projectId = Integer.parseInt(softwarehuset.getProjectsFromProjectList().get(
-//				softwarehuset.getProjectsFromProjectList().indexOf(softwarehuset.searchForProjectByName(projectName)))
-//				.getId());
-//	}
-//
-//	@When("the project manager creates an activity")
-//	public void the_project_manager_creates_an_activity() throws Exception {
-//		try {
-//			softwarehuset.createAct(activityName, projectId);
-//		} catch (OperationNotAllowedException e) {
-//			errorMessageHolder.setErrorMessage(e.getMessage());
-//		}
-//	}
-//
-//	@Then("the system creates an activity with a consecutive number")
-//	public void the_system_creates_an_activity_with_a_consecutive_number() {
-//		assertTrue(softwarehuset.getActivitiesFromActivityList().contains(softwarehuset.searchForActivity(activityName)));
-//	}
-//
-//	@Given("that the project manager provides the ID {int} of a project, which has not been created")
-//	public void that_the_project_manager_provides_the_ID_of_a_project_which_has_not_been_created(Integer projectId) {
-//		this.projectId = projectId;
-//	}
-//
-//	// from assign-an-employee-to-activity.feature
-//	@Given("that the employee with ID {string} is vacant")
-//	public void that_the_employee_with_ID_is_vacant(String string) {
-//		// Write code here that turns the phrase above into concrete actions
-//		throw new cucumber.api.PendingException();
-//	}
-//
-//	@Given("the project manager is signed in")
-//	public void the_project_manager_is_signed_in() {
-//		// Write code here that turns the phrase above into concrete actions
-//		throw new cucumber.api.PendingException();
-//	}
-//
-//	@When("the project manager wants to add an employee to an activity")
-//	public void the_project_manager_wants_to_add_an_employee_to_an_activity() {
-//		// Write code here that turns the phrase above into concrete actions
-//		throw new cucumber.api.PendingException();
-//	}
-//
-//	@Then("the employee is assigned to the activity")
-//	public void the_employee_is_assigned_to_the_activity() {
-//		// Write code here that turns the phrase above into concrete actions
-//		throw new cucumber.api.PendingException();
-//	}
-//
-//	@Given("that the employee with ID {string} is not vacant")
-//	public void that_the_employee_with_ID_is_not_vacant(String string) {
-//		// Write code here that turns the phrase above into concrete actions
-//		throw new cucumber.api.PendingException();
-//	}
-//
-//	@Then("the project manager gets an error {string}")
-//	public void the_project_manager_gets_an_error(String string) {
-//		// Write code here that turns the phrase above into concrete actions
-//		throw new cucumber.api.PendingException();
-//	}
-//
-//	@Given("that the employee with ID {string} is assigned to {int} activities in one week")
-//	public void that_the_employee_with_ID_is_assigned_to_activities_in_one_week(String string, Integer int1) {
-//		// Write code here that turns the phrase above into concrete actions
-//		throw new cucumber.api.PendingException();
-//	}
-//
-//	@Given("there are no permanent activities included")
-//	public void there_are_no_permanent_activities_included() {
-//		// Write code here that turns the phrase above into concrete actions
-//		throw new cucumber.api.PendingException();
-//	}
-//
-//	@When("the project manager wants to assign the employee to another activity in the same week")
-//	public void the_project_manager_wants_to_assign_the_employee_to_another_activity_in_the_same_week() {
-//		// Write code here that turns the phrase above into concrete actions
-//		throw new cucumber.api.PendingException();
-//	}
-//
-//	@Then("the project manager gets the error {string}")
-//	public void the_project_manager_gets_the_error(String string) {
-//		// Write code here that turns the phrase above into concrete actions
-//		throw new cucumber.api.PendingException();
-//	}
+	@Given("that the project manager provides his id {string}")
+	public void that_the_project_manager_provides_his_id(String pmId) throws Exception {
+
+		this.pmId = employee.getEmployeeID();
+	}
+
+	@Given("provides the ID {string} for a project")
+	public void provides_the_ID_for_a_project(String string) {
+		projectId = softwarehuset.getProjectsFromProjectList().get(0).getId();
+	}
+
+	@Given("provides a name {string} for the activity")
+	public void provides_a_name_for_the_activity(String activityName) {
+		this.activityName = activityName;
+	}
+
+	@When("the project manager creates an activity")
+	public void the_project_manager_creates_an_activity() throws Exception {
+		activityListSize = softwarehuset.getActivitiesFromActivityList(projectId).size();
+		System.out.println("Size before " + activityListSize);
+
+		try {
+			softwarehuset.createAct(activityName, projectId, pmId);
+		} catch (OperationNotAllowedException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+
+	@Then("the system creates an activity with a consecutive number")
+	public void the_system_creates_an_activity_with_a_consecutive_number() {
+		assertTrue(softwarehuset.getActivitiesFromActivityList(projectId).size() > activityListSize);
+		System.out.println("Size after " + softwarehuset.getActivitiesFromActivityList(projectId).size());
+
+	}
 }

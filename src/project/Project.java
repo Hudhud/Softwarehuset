@@ -29,43 +29,51 @@ public class Project{
 		return id;
 	}
 
-	public Activity createActivity(String activityName, int projectID) throws Exception {
+	public Activity createActivity(String activityName, String projectID) throws Exception {
 
-		Activity a = new Activity(activityName, generateActivityID(projectID));
+		for (int i = 0; i < getActivities().size(); i++) {
+			Activity a = getActivities().get(i);
+			if (a.getName().equals(activityName)) {
+				throw new OperationNotAllowedException("The name already exists");
+			}
+		}
+		
+		Activity a = new Activity(activityName);
 		return a;
 	}
 
-	private String generateActivityID(int projectID) {
-
-		int id;
-		String lastId;
-		String idStringFormat = null;
-
-		if (activityList.size() == 0) {
-			id = 1;
-			idStringFormat = String.format("%02d", id);
-		} else {
-			lastId = activityList.get(activityList.size() - 1).getId();
-			int idIntFormat = Integer.parseInt(lastId) + 1;
-			idStringFormat = String.format("%02d", idIntFormat);
-		}
-		String activityID = projectID + idStringFormat;
-
-		return activityID;
-	}
+//	private String generateActivityID(String projectID) {
+//
+//		int id;
+//		String lastId;
+//		String idStringFormat = null;
+//
+//		if (getActivities().size() == 0) {
+//			id = 1;
+//			idStringFormat = String.format("%02d", id);
+//		} else {
+//			lastId = getActivities().get(getActivities().size() - 1).getId();
+//			int idIntFormat = Integer.parseInt(lastId) + 1;
+//			idStringFormat = String.format("%02d", idIntFormat);
+//		}
+//		String activityID = projectID + idStringFormat;
+//
+//		return activityID;
+//	}
 	
-	public void addActivityToActivityList(String activityName, int projectID) throws Exception{
+	public void addActivityToActivityList(String activityName, String projectID) throws Exception{
 		Activity a = createActivity(activityName, projectID);
-		activityList.add(a);
+		getActivities().add(a);
 	}
 
 	public ArrayList<Activity> getActivities() {
+		System.out.println("act size "+activityList.size());
 		return activityList;
 	}
 
 	public Activity searchForActivity(String activityName) {
 		Activity a = null;
-		for (Activity activity : activityList) {
+		for (Activity activity : getActivities()) {
 			if (activity.getName().equals(activityName)) {
 				a = activity;
 			}
