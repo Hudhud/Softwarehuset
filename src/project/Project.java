@@ -67,7 +67,6 @@ public class Project{
 	}
 
 	public ArrayList<Activity> getActivities() {
-		System.out.println("act size "+activityList.size());
 		return activityList;
 	}
 

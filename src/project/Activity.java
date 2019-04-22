@@ -9,9 +9,8 @@ public class Activity {
 
 	public Activity(String activityName) throws Exception {
 		
-		/* Der mangler et scenarie til hvis der ikke angives et navn til en aktivitet */
 		if (activityName.length() < 1) {
-				throw new OperationNotAllowedException("The activity has no name. Please choose a name for the activity");
+				throw new OperationNotAllowedException("The activity has no name. Please type a name for the activity");
 			} 
 
 	this.activityName = activityName;

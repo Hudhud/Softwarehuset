@@ -41,11 +41,11 @@ public class Softwarehuset {
 		String lastId;
 		String idStringFormat = null;
 		String year = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
-		if (projectList.size() == 0) {
+		if (getProjectsFromProjectList().size() == 0) {
 			id = 1;
 			idStringFormat = String.format("%06d", id);
 		} else {
-			lastId = projectList.get(projectList.size() - 1).getId();
+			lastId = getProjectsFromProjectList().get(getProjectsFromProjectList().size() - 1).getId();
 			int idIntFormat = Integer.parseInt(lastId) + 1;
 			idStringFormat = String.format("%06d", idIntFormat);
 		}
@@ -119,7 +119,7 @@ public class Softwarehuset {
 
 	public void createAct(String activityName, String projectID, String pmId) throws Exception {
 		projectManager = new ProjectManager(pmId);
-		projectManager.createActivity(projectID, activityName, searchForProjectById(projectID),this);
+		projectManager.createActivity(projectID, activityName, searchForProjectById(projectID), this);
 	}
 
 	public ArrayList<Activity> getActivitiesFromActivityList(String projectId) {
@@ -178,7 +178,7 @@ public class Softwarehuset {
 			CEO ceo = new CEO(ceoId);
 			ceo.choosePM(employeeId, projectId, this);
 			getProjectManagerList().add(new ProjectManager(employeeId));
-			//getEmployeeList().remove(getEmployeeList().indexOf(searchForEmployeeById(employeeId)));
+			// getEmployeeList().remove(getEmployeeList().indexOf(searchForEmployeeById(employeeId)));
 
 		} else if (!ceoId.equals("ceo")) {
 			throw new OperationNotAllowedException("This operation can only be performed by the CEO");

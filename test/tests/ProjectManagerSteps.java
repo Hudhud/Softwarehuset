@@ -24,7 +24,7 @@ public class ProjectManagerSteps {
 	private String pmId;
 	private String projectId;
 	private Employee employee;
-	private int activityListSize;
+	// private int activityListSize;
 
 	public ProjectManagerSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder) throws Exception {
 		this.softwarehuset = softwarehuset;
@@ -32,7 +32,8 @@ public class ProjectManagerSteps {
 		softwarehuset.generateEmployees();
 		employee = softwarehuset.getEmployeeList().get(0);
 		softwarehuset.addProjectToProjectList("TestProject2", employee);
-		softwarehuset.choosePM(employee.getEmployeeID(), "ceo",	softwarehuset.getProjectsFromProjectList().get(0).getId());
+		softwarehuset.choosePM(employee.getEmployeeID(), "ceo",
+				softwarehuset.getProjectsFromProjectList().get(0).getId());
 	}
 
 	// from create-a-new-activity.feature
@@ -55,8 +56,8 @@ public class ProjectManagerSteps {
 
 	@When("the project manager creates an activity")
 	public void the_project_manager_creates_an_activity() throws Exception {
-		activityListSize = softwarehuset.getActivitiesFromActivityList(projectId).size();
-		System.out.println("Size before " + activityListSize);
+		// activityListSize =
+		// softwarehuset.getActivitiesFromActivityList(projectId).size();
 
 		try {
 			softwarehuset.createAct(activityName, projectId, pmId);
@@ -67,8 +68,24 @@ public class ProjectManagerSteps {
 
 	@Then("the system creates an activity with a consecutive number")
 	public void the_system_creates_an_activity_with_a_consecutive_number() {
-		assertTrue(softwarehuset.getActivitiesFromActivityList(projectId).size() > activityListSize);
-		System.out.println("Size after " + softwarehuset.getActivitiesFromActivityList(projectId).size());
+		assertTrue(softwarehuset.getActivitiesFromActivityList(projectId).size() > 0);
 
 	}
+
+	@Given("provides the ID {string} for a project, which has not been created")
+	public void providesTheIDForAProjectWhichHasNotBeenCreated(String projectId) {
+		this.projectId = projectId;
+	}
+
+	@Given("provides a name {string} for the activity, which already exists")
+	public void providesANameForTheActivityWhichAlreadyExists(String activityName) throws Exception {
+		softwarehuset.createAct(activityName, projectId, pmId);
+		this.activityName = activityName;
+	}
+	
+	@Given("provides a no name for the activity")
+	public void providesANoNameForTheActivity() {
+	    this.activityName = "";
+	}
+
 }

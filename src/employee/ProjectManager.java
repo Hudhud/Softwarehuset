@@ -15,8 +15,6 @@ public class ProjectManager extends Employee{
 		if (softwarehuset.searchForProjectById(projectID) == null)
 			throw new OperationNotAllowedException("A project with provided ID does not exist");
 		
-		System.out.println("No ERROR");
-
 		p.addActivityToActivityList(activityName, projectID);
 	}
 	
