@@ -1,7 +1,6 @@
-/main/
-/tests/
-/admin/
-/employee/
 /ceo/
-/project/
+/employee/
 /exceptions/
+/main/
+/project/
+/tests/
