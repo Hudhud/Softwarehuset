@@ -4,12 +4,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import employee.Employee;
+import employee.PermanentActivity;
 import exceptions.ErrorMessageHolder;
 import exceptions.OperationNotAllowedException;
 import main.Softwarehuset;
@@ -20,6 +23,9 @@ public class EmployeeSteps {
 	private ErrorMessageHolder errorMessageHolder;
 	private List<Employee> employeeList;
 	private Employee employee;
+	private Calendar startDate, endDate;
+	private int startYear, startMonth, startDay, endYear, endMonth, endDay;
+	private Object permanentActivity;
 	
 	public EmployeeSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder) {
 		this.softwarehuset = softwarehuset;
@@ -58,75 +64,56 @@ public class EmployeeSteps {
 		assertEquals(errorMessage, errorMessageHolder.getErrorMessage());
 	}
 
-//	
+	
 //	//from create-a-permanent-activity.feature
-//	
-//	@Given("that employee  with ID {string} provides information about the time period of the permanent activity")
-//	public void that_employee_with_ID_provides_information_about_the_time_period_of_the_permanent_activity(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-//
-//	@When("the employee creates a permanent activity")
-//	public void the_employee_creates_a_permanent_activity() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-//
-//	@Then("the permanent activity is created")
-//	public void the_permanent_activity_is_created() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-//
-//	@Given("that employee with ID {string} does not provide any information about the time period of the permanent activity")
-//	public void that_employee_with_ID_does_not_provide_any_information_about_the_time_period_of_the_permanent_activity(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-//
-//	@Then("the employee gets an error {string}")
-//	public void the_employee_gets_an_error(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-//	
-//	//from register-working-time.feature
-//	
-//	@Given("that the employee with ID {string} is signed in")
-//	public void that_the_employee_with_ID_is_signed_in(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-//
-//	@Given("the employee provides information about his\\/her working time")
-//	public void the_employee_provides_information_about_his_her_working_time() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-//
-//	@When("the employee wants to register his\\/her working time for an activity with ID {int}")
-//	public void the_employee_wants_to_register_his_her_working_time_for_an_activity_with_ID(Integer int1) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-//
-//	@Then("the employee has registered his\\/her working time")
-//	public void the_employee_has_registered_his_her_working_time() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-//
-//	@Given("that the employee with ID {string} is not signed in")
-//	public void that_the_employee_with_ID_is_not_signed_in(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-//
-//	@When("the employee signs in with a wrong ID")
-//	public void the_employee_signs_in_with_a_wrong_ID() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
+	
+	@Given("that an employee  provides his ID {string}")
+	public void thatAnEmployeeProvidesHisID(String ID) {
+	    employee = employeeList.get(0);
+	    ID = employee.getEmployeeID();
+	    assertTrue(employeeList.contains(softwarehuset.searchForEmployeeById(ID)));
+	}
+
+	@Given("provides a start date {int}:{int}:{int} for the permanent activity")
+	public void providesAStartDateForThePermanentActivity(Integer year, Integer month, Integer day) {
+		startYear = year;
+		startMonth = month;
+		startDay = day;
+//		startDate = new GregorianCalendar(year, (month-1), day);
+	}
+
+	@Given("provides an end date {int}:{int}:{int} for the permanent activity")
+	public void providesAnEndDateForThePermanentActivity(Integer year, Integer month, Integer day) {
+		endYear = year;
+		endMonth = month;
+		endDay = day;
+//		endDate = new GregorianCalendar(year, (month-1), day);
+	}
+
+	@When("the employee creates a permanent activity")
+	public void theEmployeeCreatesAPermanentActivity() throws OperationNotAllowedException {
+		try {
+			employee.createPermanentActivity(startYear, startMonth, startDay, endYear, endMonth, endDay);
+		} catch(OperationNotAllowedException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	    
+	}
+
+	@Then("the system creates the permanent activity")
+	public void theSystemCreatesThePermanentActivity() {
+	    assertTrue(employee.getPermanentActivityList().size() > 0);
+	}
+	
+	@Given("does not provide a start date for the permanent activity")
+	public void doesNotProvideAStartDateForThePermanentActivity() {
+		
+	}
+
+	@Given("does not provide an end date for the permanent activity")
+	public void doesNotProvideAnEndDateForThePermanentActivity() {
+		
+	}
+
 
 }

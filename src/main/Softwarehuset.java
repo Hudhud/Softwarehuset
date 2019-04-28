@@ -3,6 +3,7 @@ package main;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -195,6 +196,8 @@ public class Softwarehuset {
 	public static void main(String[] args) {
 		Softwarehuset softwarehuset = new Softwarehuset();
 		softwarehuset.generateEmployees();
+		Calendar calendar = new GregorianCalendar(2019,11,4);
+		System.out.println(calendar.getTime());
 	}
 
 }
