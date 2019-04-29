@@ -1,4 +1,115 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("use_cases\\create_a_new_activity.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("use_cases\\assign_an_employee_to_activity.feature");
+formatter.feature({
+  "name": "Assign an employee to activity",
+  "description": "",
+  "keyword": "Feature"
+});
+formatter.scenario({
+  "name": "Assign employee, who is vacant, to an activity",
+  "description": "",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "name": "that the employee with ID \"abcd\" is vacant",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.that_the_employee_with_ID_is_vacant(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the project manager wants to add an employee to an activity",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.the_project_manager_wants_to_add_an_employee_to_an_activity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the system assigns the employee to the activity",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.the_system_assigns_the_employee_to_the_activity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Project manager wants to assign an employee, who is already assigned to 20 activities, to an activity",
+  "description": "",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "name": "that the employee with ID \"abcd\" is already assigned to 20 activities",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.thatTheEmployeeWithIDIsAlreadyAssignedToActivities(String,Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the project manager wants to assign the employee to another activity",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.theProjectManagerWantsToAssignTheEmployeeToAnotherActivity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the system provides an error message \"The employee is already assigned to 20 activities\"",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Employee without valid project manager ID wants to assign an employee to an activity",
+  "description": "",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "name": "that the employee with ID \"abcd\" is vacant",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.that_the_employee_with_ID_is_vacant(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "an employee without a project manager ID wants to assign the employee to another activity",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.anEmployeeWithoutAProjectManagerIDWantsToAssignTheEmployeeToAnotherActivity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the system provides an error message \"Please enter a valid project manager ID\"",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.uri("use_cases\\create_a_new_activity.feature");
 formatter.feature({
   "name": "Create a new activity",
   "description": "",
@@ -296,6 +407,41 @@ formatter.step({
 });
 formatter.match({
   "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Create several new projects",
+  "description": "",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "name": "that names \"Project_1\" \"Project_2\" \"Project_3\" for the projects are provided",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "EmployeeSteps.thatNamesForTheProjectsAreProvided(String,String,String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "three new projects are created",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "EmployeeSteps.threeNewProjectsAreCreated()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the system creates three projects with the provided names \"Project_1\" \"Project_2\" \"Project_3\" and  consecutive numbers",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "EmployeeSteps.theSystemCreatesThreeProjectsWithTheProvidedNamesAndConsecutiveNumbers(String,String,String)"
 });
 formatter.result({
   "status": "passed"

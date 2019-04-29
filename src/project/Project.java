@@ -70,16 +70,16 @@ public class Project{
 		return activityList;
 	}
 
-	public Activity searchForActivity(String activityName) {
-		Activity a = null;
-		for (Activity activity : getActivities()) {
-			if (activity.getName().equals(activityName)) {
-				a = activity;
-			}
-			
-		}
-		return a;		
-	}
+//	public Activity searchForActivity(String activityName) {
+//		Activity a = null;
+//		for (Activity activity : getActivities()) {
+//			if (activity.getName().equals(activityName)) {
+//				a = activity;
+//			}
+//			
+//		}
+//		return a;		
+//	}
 
 	public void setPM(String pmId) {
 		this.pmId = pmId;

@@ -45,13 +45,13 @@ public class Softwarehuset {
 		String year = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
 		if (getProjectsFromProjectList().size() == 0) {
 			id = 1;
-			idStringFormat = String.format("%06d", id);
+			idStringFormat = year + String.format("%06d", id);
 		} else {
 			lastId = getProjectsFromProjectList().get(getProjectsFromProjectList().size() - 1).getId();
 			int idIntFormat = Integer.parseInt(lastId) + 1;
-			idStringFormat = String.format("%06d", idIntFormat);
+			idStringFormat = String.format("%06d", idIntFormat); 
 		}
-		String projectID = year + idStringFormat;
+		String projectID = idStringFormat;
 
 		return projectID;
 	}
@@ -108,16 +108,31 @@ public class Softwarehuset {
 		return e;
 	}
 
-	public boolean employeeExists(String employeeId) {
-		for (Employee emp : getEmployeeList()) {
-			if (emp.getEmployeeID().equals(employeeId)) {
-				employee = emp;
-				return true;
+	public ProjectManager searchForPMById(String pmId) throws OperationNotAllowedException {
+		String id = null;
+		ProjectManager pm = null;
+		for (int i = 0; i < getProjectManagerList().size(); i++) {
+			id = getProjectManagerList().get(i).getEmployeeID();
+			if (pmId.equals(id)) {
+				pm = getProjectManagerList().get(i);
 			}
 		}
-
-		return false;
+		
+		if (pm == null ) {
+			throw new OperationNotAllowedException("Please enter a valid project manager ID");
+		}
+		return pm;
 	}
+
+//	public boolean employeeExists(String employeeId) {
+//		for (Employee emp : getEmployeeList()) {
+//			if (emp.getEmployeeID().equals(employeeId)) {
+//				employee = emp;
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 
 	public void createAct(String activityName, String projectID, String pmId) throws Exception {
 		projectManager = new ProjectManager(pmId);
@@ -128,20 +143,20 @@ public class Softwarehuset {
 		return searchForProjectById(projectId).getActivities();
 	}
 
-	public Activity searchForActivity(String activityName, String projectId) {
-
-		String name = null;
-		Activity activity = null;
-		for (int i = 0; i < getEmployeeList().size(); i++) {
-			name = getActivitiesFromActivityList(projectId).get(i).getName();
-			if (activityName.equals(name)) {
-				activity = getActivitiesFromActivityList(projectId).get(i);
-			}
-		}
-
-		return activity;
-
-	}
+//	public Activity searchForActivity(String activityName, String projectId) {
+//
+//		String name = null;
+//		Activity activity = null;
+//		for (int i = 0; i < getEmployeeList().size(); i++) {
+//			name = getActivitiesFromActivityList(projectId).get(i).getName();
+//			if (activityName.equals(name)) {
+//				activity = getActivitiesFromActivityList(projectId).get(i);
+//			}
+//		}
+//
+//		return activity;
+//
+//	}
 
 	public List<Employee> generateEmployees() {
 		// We assume there are 50 employees.
@@ -198,16 +213,21 @@ public class Softwarehuset {
 			int endDay, Employee employee) throws OperationNotAllowedException {
 		employee.createPermanentActivity(startYear, startMonth, startDay, endYear, endMonth, endDay);
 	}
-	
-	public ArrayList<PermanentActivity> getEmployeePermanentActivities(Employee employee){
+
+	public ArrayList<PermanentActivity> getEmployeePermanentActivities(Employee employee) {
 		return employee.getPermanentActivityList();
 	}
 
+	public void assignEmployeeToActivity(Employee employee, ProjectManager pm) throws OperationNotAllowedException {
+		
+		pm.assignEmpToActivity(employee);
+	}
+
 	public static void main(String[] args) {
-		Softwarehuset softwarehuset = new Softwarehuset();
-		softwarehuset.generateEmployees();
-		Calendar calendar = new GregorianCalendar(2019, 11, 4);
-		System.out.println(calendar.getTime());
+//		Softwarehuset softwarehuset = new Softwarehuset();
+//		softwarehuset.generateEmployees();
+//		Calendar calendar = new GregorianCalendar(2019, 11, 4);
+//		System.out.println(calendar.getTime());
 	}
 
 }

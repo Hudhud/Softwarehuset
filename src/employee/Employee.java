@@ -19,7 +19,6 @@ public class Employee {
 	// This empty constructor is necessary, because sometimes we need it in some
 	// methods.
 	public Employee() {
-
 	}
 
 	public Employee(String employeeID) {
@@ -42,21 +41,21 @@ public class Employee {
 		this.isEmployeePM = isEmployeePM;
 	}
 
-	public void setIsEmployeeVacant(boolean vacant) {
-		this.vacant = vacant;
-	}
-
-	public boolean isEmployeeVacant() {
-		return vacant;
-	}
+//	public void setIsEmployeeVacant(boolean vacant) {
+//		this.vacant = vacant;
+//	}
+//
+//	public boolean isEmployeeVacant() {
+//		return vacant;
+//	}
 
 	public Project createProj(String name, String id) throws Exception {
 		Project p = new Project(name, id);
 		return p;
 	}
 
-	public void createPermanentActivity(int startYear, int startMonth, int startDay, int endYear,
-			int endMonth, int endDay) throws OperationNotAllowedException {
+	public void createPermanentActivity(int startYear, int startMonth, int startDay, int endYear, int endMonth,
+			int endDay) throws OperationNotAllowedException {
 		ArrayList<Integer> months = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
 
 		if (!months.contains(startMonth) || !months.contains(endMonth)) {
@@ -90,6 +89,13 @@ public class Employee {
 	public ArrayList<PermanentActivity> getPermanentActivityList() {
 		return permanentActivityList;
 	}
-	
-	
+
+	public void increaseActivityAmount() {
+		activityCounter++;
+	}
+
+	public int getActivityAmount() {
+		return activityCounter;
+	}
+
 }

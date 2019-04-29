@@ -14,7 +14,7 @@ import main.Softwarehuset;
 
 public class EmployeeSteps {
 	private Softwarehuset softwarehuset;
-	private String projectName;
+	private String projectName, projectName_1, projectName_2;
 	private ErrorMessageHolder errorMessageHolder;
 	private List<Employee> employeeList;
 	private Employee employee;
@@ -56,6 +56,35 @@ public class EmployeeSteps {
 	@Then("the system provides an error message {string}")
 	public void theSystemProvidesAnErrorMessage(String errorMessage) throws Exception {
 		assertEquals(errorMessage, errorMessageHolder.getErrorMessage());
+	}
+
+	@Given("that names {string} {string} {string} for the projects are provided")
+	public void thatNamesForTheProjectsAreProvided(String projectName, String projectName_1, String projectName_2) {
+		this.projectName = projectName;
+		this.projectName_1 = projectName_1;
+		this.projectName_2 = projectName_2;
+	}
+
+	@When("three new projects are created")
+	public void threeNewProjectsAreCreated() throws Exception {
+		try {
+			softwarehuset.addProjectToProjectList(projectName, employeeList.get(0));
+			softwarehuset.addProjectToProjectList(projectName_1, employeeList.get(0));
+			softwarehuset.addProjectToProjectList(projectName_2, employeeList.get(0));
+		} catch (OperationNotAllowedException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+
+	@Then("the system creates three projects with the provided names {string} {string} {string} and  consecutive numbers")
+	public void theSystemCreatesThreeProjectsWithTheProvidedNamesAndConsecutiveNumbers(String projectName,
+			String projectName_1, String projectName_2) {
+		assertTrue(
+				softwarehuset.getProjectsFromProjectList().contains(softwarehuset.searchForProjectByName(projectName)));
+		assertTrue(softwarehuset.getProjectsFromProjectList()
+				.contains(softwarehuset.searchForProjectByName(projectName_1)));
+		assertTrue(softwarehuset.getProjectsFromProjectList()
+				.contains(softwarehuset.searchForProjectByName(projectName_2)));
 	}
 
 //	//from create-a-permanent-activity.feature
