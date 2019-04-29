@@ -1,8 +1,6 @@
 package project;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-
 import exceptions.OperationNotAllowedException;
 
 public class Project{
@@ -29,7 +27,7 @@ public class Project{
 		return id;
 	}
 
-	public Activity createActivity(String activityName, String projectID) throws Exception {
+	private Activity createActivity(String activityName, String projectID) throws Exception {
 
 		for (int i = 0; i < getActivities().size(); i++) {
 			Activity a = getActivities().get(i);

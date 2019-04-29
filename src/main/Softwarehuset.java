@@ -1,13 +1,9 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
-
 import ceo.CEO;
 import employee.Employee;
 import employee.PermanentActivity;
@@ -18,16 +14,13 @@ import project.Project;
 
 public class Softwarehuset {
 	private ArrayList<Project> projectList = new ArrayList<Project>();
-//	private Scanner console = new Scanner(System.in);
-//	private String str = console.nextLine();
 	private String id;
-//	private Project project;
 	private static Employee employee;
 	private static ProjectManager projectManager;
 	private static ArrayList<Employee> employeeList = new ArrayList<Employee>();
 	private static ArrayList<ProjectManager> projectManagerList = new ArrayList<ProjectManager>();
 
-	public static String employeeIdGenerator() {
+	private static String employeeIdGenerator() {
 		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVXYZ";
 		Random rand = new Random();
 		int idLength = rand.nextInt(4 - 1) + 1;
@@ -38,7 +31,7 @@ public class Softwarehuset {
 		return sb.toString();
 	}
 
-	public String projectIdGenerator() {
+	private String projectIdGenerator() {
 		int id;
 		String lastId;
 		String idStringFormat = null;
@@ -56,7 +49,7 @@ public class Softwarehuset {
 		return projectID;
 	}
 
-	public Project createP(String projectName, Employee employee) throws Exception {
+	private Project createP(String projectName, Employee employee) throws Exception {
 		id = projectIdGenerator();
 		return employee.createProj(projectName, id);
 	}

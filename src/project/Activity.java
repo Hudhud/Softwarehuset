@@ -5,8 +5,6 @@ import exceptions.OperationNotAllowedException;
 public class Activity {
 
 	private String activityName;
-	private String id;
-
 	public Activity(String activityName) throws Exception {
 		
 		if (activityName.length() < 1) {
