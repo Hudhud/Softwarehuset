@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
-
 import exceptions.OperationNotAllowedException;
 import project.Project;
 
@@ -16,6 +14,7 @@ public class Employee {
 	private boolean isEmployeePM;
 	private boolean vacant;
 	private ArrayList<PermanentActivity> permanentActivityList = new ArrayList<PermanentActivity>();
+	private int activityCounter;
 
 	// This empty constructor is necessary, because sometimes we need it in some
 	// methods.
@@ -56,9 +55,9 @@ public class Employee {
 		return p;
 	}
 
-	public void createPermanentActivity(Integer startYear, Integer startMonth, Integer startDay, Integer endYear,
-			Integer endMonth, Integer endDay) throws OperationNotAllowedException {
-		ArrayList<Integer> months =  new ArrayList<Integer>(Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12));
+	public void createPermanentActivity(int startYear, int startMonth, int startDay, int endYear,
+			int endMonth, int endDay) throws OperationNotAllowedException {
+		ArrayList<Integer> months = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
 
 		if (!months.contains(startMonth) || !months.contains(endMonth)) {
 			throw new OperationNotAllowedException("Invalid month");
@@ -71,8 +70,7 @@ public class Employee {
 		if (daysInMonthStart < startDay || daysInMonthEnd < endDay) {
 			throw new OperationNotAllowedException("Invalid day of month");
 		}
-		
-		
+
 		if (startYear < Calendar.getInstance().get(Calendar.YEAR)) {
 			throw new OperationNotAllowedException("Invalid year");
 
@@ -92,4 +90,6 @@ public class Employee {
 	public ArrayList<PermanentActivity> getPermanentActivityList() {
 		return permanentActivityList;
 	}
+	
+	
 }

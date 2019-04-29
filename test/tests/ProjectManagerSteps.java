@@ -2,20 +2,13 @@ package tests;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import employee.Employee;
-import employee.ProjectManager;
 import exceptions.ErrorMessageHolder;
 import exceptions.OperationNotAllowedException;
 import main.Softwarehuset;
-import project.Project;
 
 public class ProjectManagerSteps {
 	private Softwarehuset softwarehuset;
@@ -24,7 +17,6 @@ public class ProjectManagerSteps {
 	private String pmId;
 	private String projectId;
 	private Employee employee;
-	// private int activityListSize;
 
 	public ProjectManagerSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder) throws Exception {
 		this.softwarehuset = softwarehuset;
@@ -56,8 +48,6 @@ public class ProjectManagerSteps {
 
 	@When("the project manager creates an activity")
 	public void the_project_manager_creates_an_activity() throws Exception {
-		// activityListSize =
-		// softwarehuset.getActivitiesFromActivityList(projectId).size();
 
 		try {
 			softwarehuset.createAct(activityName, projectId, pmId);

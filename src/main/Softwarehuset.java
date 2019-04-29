@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import ceo.CEO;
 import employee.Employee;
+import employee.PermanentActivity;
 import employee.ProjectManager;
 import exceptions.OperationNotAllowedException;
 import project.Activity;
@@ -193,10 +194,19 @@ public class Softwarehuset {
 		searchForProjectById(projectId).setPM(pmId);
 	}
 
+	public void createPermanentActivity(int startYear, int startMonth, int startDay, int endYear, int endMonth,
+			int endDay, Employee employee) throws OperationNotAllowedException {
+		employee.createPermanentActivity(startYear, startMonth, startDay, endYear, endMonth, endDay);
+	}
+	
+	public ArrayList<PermanentActivity> getEmployeePermanentActivities(Employee employee){
+		return employee.getPermanentActivityList();
+	}
+
 	public static void main(String[] args) {
 		Softwarehuset softwarehuset = new Softwarehuset();
 		softwarehuset.generateEmployees();
-		Calendar calendar = new GregorianCalendar(2019,11,4);
+		Calendar calendar = new GregorianCalendar(2019, 11, 4);
 		System.out.println(calendar.getTime());
 	}
 
