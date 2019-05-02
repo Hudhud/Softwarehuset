@@ -23,7 +23,7 @@ Feature: Create a new activity
     When the project manager creates an activity
     Then the system provides an error message "The name already exists"
    
-    Scenario: the provided activity name already exists
+    Scenario: the provided activity has no name
   	Given that the project manager provides his id "asd"
     And provides the ID "2019000001" for a project
     And provides a no name for the activity

@@ -15,6 +15,7 @@ public class Employee {
 	private boolean vacant;
 	private ArrayList<PermanentActivity> permanentActivityList = new ArrayList<PermanentActivity>();
 	private int activityCounter;
+	private ArrayList<ActivityWorkingHours> activityWorkingHoursList = new ArrayList<>();
 
 	// This empty constructor is necessary, because sometimes we need it in some
 	// methods.
@@ -97,5 +98,15 @@ public class Employee {
 	public int getActivityAmount() {
 		return activityCounter;
 	}
+	
+	public void registerWorkingHours(String activityID, String workingHours) throws OperationNotAllowedException {
+		ActivityWorkingHours awh = new ActivityWorkingHours(activityID, workingHours);
+		getActivityWorkingHoursList().add(awh);
+	}
+
+	public ArrayList<ActivityWorkingHours> getActivityWorkingHoursList() {
+		return activityWorkingHoursList;
+	}
+
 
 }

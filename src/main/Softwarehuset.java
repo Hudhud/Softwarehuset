@@ -111,8 +111,13 @@ public class Softwarehuset {
 			}
 		}
 		
-		if (pm == null ) {
+		if (pm == null) {
 			throw new OperationNotAllowedException("Please enter a valid project manager ID");
+		} 
+		for (ProjectManager projectmanager : getProjectManagerList()) {
+			if(!projectmanager.getEmployeeID().equals(pmId)) {
+				throw new OperationNotAllowedException("Please enter a valid project manager ID");				
+			}
 		}
 		return pm;
 	}
@@ -128,6 +133,11 @@ public class Softwarehuset {
 //	}
 
 	public void createAct(String activityName, String projectID, String pmId) throws Exception {
+//		for (ProjectManager projectManager : getProjectManagerList()) {
+//			if(!projectManager.getIsEmployeePM()) {
+//				throw new OperationNotAllowedException("Invalid ID");
+//			}
+//		}
 		projectManager = new ProjectManager(pmId);
 		projectManager.createActivity(projectID, activityName, searchForProjectById(projectID), this);
 	}
@@ -215,7 +225,21 @@ public class Softwarehuset {
 		
 		pm.assignEmpToActivity(employee);
 	}
-
+	
+	public void registerWorkingTime(String activityID, String workingHours, Employee employee) throws OperationNotAllowedException {
+		if(!getEmployeeList().contains(employee)) {
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+		for (Project project : getProjectsFromProjectList()) {
+			for (Activity activity : project.getActivities()) {
+				if(!activity.getName().equals(activityID)) {
+					throw new OperationNotAllowedException("Invalid activity ID");
+				}
+			}
+		}
+		employee.registerWorkingHours(activityID, workingHours);
+	}
+	
 	public static void main(String[] args) {
 //		Softwarehuset softwarehuset = new Softwarehuset();
 //		softwarehuset.generateEmployees();
