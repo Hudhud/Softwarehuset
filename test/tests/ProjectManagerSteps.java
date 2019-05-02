@@ -104,11 +104,11 @@ public class ProjectManagerSteps {
 		for (int i = 0; i < 20; i++) {
 			softwarehuset.assignEmployeeToActivity(employee2, softwarehuset.searchForPMById(pmId));
 		}
+
 	}
 
 	@When("the project manager wants to assign the employee to another activity")
 	public void theProjectManagerWantsToAssignTheEmployeeToAnotherActivity() throws OperationNotAllowedException {
-
 		try {
 			softwarehuset.assignEmployeeToActivity(employee2, softwarehuset.searchForPMById(pmId));
 		} catch (OperationNotAllowedException e) {

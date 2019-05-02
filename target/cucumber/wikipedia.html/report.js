@@ -281,7 +281,7 @@ formatter.result({
   "status": "passed"
 });
 formatter.scenario({
-  "name": "the provided activity name already exists",
+  "name": "the provided activity has no name",
   "description": "",
   "keyword": "Scenario"
 });
@@ -719,6 +719,232 @@ formatter.result({
 });
 formatter.step({
   "name": "the system provides an error message \"Invalid month\"",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.uri("use_cases\\register_working_time.feature");
+formatter.feature({
+  "name": "Register working time",
+  "description": "",
+  "keyword": "Feature"
+});
+formatter.scenario({
+  "name": "Register working time for an activity",
+  "description": "",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "name": "that an employee  provides his ID \"abcd\"",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "EmployeeSteps.thatAnEmployeeProvidesHisID(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee provides the activity with ID",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "EmployeeSteps.theEmployeeProvidesTheActivityWithID()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee provides his working time \"5\" hours",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "EmployeeSteps.theEmployeeProvidesHisWorkingTimeHours(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee wants to register his working time for the activity",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "EmployeeSteps.theEmployeeWantsToRegisterHisWorkingTimeForTheActivity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee has registered his working time",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "EmployeeSteps.theEmployeeHasRegisteredHisWorkingTime()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Employee enters wrong ID",
+  "description": "",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "name": "that an employee provides wrong ID \"abcd\"",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "EmployeeSteps.thatAnEmployeeProvidesWrongID(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee provides the activity with ID",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "EmployeeSteps.theEmployeeProvidesTheActivityWithID()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee provides his working time \"5\" hours",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "EmployeeSteps.theEmployeeProvidesHisWorkingTimeHours(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee wants to register his working time for the activity",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "EmployeeSteps.theEmployeeWantsToRegisterHisWorkingTimeForTheActivity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the system provides an error message \"Invalid ID\"",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Employee does not enter working time for an activity",
+  "description": "",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "name": "that an employee  provides his ID \"abcd\"",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "EmployeeSteps.thatAnEmployeeProvidesHisID(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee provides the activity with ID",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "EmployeeSteps.theEmployeeProvidesTheActivityWithID()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee does not provide his working time",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "EmployeeSteps.theEmployeeDoesNotProvideHisWorkingTime()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee wants to register his working time for the activity",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "EmployeeSteps.theEmployeeWantsToRegisterHisWorkingTimeForTheActivity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the system provides an error message \"Invalid working hours\"",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Employee enters wrong activity ID",
+  "description": "",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "name": "that an employee  provides his ID \"abcd\"",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "EmployeeSteps.thatAnEmployeeProvidesHisID(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee provides wrong activity ID \"abcd\"",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "EmployeeSteps.theEmployeeProvidesWrongActivityID(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee provides his working time \"5\" hours",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "EmployeeSteps.theEmployeeProvidesHisWorkingTimeHours(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee wants to register his working time for the activity",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "EmployeeSteps.theEmployeeWantsToRegisterHisWorkingTimeForTheActivity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the system provides an error message \"Invalid activity ID\"",
   "keyword": "Then "
 });
 formatter.match({

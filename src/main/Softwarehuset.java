@@ -42,7 +42,7 @@ public class Softwarehuset {
 		} else {
 			lastId = getProjectsFromProjectList().get(getProjectsFromProjectList().size() - 1).getId();
 			int idIntFormat = Integer.parseInt(lastId) + 1;
-			idStringFormat = String.format("%06d", idIntFormat); 
+			idStringFormat = String.format("%06d", idIntFormat);
 		}
 		String projectID = idStringFormat;
 
@@ -110,10 +110,13 @@ public class Softwarehuset {
 				pm = getProjectManagerList().get(i);
 			}
 		}
-		
-		if (pm == null ) {
+
+		if (pm == null) {
 			throw new OperationNotAllowedException("Please enter a valid project manager ID");
+		} else if (!getProjectManagerList().contains(pm)) {
+			throw new OperationNotAllowedException("Please enter a valid project manager ID");				
 		}
+ 
 		return pm;
 	}
 
@@ -128,6 +131,11 @@ public class Softwarehuset {
 //	}
 
 	public void createAct(String activityName, String projectID, String pmId) throws Exception {
+//		for (ProjectManager projectManager : getProjectManagerList()) {
+//			if(!projectManager.getIsEmployeePM()) {
+//				throw new OperationNotAllowedException("Invalid ID");
+//			}
+//		}
 		projectManager = new ProjectManager(pmId);
 		projectManager.createActivity(projectID, activityName, searchForProjectById(projectID), this);
 	}
@@ -212,8 +220,23 @@ public class Softwarehuset {
 	}
 
 	public void assignEmployeeToActivity(Employee employee, ProjectManager pm) throws OperationNotAllowedException {
-		
+
 		pm.assignEmpToActivity(employee);
+	}
+
+	public void registerWorkingTime(String activityID, String workingHours, Employee employee)
+			throws OperationNotAllowedException {
+		if (!getEmployeeList().contains(employee)) {
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+		for (Project project : getProjectsFromProjectList()) {
+			for (Activity activity : project.getActivities()) {
+				if (!activity.getName().equals(activityID)) {
+					throw new OperationNotAllowedException("Invalid activity ID");
+				}
+			}
+		}
+		employee.registerWorkingHours(activityID, workingHours);
 	}
 
 	public static void main(String[] args) {
