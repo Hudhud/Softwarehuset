@@ -52,8 +52,7 @@ formatter.match({
   "location": "ProjectManagerSteps.thatTheEmployeeWithIDIsAlreadyAssignedToActivities(String,Integer)"
 });
 formatter.result({
-  "error_message": "exceptions.OperationNotAllowedException: Please enter a valid project manager ID\r\n\tat main.Softwarehuset.searchForPMById(Softwarehuset.java:119)\r\n\tat tests.ProjectManagerSteps.thatTheEmployeeWithIDIsAlreadyAssignedToActivities(ProjectManagerSteps.java:105)\r\n\tat ✽.that the employee with ID \"abcd\" is already assigned to 20 activities(use_cases\\assign_an_employee_to_activity.feature:18)\r\n",
-  "status": "failed"
+  "status": "passed"
 });
 formatter.step({
   "name": "the project manager wants to assign the employee to another activity",
@@ -63,7 +62,7 @@ formatter.match({
   "location": "ProjectManagerSteps.theProjectManagerWantsToAssignTheEmployeeToAnotherActivity()"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
 });
 formatter.step({
   "name": "the system provides an error message \"The employee is already assigned to 20 activities\"",
@@ -73,7 +72,7 @@ formatter.match({
   "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
 });
 formatter.scenario({
   "name": "Employee without valid project manager ID wants to assign an employee to an activity",

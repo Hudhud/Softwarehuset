@@ -96,6 +96,7 @@ public class Employee {
 	}
 
 	public int getActivityAmount() {
+		System.out.println(activityCounter);
 		return activityCounter;
 	}
 	

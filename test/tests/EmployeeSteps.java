@@ -168,7 +168,6 @@ public class EmployeeSteps {
 
 	@Then("the employee has registered his working time")
 	public void theEmployeeHasRegisteredHisWorkingTime() {
-		System.out.println(employee.getActivityWorkingHoursList().size());
 		assertTrue(employee.getActivityWorkingHoursList().size() > 0);
 	}
 	
