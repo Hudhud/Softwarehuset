@@ -17,6 +17,7 @@ public class ProjectManagerSteps {
 	private String pmId;
 	private String projectId;
 	private Employee employee, employee2;
+	private int expectedWorkload;
 
 	public ProjectManagerSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder) throws Exception {
 		this.softwarehuset = softwarehuset;
@@ -47,11 +48,16 @@ public class ProjectManagerSteps {
 		this.activityName = activityName;
 	}
 
+	@Given("provides the expected workload in hours {int} for the activity")
+	public void providesTheExpectedWorkloadInHoursForTheActivity(Integer expectedWorkload) {
+		this.expectedWorkload = expectedWorkload;
+	}
+
 	@When("the project manager creates an activity")
 	public void the_project_manager_creates_an_activity() throws Exception {
 
 		try {
-			softwarehuset.createAct(activityName, projectId, pmId);
+			softwarehuset.createAct(activityName, projectId, expectedWorkload, pmId);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -70,13 +76,18 @@ public class ProjectManagerSteps {
 
 	@Given("provides a name {string} for the activity, which already exists")
 	public void providesANameForTheActivityWhichAlreadyExists(String activityName) throws Exception {
-		softwarehuset.createAct(activityName, projectId, pmId);
+		softwarehuset.createAct(activityName, projectId, 1, pmId);
 		this.activityName = activityName;
 	}
 
-	@Given("provides a no name for the activity")
-	public void providesANoNameForTheActivity() {
-		this.activityName = "";
+	@Given("provides no name for the activity")
+	public void providesNoNameForTheActivity() {
+		this.activityName = null;
+	}
+
+	@Given("provides no the expected workload in hours for the activity")
+	public void providesNoTheExpectedWorkloadInHoursForTheActivity() {
+	    expectedWorkload = 0;
 	}
 
 	// from assign_an_employee_to_activity.feature
@@ -125,5 +136,7 @@ public class ProjectManagerSteps {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 	}
+
+	// from control_porject_time.feature
 
 }

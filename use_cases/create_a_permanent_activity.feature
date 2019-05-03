@@ -1,39 +1,45 @@
 Feature: Create permanent activity
-# Description: The employee creates a permanent activity
-# Actors: Employee
-
-Scenario: Employee wants to create a permanent activity
-    Given that an employee  provides his ID "abcd" 
-    And provides a start date 2019:06:1 for the permanent activity 
-    And provides an end date 2019:06:3 for the permanent activity
+  # Description: The employee creates a permanent activity
+  # Actors: Employee
+ 
+  Scenario: Employee wants to create a permanent activity
+    Given that an employee  provides his ID "abcd"
+    And provides a start date week 40 of 2019 for the permanent activity
+    And provides an end date week 42 of 2019 for the permanent activity
     When the employee creates a permanent activity
     Then the system creates the permanent activity
 
-Scenario: Employee provides a start date that occurs after the end date for the permanent activity
-    Given that an employee  provides his ID "abcd" 
-    And provides a start date 2019:07:3 for the permanent activity 
-    And provides an end date 2019:01:1 for the permanent activity
+  Scenario: Employee enters wrong ID
+    Given that an employee provides wrong ID "abcd"
+    And provides a start date week 40 of 2019 for the permanent activity
+    And provides an end date week 42 of 2019 for the permanent activity
     When the employee creates a permanent activity
-    Then the system provides an error message "End date must be later than start date" 
-    
-Scenario: Employee provides a day that does not exist in that particular month 
-    Given that an employee  provides his ID "abcd" 
-    And provides a start date 2019:02:29 for the permanent activity 
-    And provides an end date 2019:05:05 for the permanent activity
-    When the employee creates a permanent activity
-    Then the system provides an error message "Invalid day of month" 
+    Then the system provides an error message "Invalid ID"
 
-Scenario: Employee provides a year that is in the past
-    Given that an employee  provides his ID "abcd" 
-    And provides a start date 2016:05:2 for the permanent activity 
-    And provides an end date 2019:05:5 for the permanent activity
+  Scenario: Employee provides a start week that occurs after the end week date for the permanent activity
+    Given that an employee  provides his ID "abcd"
+    And provides a start date week 3 of 2019 for the permanent activity
+    And provides an end date week 1 of 2019 for the permanent activity
     When the employee creates a permanent activity
-    Then the system provides an error message "Invalid year"   
-      
-Scenario: Employee provides a month that does not exist in the interval between 1 and 12
-    Given that an employee  provides his ID "abcd" 
-    And provides a start date 2019:13:31 for the permanent activity 
-    And provides an end date 2019:05:5 for the permanent activity
+    Then the system provides an error message "End date must be later than start date"
+
+  Scenario: Employee provides a week that does not exist in that particular year
+    Given that an employee  provides his ID "abcd"
+    And provides a start date week 55 of 2019 for the permanent activity
+    And provides an end date week 56 of 2019 for the permanent activity
     When the employee creates a permanent activity
-    Then the system provides an error message "Invalid month" 
- 
+    Then the system provides an error message "Invalid week of year"
+
+  Scenario: Employee provides a year that is in the past
+    Given that an employee  provides his ID "abcd"
+    And provides a start date week 5 of 2016 for the permanent activity
+    And provides an end date week 6 of 2017 for the permanent activity
+    When the employee creates a permanent activity
+    Then the system provides an error message "Invalid year"
+
+  Scenario: Employee provides weeks, which are in the past
+    Given that an employee  provides his ID "abcd"
+    And provides a start date week 5 of 2019 for the permanent activity
+    And provides an end date week 6 of 2019 for the permanent activity
+    When the employee creates a permanent activity
+    Then the system provides an error message "Invalid week(s). The start week and end week must be in the present or future"
