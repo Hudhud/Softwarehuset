@@ -3,7 +3,7 @@ package project;
 import java.util.ArrayList;
 import exceptions.OperationNotAllowedException;
 
-public class Project{
+public class Project {
 	private String projectName;
 	private String id;
 	private ArrayList<Activity> activityList = new ArrayList<>();
@@ -27,7 +27,7 @@ public class Project{
 		return id;
 	}
 
-	private Activity createActivity(String activityName, String projectID) throws Exception {
+	private Activity createActivity(String activityName, int expectedWorkload, String projectID) throws Exception {
 
 		for (int i = 0; i < getActivities().size(); i++) {
 			Activity a = getActivities().get(i);
@@ -35,8 +35,12 @@ public class Project{
 				throw new OperationNotAllowedException("The name already exists");
 			}
 		}
-		
-		Activity a = new Activity(activityName);
+
+		if (activityName == null) {
+			throw new OperationNotAllowedException("The activity has no name. Please type a name for the activity");
+		}
+
+		Activity a = new Activity(activityName, expectedWorkload);
 		return a;
 	}
 
@@ -58,9 +62,10 @@ public class Project{
 //
 //		return activityID;
 //	}
-	
-	public void addActivityToActivityList(String activityName, String projectID) throws Exception{
-		Activity a = createActivity(activityName, projectID);
+
+	public void addActivityToActivityList(String activityName, int expectedWorkload, String projectID)
+			throws Exception {
+		Activity a = createActivity(activityName, expectedWorkload, projectID);
 		getActivities().add(a);
 	}
 
@@ -81,8 +86,7 @@ public class Project{
 
 	public void setPM(String pmId) {
 		this.pmId = pmId;
-	} 
-
+	}
 
 //	public void setId(String id) {
 //		this.id = id;

@@ -1,4 +1,4 @@
-Feature: create a new project 
+Feature: Create a new project 
 # Description: the project manager or employee creates a new project
 # Actors: Employee, project manager or administrator 
 

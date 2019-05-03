@@ -17,8 +17,8 @@ public class EmployeeSteps {
 	private String projectName, projectName_1, projectName_2,activityID,workingHours;
 	private ErrorMessageHolder errorMessageHolder;
 	private List<Employee> employeeList;
-	private Employee employee, employee1;
-	private int startYear, startMonth, startDay, endYear, endMonth, endDay;
+	private Employee employee;
+	private int startWeek, endWeek, startYear, endYear;
 
 	
 	public EmployeeSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder) throws Exception {
@@ -101,51 +101,42 @@ public class EmployeeSteps {
 		ID = employee.getEmployeeID();
 		assertTrue(softwarehuset.getEmployeeList().contains(softwarehuset.searchForEmployeeById(ID)));
 	}
-
-	@Given("provides a start date {int}:{int}:{int} for the permanent activity")
-	public void providesAStartDateForThePermanentActivity(int year, int month, int day) {
-		startYear = year;
-		startMonth = month;
-		startDay = day;
+	
+	@Given("provides a start date week {int} of {int} for the permanent activity")
+	public void provides_a_start_date_week_of_for_the_permanent_activity(Integer startWeek, Integer startYear) {
+	    this.startWeek = startWeek;
+	    this.startYear = startYear;
 	}
 
-	@Given("provides an end date {int}:{int}:{int} for the permanent activity")
-	public void providesAnEndDateForThePermanentActivity(int year, int month, int day) {
-		endYear = year;
-		endMonth = month;
-		endDay = day;
+	@Given("provides an end date week {int} of {int} for the permanent activity")
+	public void provides_an_end_date_week_of_for_the_permanent_activity(Integer endWeek, Integer endYear) {
+		this.endWeek = endWeek;
+	    this.endYear = endYear;
 	}
 
 	@When("the employee creates a permanent activity")
-	public void theEmployeeCreatesAPermanentActivity() throws OperationNotAllowedException {
-		try {
-			softwarehuset.createPermanentActivity(startYear, startMonth, startDay, endYear, endMonth, endDay, employee);
+	public void the_employee_creates_a_permanent_activity() {
+	    try {
+			softwarehuset.createPermanentActivity(startWeek, endWeek, startYear, endYear, employee);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
-
 	}
+
 
 	@Then("the system creates the permanent activity")
 	public void theSystemCreatesThePermanentActivity() {
+		System.out.println(softwarehuset.getEmployeePermanentActivities(employee).size());
 		assertTrue(softwarehuset.getEmployeePermanentActivities(employee).size() > 0);
 	}
 
-	@Given("does not provide a start date for the permanent activity")
-	public void doesNotProvideAStartDateForThePermanentActivity() {
 
-	}
-
-	@Given("does not provide an end date for the permanent activity")
-	public void doesNotProvideAnEndDateForThePermanentActivity() {
-
-	}
 	//Register working time 
 
 	@Given("the employee provides the activity with ID")
 	public void theEmployeeProvidesTheActivityWithID() throws Exception {
 		try {
-			softwarehuset.createAct("activity1", "2019000001", softwarehuset.getProjectManagerList().get(0).getEmployeeID());
+			softwarehuset.createAct("activity1", "2019000001", 1, softwarehuset.getProjectManagerList().get(0).getEmployeeID());
 			activityID = softwarehuset.getActivitiesFromActivityList("2019000001").get(0).getName();
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
@@ -175,7 +166,7 @@ public class EmployeeSteps {
 	public void thatAnEmployeeProvidesWrongID(String employeeID) throws Exception {
 		try {
 			employee = new Employee(employeeID);
-			softwarehuset.createAct("activity1", "2019000001", softwarehuset.getProjectManagerList().get(0).getEmployeeID());
+			softwarehuset.createAct("activity1", "2019000001", 1, softwarehuset.getProjectManagerList().get(0).getEmployeeID());
 			activityID = softwarehuset.getActivitiesFromActivityList("2019000001").get(0).getName();
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
@@ -191,7 +182,7 @@ public class EmployeeSteps {
 	public void theEmployeeProvidesWrongActivityID(String activityID) throws Exception {
 		try {
 			this.activityID = activityID;
-			softwarehuset.createAct("activity1", "2019000001", softwarehuset.getProjectManagerList().get(0).getEmployeeID());
+			softwarehuset.createAct("activity1", "2019000001", 1, softwarehuset.getProjectManagerList().get(0).getEmployeeID());
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}

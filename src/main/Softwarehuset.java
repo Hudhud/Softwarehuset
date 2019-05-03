@@ -114,9 +114,9 @@ public class Softwarehuset {
 		if (pm == null) {
 			throw new OperationNotAllowedException("Please enter a valid project manager ID");
 		} else if (!getProjectManagerList().contains(pm)) {
-			throw new OperationNotAllowedException("Please enter a valid project manager ID");				
+			throw new OperationNotAllowedException("Please enter a valid project manager ID");
 		}
- 
+
 		return pm;
 	}
 
@@ -130,14 +130,14 @@ public class Softwarehuset {
 //		return false;
 //	}
 
-	public void createAct(String activityName, String projectID, String pmId) throws Exception {
+	public void createAct(String activityName, String projectID, int expectedWorkload, String pmId) throws Exception {
 //		for (ProjectManager projectManager : getProjectManagerList()) {
 //			if(!projectManager.getIsEmployeePM()) {
 //				throw new OperationNotAllowedException("Invalid ID");
 //			}
 //		}
 		projectManager = new ProjectManager(pmId);
-		projectManager.createActivity(projectID, activityName, searchForProjectById(projectID), this);
+		projectManager.createActivity(projectID, activityName, expectedWorkload, searchForProjectById(projectID), this);
 	}
 
 	public ArrayList<Activity> getActivitiesFromActivityList(String projectId) {
@@ -210,9 +210,12 @@ public class Softwarehuset {
 		searchForProjectById(projectId).setPM(pmId);
 	}
 
-	public void createPermanentActivity(int startYear, int startMonth, int startDay, int endYear, int endMonth,
-			int endDay, Employee employee) throws OperationNotAllowedException {
-		employee.createPermanentActivity(startYear, startMonth, startDay, endYear, endMonth, endDay);
+	public void createPermanentActivity(int startWeek, int endWeek, int startYear, int endYear, Employee employee)
+			throws OperationNotAllowedException {
+		if (!getEmployeeList().contains(employee)) {
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+		employee.createPermanentActivity(startWeek, endWeek, startYear, endYear);
 	}
 
 	public ArrayList<PermanentActivity> getEmployeePermanentActivities(Employee employee) {
@@ -239,11 +242,7 @@ public class Softwarehuset {
 		employee.registerWorkingHours(activityID, workingHours);
 	}
 
-	public static void main(String[] args) {
-//		Softwarehuset softwarehuset = new Softwarehuset();
-//		softwarehuset.generateEmployees();
-//		Calendar calendar = new GregorianCalendar(2019, 11, 4);
-//		System.out.println(calendar.getTime());
-	}
+//	public static void main(String[] args) {
+//	}
 
 }

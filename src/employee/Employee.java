@@ -55,35 +55,9 @@ public class Employee {
 		return p;
 	}
 
-	public void createPermanentActivity(int startYear, int startMonth, int startDay, int endYear, int endMonth,
-			int endDay) throws OperationNotAllowedException {
-		ArrayList<Integer> months = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12));
-
-		if (!months.contains(startMonth) || !months.contains(endMonth)) {
-			throw new OperationNotAllowedException("Invalid month");
-		}
-		YearMonth yearMonthStart = YearMonth.of(startYear, startMonth);
-		int daysInMonthStart = yearMonthStart.lengthOfMonth();
-		YearMonth yearMonthEnd = YearMonth.of(endYear, endMonth);
-		int daysInMonthEnd = yearMonthEnd.lengthOfMonth();
-
-		if (daysInMonthStart < startDay || daysInMonthEnd < endDay) {
-			throw new OperationNotAllowedException("Invalid day of month");
-		}
-
-		if (startYear < Calendar.getInstance().get(Calendar.YEAR)) {
-			throw new OperationNotAllowedException("Invalid year");
-
-		}
-
-		Calendar startDate = new GregorianCalendar(startYear, startMonth, startDay);
-		Calendar endDate = new GregorianCalendar(endYear, endMonth, endDay);
-
-		if (startDate.after(endDate)) {
-			throw new OperationNotAllowedException("End date must be later than start date");
-		}
-
-		PermanentActivity permanentActivity = new PermanentActivity(startDate, endDate);
+	public void createPermanentActivity(int startWeek, int endWeek, int startYear, int endYear) throws OperationNotAllowedException {
+		
+		PermanentActivity permanentActivity = new PermanentActivity(startWeek, endWeek, startYear, endYear);
 		permanentActivityList.add(permanentActivity);
 	}
 
@@ -96,7 +70,7 @@ public class Employee {
 	}
 
 	public int getActivityAmount() {
-		System.out.println(activityCounter);
+//		System.out.println(activityCounter);
 		return activityCounter;
 	}
 	
