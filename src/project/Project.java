@@ -8,7 +8,12 @@ public class Project {
 	private String id;
 	private ArrayList<Activity> activityList = new ArrayList<>();
 	private String pmId;
-
+//	private int startWeek;
+//	private int endWeek;
+//	private int startYear;
+//	private int endYear;
+//	
+	
 	public Project(String projectName, String projectID) throws Exception {
 		if (projectName.length() < 1) {
 			throw new OperationNotAllowedException("The project has no name. Please choose a name for the project");
@@ -37,7 +42,7 @@ public class Project {
 		}
 
 		if (activityName == null) {
-			throw new OperationNotAllowedException("The activity has no name. Please type a name for the activity");
+			throw new OperationNotAllowedException("Please type a name for the activity");
 		}
 
 		Activity a = new Activity(activityName, expectedWorkload);
@@ -90,6 +95,22 @@ public class Project {
 
 //	public void setId(String id) {
 //		this.id = id;
+//	}
+	
+//	public void setStartWeek(int startWeek) {
+//		this.startWeek = startWeek;
+//	}
+//	
+//	public void setEndWeek(int endWeek) {
+//		this.endWeek = endWeek;
+//	}
+//	
+//	public void setStartYear(int startYear) {
+//		this.startYear = startYear;
+//	}
+//	
+//	public void setEndYear(int endYear) {
+//		this.endYear = endYear;
 //	}
 
 }

@@ -14,13 +14,12 @@ import main.Softwarehuset;
 
 public class EmployeeSteps {
 	private Softwarehuset softwarehuset;
-	private String projectName, projectName_1, projectName_2,activityID,workingHours;
+	private String projectName, projectName_1, projectName_2, activityName, workingHours;
 	private ErrorMessageHolder errorMessageHolder;
 	private List<Employee> employeeList;
 	private Employee employee;
 	private int startWeek, endWeek, startYear, endYear;
 
-	
 	public EmployeeSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder) throws Exception {
 		this.softwarehuset = softwarehuset;
 		this.errorMessageHolder = errorMessageHolder;
@@ -101,46 +100,44 @@ public class EmployeeSteps {
 		ID = employee.getEmployeeID();
 		assertTrue(softwarehuset.getEmployeeList().contains(softwarehuset.searchForEmployeeById(ID)));
 	}
-	
+
 	@Given("provides a start date week {int} of {int} for the permanent activity")
 	public void provides_a_start_date_week_of_for_the_permanent_activity(Integer startWeek, Integer startYear) {
-	    this.startWeek = startWeek;
-	    this.startYear = startYear;
+		this.startWeek = startWeek;
+		this.startYear = startYear;
 	}
 
 	@Given("provides an end date week {int} of {int} for the permanent activity")
 	public void provides_an_end_date_week_of_for_the_permanent_activity(Integer endWeek, Integer endYear) {
 		this.endWeek = endWeek;
-	    this.endYear = endYear;
+		this.endYear = endYear;
 	}
 
 	@When("the employee creates a permanent activity")
 	public void the_employee_creates_a_permanent_activity() {
-	    try {
+		try {
 			softwarehuset.createPermanentActivity(startWeek, endWeek, startYear, endYear, employee);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 	}
 
-
 	@Then("the system creates the permanent activity")
 	public void theSystemCreatesThePermanentActivity() {
-		System.out.println(softwarehuset.getEmployeePermanentActivities(employee).size());
 		assertTrue(softwarehuset.getEmployeePermanentActivities(employee).size() > 0);
 	}
 
+	// Register working time
 
-	//Register working time 
-
-	@Given("the employee provides the activity with ID")
-	public void theEmployeeProvidesTheActivityWithID() throws Exception {
+	@Given("the employee provides the activity with a name")
+	public void theEmployeeProvidesTheActivityWithAName() throws Exception {
 		try {
-			softwarehuset.createAct("activity1", "2019000001", 1, softwarehuset.getProjectManagerList().get(0).getEmployeeID());
-			activityID = softwarehuset.getActivitiesFromActivityList("2019000001").get(0).getName();
+			softwarehuset.createAct("activity1", "2019000001", 1,
+					softwarehuset.getProjectManagerList().get(0).getEmployeeID());
+			activityName = softwarehuset.getActivitiesFromActivityList("2019000001").get(0).getName();
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
-		}	
+		}
 	}
 
 	@Given("the employee provides his working time {string} hours")
@@ -151,7 +148,7 @@ public class EmployeeSteps {
 	@When("the employee wants to register his working time for the activity")
 	public void theEmployeeWantsToRegisterHisWorkingTimeForTheActivity() throws OperationNotAllowedException {
 		try {
-		softwarehuset.registerWorkingTime(activityID, workingHours, employee);
+			softwarehuset.registerWorkingTime(activityName, workingHours, employee);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -161,30 +158,37 @@ public class EmployeeSteps {
 	public void theEmployeeHasRegisteredHisWorkingTime() {
 		assertTrue(employee.getActivityWorkingHoursList().size() > 0);
 	}
-	
+
 	@Given("that an employee provides wrong ID {string}")
 	public void thatAnEmployeeProvidesWrongID(String employeeID) throws Exception {
 		try {
 			employee = new Employee(employeeID);
-			softwarehuset.createAct("activity1", "2019000001", 1, softwarehuset.getProjectManagerList().get(0).getEmployeeID());
-			activityID = softwarehuset.getActivitiesFromActivityList("2019000001").get(0).getName();
+			softwarehuset.createAct("activity1", "2019000001", 1,
+					softwarehuset.getProjectManagerList().get(0).getEmployeeID());
+			activityName = softwarehuset.getActivitiesFromActivityList("2019000001").get(0).getName();
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 	}
-	
+
 	@Given("the employee does not provide his working time")
 	public void theEmployeeDoesNotProvideHisWorkingTime() {
-		workingHours = null;
 	}
-	
-	@Given("the employee provides wrong activity ID {string}")
+
+	@Given("the employee provides wrong activity name {string}")
 	public void theEmployeeProvidesWrongActivityID(String activityID) throws Exception {
 		try {
-			this.activityID = activityID;
-			softwarehuset.createAct("activity1", "2019000001", 1, softwarehuset.getProjectManagerList().get(0).getEmployeeID());
+			this.activityName = activityID;
+			softwarehuset.createAct("activity1", "2019000001", 1,
+					softwarehuset.getProjectManagerList().get(0).getEmployeeID());
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 	}
+
+	@Given("the employee does not enter an activity name")
+	public void theEmployeeDoesNotEnterAnActivityID() {
+
+	}
+
 }

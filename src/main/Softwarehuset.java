@@ -113,8 +113,6 @@ public class Softwarehuset {
 
 		if (pm == null) {
 			throw new OperationNotAllowedException("Please enter a valid project manager ID");
-		} else if (!getProjectManagerList().contains(pm)) {
-			throw new OperationNotAllowedException("Please enter a valid project manager ID");
 		}
 
 		return pm;
@@ -229,20 +227,36 @@ public class Softwarehuset {
 
 	public void registerWorkingTime(String activityID, String workingHours, Employee employee)
 			throws OperationNotAllowedException {
-		if (!getEmployeeList().contains(employee)) {
-			throw new OperationNotAllowedException("Invalid ID");
+		double workingHoursD;
+
+		if (workingHours == null) {
+			throw new OperationNotAllowedException("Invalid working hours");
 		}
-		for (Project project : getProjectsFromProjectList()) {
-			for (Activity activity : project.getActivities()) {
-				if (!activity.getName().equals(activityID)) {
-					throw new OperationNotAllowedException("Invalid activity ID");
+
+		for (int i = 0; i < getProjectsFromProjectList().size(); i++) {
+			Project p = getProjectsFromProjectList().get(i);
+			for (int j = 0; j < p.getActivities().size(); j++) {
+				Activity act = p.getActivities().get(j);
+				if (!act.getName().equals(activityID)) {
+					throw new OperationNotAllowedException("Unknown activity name");
 				}
 			}
 		}
-		employee.registerWorkingHours(activityID, workingHours);
+
+		try {
+			workingHoursD = Double.parseDouble(workingHours);
+		} catch (Exception e) {
+			throw new OperationNotAllowedException("Not a number. Please provide a number value");
+		}
+
+		if (!getEmployeeList().contains(employee)) {
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+
+		employee.registerWorkingHours(activityID, workingHoursD);
 	}
 
-//	public static void main(String[] args) {
-//	}
+	public static void main(String[] args) {
+	}
 
 }

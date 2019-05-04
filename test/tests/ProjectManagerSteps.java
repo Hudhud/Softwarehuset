@@ -48,8 +48,8 @@ public class ProjectManagerSteps {
 		this.activityName = activityName;
 	}
 
-	@Given("provides the expected workload in hours {int} for the activity")
-	public void providesTheExpectedWorkloadInHoursForTheActivity(Integer expectedWorkload) {
+	@Given("provides {int} hours as the expected workload for the activity")
+	public void providesHoursAsTheExpectedWorkloadForTheActivity(Integer expectedWorkload) {
 		this.expectedWorkload = expectedWorkload;
 	}
 
