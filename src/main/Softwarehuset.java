@@ -11,10 +11,12 @@ import employee.ProjectManager;
 import exceptions.OperationNotAllowedException;
 import project.Activity;
 import project.Project;
+import time.WeekServer;
 
 public class Softwarehuset {
 	private ArrayList<Project> projectList = new ArrayList<Project>();
 	private String id;
+	private WeekServer weekServer;
 	private static Employee employee;
 	private static ProjectManager projectManager;
 	private static ArrayList<Employee> employeeList = new ArrayList<Employee>();
@@ -254,6 +256,10 @@ public class Softwarehuset {
 		}
 
 		employee.registerWorkingHours(activityID, workingHoursD);
+	}
+	
+	public void setWeekServer(WeekServer weekServer) {
+		this.weekServer = weekServer;
 	}
 
 	public static void main(String[] args) {
