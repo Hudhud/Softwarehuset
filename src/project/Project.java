@@ -1,6 +1,8 @@
 package project;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+
 import exceptions.OperationNotAllowedException;
 
 public class Project {
@@ -9,19 +11,31 @@ public class Project {
 	private ArrayList<Activity> activityList = new ArrayList<>();
 	private String pmId;
 //	private int startWeek;
-//	private int endWeek;
+	private int endWeek;
 //	private int startYear;
-//	private int endYear;
+	private int endYear;
 //	
 	
-	public Project(String projectName, String projectID) throws Exception {
+	public Project(String projectName, String projectID, int endWeek, int endYear) throws Exception {
+		Calendar cal = Calendar.getInstance();
+		int currentWeek = cal.get(Calendar.WEEK_OF_YEAR);
+		int currentYear = cal.get(Calendar.YEAR);
+		int weeksInYear = cal.getActualMaximum(Calendar.WEEK_OF_YEAR);
+		
 		if (projectName.length() < 1) {
 			throw new OperationNotAllowedException("The project has no name. Please choose a name for the project");
+		} else if (endYear < currentYear) {
+			throw new OperationNotAllowedException("Invalid year. The provided year is in the past");
+		} else if (endWeek < currentWeek) {
+			throw new OperationNotAllowedException("Invalid week. The provided week is in the past");
+		} else if (endWeek > weeksInYear) {
+			throw new OperationNotAllowedException("Invalid week of year. There are only 52 weeks in a year");
 		}
 
 		this.projectName = projectName;
 		this.id = projectID;
-
+		this.endWeek = endWeek;
+		this.endYear = endYear;
 	}
 
 	public String getProjectName() {
@@ -101,16 +115,16 @@ public class Project {
 //		this.startWeek = startWeek;
 //	}
 //	
-//	public void setEndWeek(int endWeek) {
-//		this.endWeek = endWeek;
-//	}
+	public int getEndWeek() {
+		return endWeek;
+	}
 //	
 //	public void setStartYear(int startYear) {
 //		this.startYear = startYear;
 //	}
 //	
-//	public void setEndYear(int endYear) {
-//		this.endYear = endYear;
-//	}
+	public int getEndYear() {
+		return endYear;
+	}
 
 }

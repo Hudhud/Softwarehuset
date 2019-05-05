@@ -1,115 +1,4 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("use_cases\\assign_an_employee_to_activity.feature");
-formatter.feature({
-  "name": "Assign an employee to activity",
-  "description": "",
-  "keyword": "Feature"
-});
-formatter.scenario({
-  "name": "Assign employee, who is vacant, to an activity",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that the employee with ID \"abcd\" is vacant",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "ProjectManagerSteps.that_the_employee_with_ID_is_vacant(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the project manager wants to add an employee to an activity",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "ProjectManagerSteps.the_project_manager_wants_to_add_an_employee_to_an_activity()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system assigns the employee to the activity",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "ProjectManagerSteps.the_system_assigns_the_employee_to_the_activity()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.scenario({
-  "name": "Project manager wants to assign an employee, who is already assigned to 20 activities, to an activity",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that the employee with ID \"abcd\" is already assigned to 20 activities",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "ProjectManagerSteps.thatTheEmployeeWithIDIsAlreadyAssignedToActivities(String,Integer)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the project manager wants to assign the employee to another activity",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "ProjectManagerSteps.theProjectManagerWantsToAssignTheEmployeeToAnotherActivity()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system provides an error message \"The employee is already assigned to 20 activities\"",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.scenario({
-  "name": "Employee without valid project manager ID wants to assign an employee to an activity",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that the employee with ID \"abcd\" is vacant",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "ProjectManagerSteps.that_the_employee_with_ID_is_vacant(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "an employee without a project manager ID wants to assign the employee to another activity",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "ProjectManagerSteps.anEmployeeWithoutAProjectManagerIDWantsToAssignTheEmployeeToAnotherActivity()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system provides an error message \"Please enter a valid project manager ID\"",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.uri("use_cases\\create_a_new_activity.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("use_cases\\create_a_new_activity.feature");
 formatter.feature({
   "name": "Create a new activity",
   "description": "",
@@ -121,21 +10,11 @@ formatter.scenario({
   "keyword": "Scenario"
 });
 formatter.step({
-  "name": "that the project manager provides his id \"asd\"",
+  "name": "that the project manager provides the ID \"2019000001\" for a project",
   "keyword": "Given "
 });
 formatter.match({
-  "location": "ProjectManagerSteps.that_the_project_manager_provides_his_id(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "provides the ID \"2019000001\" for a project",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "ProjectManagerSteps.provides_the_ID_for_a_project(String)"
+  "location": "ProjectManagerSteps.thatTheProjectManagerProvidesTheIDForAProject(String)"
 });
 formatter.result({
   "status": "passed"
@@ -146,6 +25,26 @@ formatter.step({
 });
 formatter.match({
   "location": "ProjectManagerSteps.provides_a_name_for_the_activity(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides start week 39 of 2019",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.providesStartWeekOf(Integer,Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides end week 45 of 2019",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.providesEndWeekOf(Integer,Integer)"
 });
 formatter.result({
   "status": "passed"
@@ -186,21 +85,11 @@ formatter.scenario({
   "keyword": "Scenario"
 });
 formatter.step({
-  "name": "that the project manager provides his id \"asd\"",
+  "name": "that the project manager provides the ID \"222222\" for a project, which has not been created",
   "keyword": "Given "
 });
 formatter.match({
-  "location": "ProjectManagerSteps.that_the_project_manager_provides_his_id(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "provides the ID \"222222\" for a project, which has not been created",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "ProjectManagerSteps.providesTheIDForAProjectWhichHasNotBeenCreated(String)"
+  "location": "ProjectManagerSteps.thatTheProjectManagerProvidesTheIDForAProjectWhichHasNotBeenCreated(String)"
 });
 formatter.result({
   "status": "passed"
@@ -211,6 +100,26 @@ formatter.step({
 });
 formatter.match({
   "location": "ProjectManagerSteps.provides_a_name_for_the_activity(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides start week 39 of 2019",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.providesStartWeekOf(Integer,Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides end week 45 of 2019",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.providesEndWeekOf(Integer,Integer)"
 });
 formatter.result({
   "status": "passed"
@@ -233,7 +142,8 @@ formatter.match({
   "location": "ProjectManagerSteps.the_project_manager_creates_an_activity()"
 });
 formatter.result({
-  "status": "passed"
+  "error_message": "java.lang.NullPointerException\r\n\tat main.Softwarehuset.createAct(Softwarehuset.java:144)\r\n\tat tests.ProjectManagerSteps.the_project_manager_creates_an_activity(ProjectManagerSteps.java:69)\r\n\tat ✽.the project manager creates an activity(use_cases\\create_a_new_activity.feature:20)\r\n",
+  "status": "failed"
 });
 formatter.step({
   "name": "the system provides an error message \"A project with provided ID does not exist\"",
@@ -243,7 +153,7 @@ formatter.match({
   "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
 });
 formatter.result({
-  "status": "passed"
+  "status": "skipped"
 });
 formatter.scenario({
   "name": "the provided activity name already exists",
@@ -251,21 +161,11 @@ formatter.scenario({
   "keyword": "Scenario"
 });
 formatter.step({
-  "name": "that the project manager provides his id \"asd\"",
+  "name": "that the project manager provides the ID \"2019000001\" for a project",
   "keyword": "Given "
 });
 formatter.match({
-  "location": "ProjectManagerSteps.that_the_project_manager_provides_his_id(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "provides the ID \"2019000001\" for a project",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "ProjectManagerSteps.provides_the_ID_for_a_project(String)"
+  "location": "ProjectManagerSteps.thatTheProjectManagerProvidesTheIDForAProject(String)"
 });
 formatter.result({
   "status": "passed"
@@ -276,6 +176,26 @@ formatter.step({
 });
 formatter.match({
   "location": "ProjectManagerSteps.providesANameForTheActivityWhichAlreadyExists(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides start week 39 of 2019",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.providesStartWeekOf(Integer,Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides end week 45 of 2019",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.providesEndWeekOf(Integer,Integer)"
 });
 formatter.result({
   "status": "passed"
@@ -316,21 +236,11 @@ formatter.scenario({
   "keyword": "Scenario"
 });
 formatter.step({
-  "name": "that the project manager provides his id \"asd\"",
+  "name": "that the project manager provides the ID \"2019000001\" for a project",
   "keyword": "Given "
 });
 formatter.match({
-  "location": "ProjectManagerSteps.that_the_project_manager_provides_his_id(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "provides the ID \"2019000001\" for a project",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "ProjectManagerSteps.provides_the_ID_for_a_project(String)"
+  "location": "ProjectManagerSteps.thatTheProjectManagerProvidesTheIDForAProject(String)"
 });
 formatter.result({
   "status": "passed"
@@ -341,6 +251,26 @@ formatter.step({
 });
 formatter.match({
   "location": "ProjectManagerSteps.provides_a_name_for_the_activity(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides start week 39 of 2019",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.providesStartWeekOf(Integer,Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides end week 45 of 2019",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.providesEndWeekOf(Integer,Integer)"
 });
 formatter.result({
   "status": "passed"
@@ -381,21 +311,11 @@ formatter.scenario({
   "keyword": "Scenario"
 });
 formatter.step({
-  "name": "that the project manager provides his id \"asd\"",
+  "name": "that the project manager provides the ID \"2019000001\" for a project",
   "keyword": "Given "
 });
 formatter.match({
-  "location": "ProjectManagerSteps.that_the_project_manager_provides_his_id(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "provides the ID \"2019000001\" for a project",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "ProjectManagerSteps.provides_the_ID_for_a_project(String)"
+  "location": "ProjectManagerSteps.thatTheProjectManagerProvidesTheIDForAProject(String)"
 });
 formatter.result({
   "status": "passed"
@@ -406,6 +326,26 @@ formatter.step({
 });
 formatter.match({
   "location": "ProjectManagerSteps.providesNoNameForTheActivity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides start week 39 of 2019",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.providesStartWeekOf(Integer,Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides end week 45 of 2019",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.providesEndWeekOf(Integer,Integer)"
 });
 formatter.result({
   "status": "passed"
@@ -440,1013 +380,156 @@ formatter.match({
 formatter.result({
   "status": "passed"
 });
-formatter.uri("use_cases\\create_a_new_project.feature");
-formatter.feature({
-  "name": "Create a new project",
-  "description": "",
-  "keyword": "Feature"
-});
 formatter.scenario({
-  "name": "Create a new project",
+  "name": "create an activity with an end week, which exceeds the project\u0027s deadline",
   "description": "",
   "keyword": "Scenario"
 });
 formatter.step({
-  "name": "that a name \"Project_1\" for the project is provided",
+  "name": "that the project manager provides the ID \"2019000001\" for a project",
   "keyword": "Given "
 });
 formatter.match({
-  "location": "EmployeeSteps.thatANameForTheProjectIsProvided(String)"
+  "location": "ProjectManagerSteps.thatTheProjectManagerProvidesTheIDForAProject(String)"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "a new project is created",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "EmployeeSteps.a_new_project_is_created()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system creates a project with the provided name \"Project_1\" and a consecutive number",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemCreatesAProjectWithTheProvidedNameAndAConsecutiveNumber(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.scenario({
-  "name": "Create a new project without name",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that a name for the project is not provided",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "EmployeeSteps.thatANameForTheProjectIsNotProvided()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "a new project is created",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "EmployeeSteps.a_new_project_is_created()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system provides an error message \"The project has no name. Please choose a name for the project\"",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.scenario({
-  "name": "Create several new projects",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that names \"Project_1\" \"Project_2\" \"Project_3\" for the projects are provided",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "EmployeeSteps.thatNamesForTheProjectsAreProvided(String,String,String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "three new projects are created",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "EmployeeSteps.threeNewProjectsAreCreated()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system creates three projects with the provided names \"Project_1\" \"Project_2\" \"Project_3\" and  consecutive numbers",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemCreatesThreeProjectsWithTheProvidedNamesAndConsecutiveNumbers(String,String,String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.uri("use_cases\\create_a_permanent_activity.feature");
-formatter.feature({
-  "name": "Create permanent activity",
-  "description": "",
-  "keyword": "Feature"
-});
-formatter.scenario({
-  "name": "Employee wants to create a permanent activity",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that an employee  provides his ID \"abcd\"",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "EmployeeSteps.thatAnEmployeeProvidesHisID(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "provides a start date week 40 of 2019 for the permanent activity",
+  "name": "provides a name \"firstAct\" for the activity",
   "keyword": "And "
 });
 formatter.match({
-  "location": "EmployeeSteps.provides_a_start_date_week_of_for_the_permanent_activity(Integer,Integer)"
+  "location": "ProjectManagerSteps.provides_a_name_for_the_activity(String)"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "provides an end date week 42 of 2019 for the permanent activity",
+  "name": "provides start week 39 of 2019",
   "keyword": "And "
 });
 formatter.match({
-  "location": "EmployeeSteps.provides_an_end_date_week_of_for_the_permanent_activity(Integer,Integer)"
+  "location": "ProjectManagerSteps.providesStartWeekOf(Integer,Integer)"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "the employee creates a permanent activity",
+  "name": "provides end week 41 of 2022",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.providesEndWeekOf(Integer,Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides 5 hours as the expected workload for the activity",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.providesHoursAsTheExpectedWorkloadForTheActivity(Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the project manager creates an activity",
   "keyword": "When "
 });
 formatter.match({
-  "location": "EmployeeSteps.the_employee_creates_a_permanent_activity()"
+  "location": "ProjectManagerSteps.the_project_manager_creates_an_activity()"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "the system creates the permanent activity",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemCreatesThePermanentActivity()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.scenario({
-  "name": "Employee enters wrong ID",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that an employee provides wrong ID \"abcd\"",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "EmployeeSteps.thatAnEmployeeProvidesWrongID(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "provides a start date week 40 of 2019 for the permanent activity",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.provides_a_start_date_week_of_for_the_permanent_activity(Integer,Integer)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "provides an end date week 42 of 2019 for the permanent activity",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.provides_an_end_date_week_of_for_the_permanent_activity(Integer,Integer)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee creates a permanent activity",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "EmployeeSteps.the_employee_creates_a_permanent_activity()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system provides an error message \"Invalid ID\"",
+  "name": "the system provides an error message \"Please choose an end week number that is before deadline\"",
   "keyword": "Then "
 });
 formatter.match({
   "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
 });
 formatter.result({
-  "status": "passed"
+  "error_message": "java.lang.AssertionError: expected:\u003cPlease choose an end week number that is before deadline\u003e but was:\u003cnull\u003e\r\n\tat org.junit.Assert.fail(Assert.java:88)\r\n\tat org.junit.Assert.failNotEquals(Assert.java:834)\r\n\tat org.junit.Assert.assertEquals(Assert.java:118)\r\n\tat org.junit.Assert.assertEquals(Assert.java:144)\r\n\tat tests.EmployeeSteps.theSystemProvidesAnErrorMessage(EmployeeSteps.java:83)\r\n\tat ✽.the system provides an error message \"Please choose an end week number that is before deadline\"(use_cases\\create_a_new_activity.feature:57)\r\n",
+  "status": "failed"
 });
 formatter.scenario({
-  "name": "Employee provides a start week that occurs after the end week date for the permanent activity",
+  "name": "create an activity with an start week, which exceeds the project\u0027s deadline",
   "description": "",
   "keyword": "Scenario"
 });
 formatter.step({
-  "name": "that an employee  provides his ID \"abcd\"",
+  "name": "that the project manager provides the ID \"2019000001\" for a project",
   "keyword": "Given "
 });
 formatter.match({
-  "location": "EmployeeSteps.thatAnEmployeeProvidesHisID(String)"
+  "location": "ProjectManagerSteps.thatTheProjectManagerProvidesTheIDForAProject(String)"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "provides a start date week 3 of 2019 for the permanent activity",
+  "name": "provides a name \"firstAct\" for the activity",
   "keyword": "And "
 });
 formatter.match({
-  "location": "EmployeeSteps.provides_a_start_date_week_of_for_the_permanent_activity(Integer,Integer)"
+  "location": "ProjectManagerSteps.provides_a_name_for_the_activity(String)"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "provides an end date week 1 of 2019 for the permanent activity",
+  "name": "provides start week 49 of 2019",
   "keyword": "And "
 });
 formatter.match({
-  "location": "EmployeeSteps.provides_an_end_date_week_of_for_the_permanent_activity(Integer,Integer)"
+  "location": "ProjectManagerSteps.providesStartWeekOf(Integer,Integer)"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "the employee creates a permanent activity",
+  "name": "provides end week 51 of 2019",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.providesEndWeekOf(Integer,Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides 5 hours as the expected workload for the activity",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.providesHoursAsTheExpectedWorkloadForTheActivity(Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the project manager creates an activity",
   "keyword": "When "
 });
 formatter.match({
-  "location": "EmployeeSteps.the_employee_creates_a_permanent_activity()"
+  "location": "ProjectManagerSteps.the_project_manager_creates_an_activity()"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "the system provides an error message \"End date must be later than start date\"",
+  "name": "the system provides an error message \"Please choose a start week number that is before deadline\"",
   "keyword": "Then "
 });
 formatter.match({
   "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
 });
 formatter.result({
-  "status": "passed"
-});
-formatter.scenario({
-  "name": "Employee provides a week that does not exist in that particular year",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that an employee  provides his ID \"abcd\"",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "EmployeeSteps.thatAnEmployeeProvidesHisID(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "provides a start date week 55 of 2019 for the permanent activity",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.provides_a_start_date_week_of_for_the_permanent_activity(Integer,Integer)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "provides an end date week 56 of 2019 for the permanent activity",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.provides_an_end_date_week_of_for_the_permanent_activity(Integer,Integer)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee creates a permanent activity",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "EmployeeSteps.the_employee_creates_a_permanent_activity()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system provides an error message \"Invalid week of year\"",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.scenario({
-  "name": "Employee provides a year that is in the past",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that an employee  provides his ID \"abcd\"",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "EmployeeSteps.thatAnEmployeeProvidesHisID(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "provides a start date week 5 of 2016 for the permanent activity",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.provides_a_start_date_week_of_for_the_permanent_activity(Integer,Integer)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "provides an end date week 6 of 2017 for the permanent activity",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.provides_an_end_date_week_of_for_the_permanent_activity(Integer,Integer)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee creates a permanent activity",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "EmployeeSteps.the_employee_creates_a_permanent_activity()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system provides an error message \"Invalid year\"",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.scenario({
-  "name": "Employee provides weeks, which are in the past",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that an employee  provides his ID \"abcd\"",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "EmployeeSteps.thatAnEmployeeProvidesHisID(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "provides a start date week 5 of 2019 for the permanent activity",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.provides_a_start_date_week_of_for_the_permanent_activity(Integer,Integer)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "provides an end date week 6 of 2019 for the permanent activity",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.provides_an_end_date_week_of_for_the_permanent_activity(Integer,Integer)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee creates a permanent activity",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "EmployeeSteps.the_employee_creates_a_permanent_activity()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system provides an error message \"Invalid week(s). The start week and end week must be in the present or future\"",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.uri("use_cases\\register_working_time.feature");
-formatter.feature({
-  "name": "Register working time",
-  "description": "",
-  "keyword": "Feature"
-});
-formatter.scenario({
-  "name": "Register working time for an activity",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that an employee  provides his ID \"abcd\"",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "EmployeeSteps.thatAnEmployeeProvidesHisID(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee provides the activity with a name",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeProvidesTheActivityWithAName()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee provides his working time \"2.0\" hours",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeProvidesHisWorkingTimeHours(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee wants to register his working time for the activity",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeWantsToRegisterHisWorkingTimeForTheActivity()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee has registered his working time",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeHasRegisteredHisWorkingTime()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.scenario({
-  "name": "Employee enters a non-existing employee ID",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that an employee provides wrong ID \"abcd\"",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "EmployeeSteps.thatAnEmployeeProvidesWrongID(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee provides the activity with a name",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeProvidesTheActivityWithAName()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee provides his working time \"2.0\" hours",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeProvidesHisWorkingTimeHours(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee wants to register his working time for the activity",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeWantsToRegisterHisWorkingTimeForTheActivity()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system provides an error message \"Invalid ID\"",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.scenario({
-  "name": "Employee does not enter working time for an activity",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that an employee  provides his ID \"abcd\"",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "EmployeeSteps.thatAnEmployeeProvidesHisID(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee provides the activity with a name",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeProvidesTheActivityWithAName()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee does not provide his working time",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeDoesNotProvideHisWorkingTime()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee wants to register his working time for the activity",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeWantsToRegisterHisWorkingTimeForTheActivity()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system provides an error message \"Invalid working hours\"",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.scenario({
-  "name": "Employee enters a non-existing activity name",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that an employee  provides his ID \"abcd\"",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "EmployeeSteps.thatAnEmployeeProvidesHisID(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee provides wrong activity name \"abcd\"",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeProvidesWrongActivityID(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee provides his working time \"2.0\" hours",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeProvidesHisWorkingTimeHours(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee wants to register his working time for the activity",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeWantsToRegisterHisWorkingTimeForTheActivity()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system provides an error message \"Unknown activity name\"",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.scenario({
-  "name": "Employee does not enter an activity name",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that an employee  provides his ID \"abcd\"",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "EmployeeSteps.thatAnEmployeeProvidesHisID(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee does not enter an activity name",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeDoesNotEnterAnActivityID()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee provides his working time \"2.0\" hours",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeProvidesHisWorkingTimeHours(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee wants to register his working time for the activity",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeWantsToRegisterHisWorkingTimeForTheActivity()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system provides an error message \"Please provide activity name\"",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.scenario({
-  "name": "Employee enters an illegal value (a String) for working time for an activity",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that an employee  provides his ID \"abcd\"",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "EmployeeSteps.thatAnEmployeeProvidesHisID(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee provides the activity with a name",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeProvidesTheActivityWithAName()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee provides his working time \"bb\" hours",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeProvidesHisWorkingTimeHours(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee wants to register his working time for the activity",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeWantsToRegisterHisWorkingTimeForTheActivity()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system provides an error message \"Not a number. Please provide a number value\"",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.scenario({
-  "name": "Employee enters a value, which is equal to or less than 0.0 for working time for an activity",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that an employee  provides his ID \"abcd\"",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "EmployeeSteps.thatAnEmployeeProvidesHisID(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee provides the activity with a name",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeProvidesTheActivityWithAName()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee provides his working time \"0.0\" hours",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeProvidesHisWorkingTimeHours(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee wants to register his working time for the activity",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeWantsToRegisterHisWorkingTimeForTheActivity()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system provides an error message \"Invalid working hours\"",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.uri("use_cases\\to_be_PM.feature");
-formatter.feature({
-  "name": "Choose an employee to be a project manager",
-  "description": "",
-  "keyword": "Feature"
-});
-formatter.scenario({
-  "name": "Choose an employee to be a project manager",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "the CEO provides his id \"ceo\"",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "CEOSteps.theCEOProvidesHisId(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "provides the project id \"2019000001\" along with the project name \"TestProject1\"",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "CEOSteps.providesTheProjectIdAlongWithTheProjectName(String,String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee with the ID \"abcd\" exists",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "CEOSteps.theEmployeeWithTheIDExists(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the CEO chooses an employee with an ID \"abcd\" to be a project manager for the project with the ID \"2019000001\"",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "CEOSteps.theCEOChoosesAnEmployeeWithAnIDToBeAProjectManagerForTheProjectWithTheID(String,String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system makes the employee a project manager",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "CEOSteps.theSystemMakesTheEmployeeAProjectManager()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.scenario({
-  "name": "Choose an employee to be a project manager when the employee does not exist",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "the CEO provides his id \"ceo\"",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "CEOSteps.theCEOProvidesHisId(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "provides the project id \"2019000001\" along with the project name \"TestProject1\"",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "CEOSteps.providesTheProjectIdAlongWithTheProjectName(String,String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee with the ID \"abcd\" does not exist",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "CEOSteps.theEmployeeWithTheIDDoesNotExist(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the CEO chooses an employee with an ID \"abcd\" to be a project manager for the project with the ID \"2019000001\"",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "CEOSteps.theCEOChoosesAnEmployeeWithAnIDToBeAProjectManagerForTheProjectWithTheID(String,String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system provides an error message \"This employee does not exist\"",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.scenario({
-  "name": "Choose an employee to be a project manager when a wrong CEO id is provided",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that a wrong CEO id \"aaa\" is provided",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "CEOSteps.thatAWrongCEOIdIsProvided(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "provides the project id \"2019000001\" along with the project name \"TestProject1\"",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "CEOSteps.providesTheProjectIdAlongWithTheProjectName(String,String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee with the ID \"abcd\" exists",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "CEOSteps.theEmployeeWithTheIDExists(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the CEO chooses an employee with an ID \"abcd\" to be a project manager for the project with the ID \"2019000001\"",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "CEOSteps.theCEOChoosesAnEmployeeWithAnIDToBeAProjectManagerForTheProjectWithTheID(String,String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system provides an error message \"This operation can only be performed by the CEO\"",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
-});
-formatter.result({
-  "status": "passed"
+  "error_message": "java.lang.AssertionError: expected:\u003cPlease choose a start week number that is before deadline\u003e but was:\u003cnull\u003e\r\n\tat org.junit.Assert.fail(Assert.java:88)\r\n\tat org.junit.Assert.failNotEquals(Assert.java:834)\r\n\tat org.junit.Assert.assertEquals(Assert.java:118)\r\n\tat org.junit.Assert.assertEquals(Assert.java:144)\r\n\tat tests.EmployeeSteps.theSystemProvidesAnErrorMessage(EmployeeSteps.java:83)\r\n\tat ✽.the system provides an error message \"Please choose a start week number that is before deadline\"(use_cases\\create_a_new_activity.feature:66)\r\n",
+  "status": "failed"
 });
 });

@@ -13,9 +13,8 @@ import main.Softwarehuset;
 public class ProjectManagerSteps {
 	private Softwarehuset softwarehuset;
 	private ErrorMessageHolder errorMessageHolder;
-	private String activityName;
-	private String pmId;
-	private String projectId;
+	private String activityName, projectId, pmId;
+	private int startYear, startWeek, endYear, endWeek;
 	private Employee employee, employee2;
 	private int expectedWorkload;
 
@@ -25,27 +24,37 @@ public class ProjectManagerSteps {
 		softwarehuset.generateEmployees();
 		employee = softwarehuset.getEmployeeList().get(0);
 		employee2 = softwarehuset.getEmployeeList().get(1);
-		softwarehuset.addProjectToProjectList("TestProject2", employee);
+		softwarehuset.addProjectToProjectList("TestProject2", employee, 50, 2019);
 		softwarehuset.choosePM(employee.getEmployeeID(), "ceo",
 				softwarehuset.getProjectsFromProjectList().get(0).getId());
 	}
 
 	// from create-a-new-activity.feature
 
-	@Given("that the project manager provides his id {string}")
-	public void that_the_project_manager_provides_his_id(String pmId) throws Exception {
-
+	@Given("that the project manager provides the ID {string} for a project")
+	public void thatTheProjectManagerProvidesTheIDForAProject(String string) {
 		this.pmId = employee.getEmployeeID();
-	}
-
-	@Given("provides the ID {string} for a project")
-	public void provides_the_ID_for_a_project(String string) {
 		projectId = softwarehuset.getProjectsFromProjectList().get(0).getId();
 	}
 
 	@Given("provides a name {string} for the activity")
 	public void provides_a_name_for_the_activity(String activityName) {
 		this.activityName = activityName;
+	}
+
+	@Given("provides start week {int} of {int}")
+	public void providesStartWeekOf(Integer startWeek, Integer startYear) {
+		this.startWeek = startWeek;
+		this.startYear = startYear;
+		System.out.println(startWeek +" "+ startYear);
+	}
+
+	@Given("provides end week {int} of {int}")
+	public void providesEndWeekOf(Integer endWeek, Integer endYear) {
+		this.endWeek = endWeek;
+		this.endYear = endYear;
+		System.out.println(endWeek +" "+ endYear);
+
 	}
 
 	@Given("provides {int} hours as the expected workload for the activity")
@@ -57,7 +66,8 @@ public class ProjectManagerSteps {
 	public void the_project_manager_creates_an_activity() throws Exception {
 
 		try {
-			softwarehuset.createAct(activityName, projectId, expectedWorkload, pmId);
+			softwarehuset.createAct(activityName, projectId, expectedWorkload, pmId, startYear, endYear, startWeek,
+					endWeek);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -69,14 +79,14 @@ public class ProjectManagerSteps {
 
 	}
 
-	@Given("provides the ID {string} for a project, which has not been created")
-	public void providesTheIDForAProjectWhichHasNotBeenCreated(String projectId) {
+	@Given("that the project manager provides the ID {string} for a project, which has not been created")
+	public void thatTheProjectManagerProvidesTheIDForAProjectWhichHasNotBeenCreated(String projectId) {
 		this.projectId = projectId;
 	}
 
 	@Given("provides a name {string} for the activity, which already exists")
 	public void providesANameForTheActivityWhichAlreadyExists(String activityName) throws Exception {
-		softwarehuset.createAct(activityName, projectId, 1, pmId);
+		softwarehuset.createAct(activityName, projectId, 1, pmId, 2019, 2019, 42, 43);
 		this.activityName = activityName;
 	}
 
@@ -87,7 +97,7 @@ public class ProjectManagerSteps {
 
 	@Given("provides no the expected workload in hours for the activity")
 	public void providesNoTheExpectedWorkloadInHoursForTheActivity() {
-	    expectedWorkload = 0;
+		expectedWorkload = 0;
 	}
 
 	// from assign_an_employee_to_activity.feature
@@ -138,5 +148,53 @@ public class ProjectManagerSteps {
 	}
 
 	// from control_porject_time.feature
+
+//	@Given("that the project manager provides expected start time week {int} of {int} for an activity")
+//	public void thatTheProjectManagerProvidesExpectedStartTimeWeekOfForAnActivity(Integer int1, Integer int2) {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new cucumber.api.PendingException();
+//	}
+//
+//	@Given("that the project manager provides expected end time week {int} of {int} for an activity")
+//	public void thatTheProjectManagerProvidesExpectedEndTimeWeekOfForAnActivity(Integer int1, Integer int2) {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new cucumber.api.PendingException();
+//	}
+//
+//	@When("the project manager sets the start week and end week for an activity")
+//	public void theProjectManagerSetsTheStartWeekAndEndWeekForAnActivity() {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new cucumber.api.PendingException();
+//	}
+//
+//	@Then("the system assigns the start week and end week to that activity")
+//	public void theSystemAssignsTheStartWeekAndEndWeekToThatActivity() {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new cucumber.api.PendingException();
+//	}
+//
+//	@Given("that a project manager provides wrong ID {string}")
+//	public void thatAProjectManagerProvidesWrongID(String string) {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new cucumber.api.PendingException();
+//	}
+//
+//	@When("the project manager sets the start week and end week for the activity")
+//	public void theProjectManagerSetsTheStartWeekAndEndWeekForTheActivity() {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new cucumber.api.PendingException();
+//	}
+//
+//	@Given("that a project manager provides a start date week {int} of {int} for the activity")
+//	public void thatAProjectManagerProvidesAStartDateWeekOfForTheActivity(Integer int1, Integer int2) {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new cucumber.api.PendingException();
+//	}
+//
+//	@When("the project manager creates a activity")
+//	public void theProjectManagerCreatesAActivity() {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new cucumber.api.PendingException();
+//	}
 
 }

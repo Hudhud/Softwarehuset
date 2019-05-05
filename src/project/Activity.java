@@ -2,8 +2,8 @@ package project;
 
 import exceptions.OperationNotAllowedException;
 
-public class Activity {
 
+public class Activity   {
 	private String activityName;
 
 	public Activity(String activityName, int expectedWorkload) throws Exception {
@@ -13,9 +13,9 @@ public class Activity {
 		}
 
 		this.activityName = activityName;
-
+		
 	}
-
+	
 	public String getName() {
 		return activityName;
 	}

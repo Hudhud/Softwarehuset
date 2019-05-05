@@ -50,8 +50,8 @@ public class Employee {
 //		return vacant;
 //	}
 
-	public Project createProj(String name, String id) throws Exception {
-		Project p = new Project(name, id);
+	public Project createProj(String name, String id, int endWeek, int endYear ) throws Exception {
+		Project p = new Project(name, id, endWeek, endYear);
 		return p;
 	}
 
