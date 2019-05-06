@@ -2,6 +2,7 @@ Feature: Create a new activity
 #
 #Description: The project manager creates an activity for a project
 #Actors: Project manager
+
 Scenario: create an activity for a project 
 	Given that the project manager provides the ID "2019000001" for a project 
 	And provides a name "firstAct" for the activity 
@@ -51,7 +52,7 @@ Scenario: create an activity with an end week, which exceeds the project's deadl
 	Given that the project manager provides the ID "2019000001" for a project 
 	And provides a name "firstAct" for the activity 
 	And provides start week 39 of 2019
-	And provides end week 41 of 2022
+	And provides end week 52 of 2022
 	And provides 5 hours as the expected workload for the activity 
 	When the project manager creates an activity 
 	Then the system provides an error message "Please choose an end week number that is before deadline" 
@@ -59,8 +60,8 @@ Scenario: create an activity with an end week, which exceeds the project's deadl
 Scenario: create an activity with an start week, which exceeds the project's deadline
 	Given that the project manager provides the ID "2019000001" for a project 
 	And provides a name "firstAct" for the activity 
-	And provides start week 49 of 2019
-	And provides end week 51 of 2019
+	And provides start week 51 of 2019
+	And provides end week 52 of 2019
 	And provides 5 hours as the expected workload for the activity 
 	When the project manager creates an activity 
 	Then the system provides an error message "Please choose a start week number that is before deadline" 

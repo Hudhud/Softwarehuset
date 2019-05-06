@@ -39,9 +39,7 @@ public class EmployeeSteps {
 
 	@Given("provides end week {int} of {int} for the deadline")
 	public void providesEndWeekOfForTheDeadline(Integer endWeek, Integer endYear) {
-		if (endWeek ==) {
-			
-		}
+		
 		
 	    this.endWeek = endWeek;
 	    this.endYear = endYear;

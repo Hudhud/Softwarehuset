@@ -12,9 +12,6 @@ public class ProjectManager extends Employee{
 
 
 	public void createActivity(String projectID, String activityName, int expectedWorkload, Project p,Softwarehuset softwarehuset, String pmId, int startYear, int endYear, int startweek, int endWeek) throws Exception {
-		if (softwarehuset.searchForProjectById(projectID) == null)
-			throw new OperationNotAllowedException("A project with provided ID does not exist");
-		
 		p.addActivityToActivityList(activityName, expectedWorkload, projectID);
 	}
 	

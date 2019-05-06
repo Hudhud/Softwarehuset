@@ -56,7 +56,8 @@ public class Softwarehuset {
 		return employee.createProj(projectName, id, endWeek, endYear);
 	}
 
-	public void addProjectToProjectList(String projectName, Employee employee, int endWeek, int endYear) throws Exception {
+	public void addProjectToProjectList(String projectName, Employee employee, int endWeek, int endYear)
+			throws Exception {
 		getProjectsFromProjectList().add(createP(projectName, employee, endWeek, endYear));
 	}
 
@@ -130,7 +131,8 @@ public class Softwarehuset {
 //		return false;
 //	}
 
-	public void createAct(String activityName, String projectID, int expectedWorkload, String pmId, int startYear, int endYear, int startweek, int endWeek) throws Exception {
+	public void createAct(String activityName, String projectID, int expectedWorkload, String pmId, int startYear,
+			int endYear, int startweek, int endWeek) throws Exception {
 //		for (ProjectManager projectManager : getProjectManagerList()) {
 //			if(!projectManager.getIsEmployeePM()) {
 //				throw new OperationNotAllowedException("Invalid ID");
@@ -140,18 +142,31 @@ public class Softwarehuset {
 		int currentWeek = calendar.get(Calendar.WEEK_OF_YEAR);
 		int currentYear = calendar.get(Calendar.YEAR);
 		int weeksInYear = calendar.getActualMaximum(Calendar.WEEK_OF_YEAR);
+
 		
-		if ( (endWeek > searchForProjectById(projectID).getEndWeek()) && (endYear > searchForProjectById(projectID).getEndYear()) ) {
-			throw new OperationNotAllowedException("Please choose an end week number that is before deadline"); 
+		if (searchForProjectById(projectID) == null)
+			throw new OperationNotAllowedException("A project with provided ID does not exist");
+		
+//		if (endYear > searchForProjectById(projectID).getEndYear()
+//				|| endYear == searchForProjectById(projectID).getEndYear()
+//						&& endWeek > searchForProjectById(projectID).getEndWeek()) {
+//			throw new OperationNotAllowedException("Please choose an end week number that is before deadline");
+//		}
+		
+		if ((startweek > searchForProjectById(projectID).getEndWeek())
+				&& (startYear >= searchForProjectById(projectID).getEndYear())) {
+			throw new OperationNotAllowedException("Please choose a start week number that is before deadline");
 		}
-		if ( (startweek > searchForProjectById(projectID).getEndWeek()) && (startYear > searchForProjectById(projectID).getEndYear()) ) {
-			throw new OperationNotAllowedException("Please choose an start week number that is before deadline"); 
+		if ((endWeek > searchForProjectById(projectID).getEndWeek())
+				&& (endYear >= searchForProjectById(projectID).getEndYear())) {
+			throw new OperationNotAllowedException("Please choose an end week number that is before deadline");
 		}
-		
-		
+	
+
 		checkTime(startYear, currentYear, endYear, startweek, endWeek, currentWeek, weeksInYear);
 		projectManager = new ProjectManager(pmId);
-		projectManager.createActivity(projectID, activityName, expectedWorkload, searchForProjectById(projectID), this, projectManager.getEmployeeID(), startYear, endYear, startweek, endWeek);
+		projectManager.createActivity(projectID, activityName, expectedWorkload, searchForProjectById(projectID), this,
+				projectManager.getEmployeeID(), startYear, endYear, startweek, endWeek);
 	}
 
 	public ArrayList<Activity> getActivitiesFromActivityList(String projectId) {
@@ -271,12 +286,13 @@ public class Softwarehuset {
 
 		employee.registerWorkingHours(activityID, workingHoursD);
 	}
-	
+
 	public void setWeekServer(WeekServer weekServer) {
 		this.weekServer = weekServer;
 	}
-	
-	public void checkTime(int startYear, int currentYear, int endYear, int startweek, int endWeek, int currentWeek, int weeksInYear) throws OperationNotAllowedException {
+
+	public void checkTime(int startYear, int currentYear, int endYear, int startweek, int endWeek, int currentWeek,
+			int weeksInYear) throws OperationNotAllowedException {
 		if (startYear < currentYear) {
 			throw new OperationNotAllowedException("Invalid time. The time can not be in the past");
 		}

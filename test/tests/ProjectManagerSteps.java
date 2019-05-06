@@ -46,15 +46,12 @@ public class ProjectManagerSteps {
 	public void providesStartWeekOf(Integer startWeek, Integer startYear) {
 		this.startWeek = startWeek;
 		this.startYear = startYear;
-		System.out.println(startWeek +" "+ startYear);
 	}
 
 	@Given("provides end week {int} of {int}")
 	public void providesEndWeekOf(Integer endWeek, Integer endYear) {
 		this.endWeek = endWeek;
 		this.endYear = endYear;
-		System.out.println(endWeek +" "+ endYear);
-
 	}
 
 	@Given("provides {int} hours as the expected workload for the activity")
@@ -81,6 +78,7 @@ public class ProjectManagerSteps {
 
 	@Given("that the project manager provides the ID {string} for a project, which has not been created")
 	public void thatTheProjectManagerProvidesTheIDForAProjectWhichHasNotBeenCreated(String projectId) {
+		this.pmId = employee.getEmployeeID();
 		this.projectId = projectId;
 	}
 
