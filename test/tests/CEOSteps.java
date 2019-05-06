@@ -18,6 +18,7 @@ public class CEOSteps {
 	private List<Employee> employeeList;
 	private Employee employee;
 	private String empId;
+	private String projectId;
 
 	public CEOSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder) {
 		this.softwarehuset = softwarehuset;
@@ -25,20 +26,16 @@ public class CEOSteps {
 		employeeList = softwarehuset.generateEmployees();
 	}
 
-	@Given("the CEO provides his id {string}")
-	public void theCEOProvidesHisId(String ceoId) {
-		employee = employeeList.get(0);
-		this.ceoId = ceoId;
-	}
-
-	@Given("provides the project id {string} along with the project name {string}")
+	@Given("the CEO provides the project id {string} along with the project name {string}")
 	public void providesTheProjectIdAlongWithTheProjectName(String projectId, String projectName) throws Exception {
-
-		softwarehuset.addProjectToProjectList(projectName, employee);
+		this.ceoId = "ceo"; 
+		softwarehuset.addProjectToProjectList("TEst", employeeList.get(1), 50, 2019);
+		this.projectId = projectId;
 	}
 
 	@Given("the employee with the ID {string} exists")
 	public void theEmployeeWithTheIDExists(String employeeId) {
+		employee = employeeList.get(0);
 		empId = employee.getEmployeeID();
 		assertTrue(employeeList.contains(softwarehuset.searchForEmployeeById(empId)));
 	}
@@ -48,7 +45,7 @@ public class CEOSteps {
 			String projectId) throws Exception {
 
 		try {
-			softwarehuset.choosePM(empId, ceoId, projectId);
+			softwarehuset.choosePM(empId, ceoId, this.projectId);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -71,5 +68,11 @@ public class CEOSteps {
 		employee = employeeList.get(0);
 		ceoId = id;
 	}
-
+	
+	@Given("the fake CEO provides the project id {string} along with the project name {string}")
+	public void theFakeCEOProvidesTheProjectIdAlongWithTheProjectName(String projectId, String string2) throws Exception { 
+		softwarehuset.addProjectToProjectList("TEst", employeeList.get(1), 50, 2019);
+		this.projectId = projectId;
+	}
+	
 }

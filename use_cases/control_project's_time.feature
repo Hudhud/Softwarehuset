@@ -1,4 +1,4 @@
-Feature: Control the time for project and activities
+#Feature: Control the time for project and activities
 #
 #  #Description: The project manager provides the start time and end time for the activities for a project
 #  #Actors: Project manager

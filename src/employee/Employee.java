@@ -11,7 +11,7 @@ import project.Project;
 public class Employee {
 
 	private String employeeID;
-	private boolean isEmployeePM;
+	private boolean isEmployeePM = false;
 	//private boolean vacant;
 	private ArrayList<PermanentActivity> permanentActivityList = new ArrayList<PermanentActivity>();
 	private int activityCounter;
@@ -74,8 +74,8 @@ public class Employee {
 		return activityCounter;
 	}
 	
-	public void registerWorkingHours(String activityID, double workingHours) throws OperationNotAllowedException {
-		ActivityWorkingHours awh = new ActivityWorkingHours(activityID, workingHours);
+	public void registerWorkingHours(String activityName, double workingHours) throws OperationNotAllowedException {
+		ActivityWorkingHours awh = new ActivityWorkingHours(activityName, workingHours);
 		getActivityWorkingHoursList().add(awh);
 	}
 

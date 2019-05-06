@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Calendar;
 import java.util.List;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -11,6 +12,7 @@ import employee.Employee;
 import exceptions.ErrorMessageHolder;
 import exceptions.OperationNotAllowedException;
 import main.Softwarehuset;
+import time.MockWeekHolder;
 
 public class EmployeeSteps {
 	private Softwarehuset softwarehuset;
@@ -19,8 +21,9 @@ public class EmployeeSteps {
 	private List<Employee> employeeList;
 	private Employee employee;
 	private int startWeek, endWeek, endWeek2, endWeek3, startYear, endYear, endYear2, endYear3;
+	private MockWeekHolder mockWeekHolder;
 
-	public EmployeeSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder) throws Exception {
+	public EmployeeSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder, MockWeekHolder mockWeekHolder) throws Exception {
 		this.softwarehuset = softwarehuset;
 		this.errorMessageHolder = errorMessageHolder;
 		this.employeeList = softwarehuset.generateEmployees();
@@ -28,6 +31,7 @@ public class EmployeeSteps {
 		softwarehuset.addProjectToProjectList("TestProject2", employee, 50, 2019);
 		softwarehuset.choosePM(employee.getEmployeeID(), "ceo",
 				softwarehuset.getProjectsFromProjectList().get(0).getId());
+		this.mockWeekHolder = mockWeekHolder;
 	}
 
 	// from create-a-new-project.feature
@@ -149,12 +153,17 @@ public class EmployeeSteps {
 	}
 
 	// Register working time
+	
+	@Given("that an employee provides his ID {string}")
+	public void thatAnEmployeeProvidesHisID(String id) {
+	    // employee is already generated
+	}
 
-	@Given("the employee provides the activity with a name")
-	public void theEmployeeProvidesTheActivityWithAName() throws Exception {
+	@Given("that the employee provides the activity with a name")
+	public void thatAnEmployeeProvidesTheNameOfTheActivity() throws Exception {
 		try {
 			softwarehuset.createAct("activity1", "2019000001", 1,
-					softwarehuset.getProjectManagerList().get(0).getEmployeeID(), 42, 45, 2019, 2019);
+					softwarehuset.getProjectManagerList().get(0).getEmployeeID(), 2019, 2019, 42, 45);
 			activityName = softwarehuset.getActivitiesFromActivityList("2019000001").get(0).getName();
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
@@ -196,20 +205,31 @@ public class EmployeeSteps {
 	public void theEmployeeDoesNotProvideHisWorkingTime() {
 	}
 
-	@Given("the employee provides wrong activity name {string}")
-	public void theEmployeeProvidesWrongActivityID(String activityID) throws Exception {
+	@Given("that an employee provides a wrong activity name {string}")
+	public void thatAnEmployeeProvidesAWrongActivityName(String activityName) throws Exception {
 		try {
-			this.activityName = activityID;
-			softwarehuset.createAct("activity1", "2019000001", 1,
-					softwarehuset.getProjectManagerList().get(0).getEmployeeID(), 42, 45, 2019, 2019);
+			this.activityName = activityName;
+			softwarehuset.createAct("activity1", "2019000001", 5,
+					softwarehuset.getProjectManagerList().get(0).getEmployeeID(), 2019, 2019, 42, 45);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 	}
 
-	@Given("the employee does not enter an activity name")
-	public void theEmployeeDoesNotEnterAnActivityID() {
+	@Given("that the employee does not enter an activity name")
+	public void thatTheEmployeeDoesNotEnterAnActivityName() {
 
 	}
+	
+	@Given("the activity's deadline is exceeded")
+	public void theActivitySDeadlineIsExceeded() {
+//		System.out.println(softwarehuset.getDate().get(Calendar.WEEK_OF_YEAR));
+//		
+//	    mockWeekHolder.advancedDateByWeeks(2);
+//	    
+//		System.out.println(softwarehuset.getDate().get(Calendar.WEEK_OF_YEAR));
+	}
+	
+	
 
 }

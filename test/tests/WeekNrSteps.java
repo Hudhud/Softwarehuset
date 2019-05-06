@@ -1,6 +1,6 @@
 package tests;
 	
-	import time.WeekHolder;
+	import time.MockWeekHolder;
 	import time.WeekServer;
 	import org.junit.*;
 
@@ -14,9 +14,9 @@ import static org.mockito.Mockito.*;
 	import java.util.GregorianCalendar;
 	
 	public class WeekNrSteps {
-		WeekHolder weekHolder;
+		MockWeekHolder weekHolder;
 
-		public WeekNrSteps(WeekHolder weekHolder) {
+		public WeekNrSteps(MockWeekHolder weekHolder) {
 			this.weekHolder= weekHolder;
 		}
 		

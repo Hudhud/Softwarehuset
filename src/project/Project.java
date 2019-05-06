@@ -46,7 +46,7 @@ public class Project {
 		return id;
 	}
 
-	private Activity createActivity(String activityName, int expectedWorkload, String projectID) throws Exception {
+	private Activity createActivity(String activityName, int expectedWorkload, String projectID, int startWeek, int endWeek, int startYear, int endYear) throws Exception {
 
 		for (int i = 0; i < getActivities().size(); i++) {
 			Activity a = getActivities().get(i);
@@ -59,7 +59,7 @@ public class Project {
 			throw new OperationNotAllowedException("Please type a name for the activity");
 		}
 
-		Activity a = new Activity(activityName, expectedWorkload);
+		Activity a = new Activity(activityName, expectedWorkload, startWeek, endWeek, startYear, endYear);
 		return a;
 	}
 
@@ -82,9 +82,9 @@ public class Project {
 //		return activityID;
 //	}
 
-	public void addActivityToActivityList(String activityName, int expectedWorkload, String projectID)
+	public void addActivityToActivityList(String activityName, int expectedWorkload, String projectID, int startWeek, int endWeek, int startYear, int endYear)
 			throws Exception {
-		Activity a = createActivity(activityName, expectedWorkload, projectID);
+		Activity a = createActivity(activityName, expectedWorkload, projectID, startWeek, endWeek, startYear, endYear);
 		getActivities().add(a);
 	}
 
