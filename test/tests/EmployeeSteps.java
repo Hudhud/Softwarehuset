@@ -3,8 +3,8 @@ package tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Calendar;
 import java.util.List;
+
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -163,7 +163,7 @@ public class EmployeeSteps {
 	public void thatAnEmployeeProvidesTheNameOfTheActivity() throws Exception {
 		try {
 			softwarehuset.createAct("activity1", "2019000001", 1,
-					softwarehuset.getProjectManagerList().get(0).getEmployeeID(), 2019, 2019, 42, 45);
+					softwarehuset.getProjectManagerList().get(0).getEmployeeID(), 42, 45, 2019, 2019);
 			activityName = softwarehuset.getActivitiesFromActivityList("2019000001").get(0).getName();
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
@@ -210,7 +210,7 @@ public class EmployeeSteps {
 		try {
 			this.activityName = activityName;
 			softwarehuset.createAct("activity1", "2019000001", 5,
-					softwarehuset.getProjectManagerList().get(0).getEmployeeID(), 2019, 2019, 42, 45);
+					softwarehuset.getProjectManagerList().get(0).getEmployeeID(), 42, 45, 2019, 2019);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -222,12 +222,8 @@ public class EmployeeSteps {
 	}
 	
 	@Given("the activity's deadline is exceeded")
-	public void theActivitySDeadlineIsExceeded() {
-//		System.out.println(softwarehuset.getDate().get(Calendar.WEEK_OF_YEAR));
-//		
-//	    mockWeekHolder.advancedDateByWeeks(2);
-//	    
-//		System.out.println(softwarehuset.getDate().get(Calendar.WEEK_OF_YEAR));
+	public void theActivitySDeadlineIsExceeded() {		
+	    mockWeekHolder.advancedDateByWeeks(30);
 	}
 	
 	

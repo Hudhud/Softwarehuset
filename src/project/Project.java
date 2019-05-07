@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import exceptions.OperationNotAllowedException;
+import main.Softwarehuset;
 
 public class Project {
 	private String projectName;
@@ -16,8 +17,8 @@ public class Project {
 	private int endYear;
 //	
 	
-	public Project(String projectName, String projectID, int endWeek, int endYear) throws Exception {
-		Calendar cal = Calendar.getInstance();
+	public Project(String projectName, String projectID, int endWeek, int endYear, Softwarehuset softwarehuset) throws Exception {
+		Calendar cal = softwarehuset.getDate();
 		int currentWeek = cal.get(Calendar.WEEK_OF_YEAR);
 		int currentYear = cal.get(Calendar.YEAR);
 		int weeksInYear = cal.getActualMaximum(Calendar.WEEK_OF_YEAR);

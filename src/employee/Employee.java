@@ -1,11 +1,8 @@
 package employee;
 
-import java.time.YearMonth;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import exceptions.OperationNotAllowedException;
+import main.Softwarehuset;
 import project.Project;
 
 public class Employee {
@@ -50,8 +47,8 @@ public class Employee {
 //		return vacant;
 //	}
 
-	public Project createProj(String name, String id, int endWeek, int endYear ) throws Exception {
-		Project p = new Project(name, id, endWeek, endYear);
+	public Project createProj(String name, String id, int endWeek, int endYear, Softwarehuset softwarehuset) throws Exception {
+		Project p = new Project(name, id, endWeek, endYear, softwarehuset);
 		return p;
 	}
 

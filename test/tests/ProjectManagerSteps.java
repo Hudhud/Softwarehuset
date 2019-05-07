@@ -63,8 +63,8 @@ public class ProjectManagerSteps {
 	public void the_project_manager_creates_an_activity() throws Exception {
 
 		try {
-			softwarehuset.createAct(activityName, projectId, expectedWorkload, pmId, startYear, endYear, startWeek,
-					endWeek);
+			softwarehuset.createAct(activityName, projectId, expectedWorkload, pmId, startWeek,
+					endWeek, startYear, endYear);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -84,7 +84,7 @@ public class ProjectManagerSteps {
 
 	@Given("provides a name {string} for the activity, which already exists")
 	public void providesANameForTheActivityWhichAlreadyExists(String activityName) throws Exception {
-		softwarehuset.createAct(activityName, projectId, 1, pmId, 2019, 2019, 42, 43);
+		softwarehuset.createAct(activityName, projectId, 1, pmId, 42, 43, 2019, 2019);
 		this.activityName = activityName;
 	}
 

@@ -11,8 +11,8 @@ public class ProjectManager extends Employee{
 	}
 
 
-	public void createActivity(String projectID, String activityName, int expectedWorkload, Project p,Softwarehuset softwarehuset, String pmId, int startYear, int endYear, int startweek, int endWeek) throws Exception {
-		p.addActivityToActivityList(activityName, expectedWorkload, projectID, startweek, endWeek, startYear, endWeek);
+	public void createActivity(String projectID, String activityName, int expectedWorkload, Project p,Softwarehuset softwarehuset, String pmId, int startweek, int endWeek, int startYear, int endYear) throws Exception {
+		p.addActivityToActivityList(activityName, expectedWorkload, projectID, startweek, endWeek, startYear, endYear);
 	}
 	
 	

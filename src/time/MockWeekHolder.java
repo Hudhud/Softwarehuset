@@ -2,41 +2,30 @@ package time;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-
-import org.junit.Before;
-
 import main.Softwarehuset;
 
 public class MockWeekHolder {
 
-	private int weekNumber;
-
 	DateServer dateServer = mock(DateServer.class);
-	
+
 	public MockWeekHolder(Softwarehuset softwarehuset) {
-		
-		System.out.println("sss");
-		System.out.println(dateServer.getDate().get(Calendar.WEEK_OF_YEAR));
-	    weekNumber = dateServer.getDate().get(Calendar.WEEK_OF_YEAR);
-		System.out.println(weekNumber);
-		setUp(weekNumber);
+		GregorianCalendar calendar = new GregorianCalendar();
+		setUp(calendar);
 		softwarehuset.setDateServer(dateServer);
 	}
-	
-	public void setUp(int week) {		
-		when(this.dateServer.getDate().get(Calendar.WEEK_OF_YEAR)).thenReturn(week);
+
+	public void setUp(Calendar calendar) {
+		Calendar c = new GregorianCalendar(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+		when(this.dateServer.getDate()).thenReturn(c);
 	}
-	
+
 	public void advancedDateByWeeks(int weeks) {
-		int currentWeekNr = dateServer.getDate().get(Calendar.WEEK_OF_YEAR);
-		System.out.println(currentWeekNr);
-		currentWeekNr += weeks;
-		System.out.println(currentWeekNr);
-		setUp(currentWeekNr);
+		Calendar currentDate = dateServer.getDate();
+		Calendar nextDate = new GregorianCalendar();
+		nextDate.setTime(currentDate.getTime());
+		nextDate.add(Calendar.WEEK_OF_YEAR, weeks);
+		setUp(nextDate);
 	}
 }
-

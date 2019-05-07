@@ -12,13 +12,10 @@ import exceptions.OperationNotAllowedException;
 import project.Activity;
 import project.Project;
 import time.DateServer;
-import time.WeekServer;
 
 public class Softwarehuset {
 	private ArrayList<Project> projectList = new ArrayList<Project>();
-	private String id;
-	private WeekServer weekServer;
-	private DateServer dateServer; 
+	private DateServer dateServer;
 	private static Employee employee;
 	private static ProjectManager projectManager;
 	private static ArrayList<Employee> employeeList = new ArrayList<Employee>();
@@ -39,7 +36,7 @@ public class Softwarehuset {
 		int id;
 		String lastId;
 		String idStringFormat = null;
-		String year = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+		String year = Integer.toString(getDate().get(Calendar.YEAR));
 		if (getProjectsFromProjectList().size() == 0) {
 			id = 1;
 			idStringFormat = year + String.format("%06d", id);
@@ -54,8 +51,8 @@ public class Softwarehuset {
 	}
 
 	private Project createP(String projectName, Employee employee, int endWeek, int endYear) throws Exception {
-		id = projectIdGenerator();
-		return employee.createProj(projectName, id, endWeek, endYear);
+		String id = projectIdGenerator();
+		return employee.createProj(projectName, id, endWeek, endYear, this);
 	}
 
 	public void addProjectToProjectList(String projectName, Employee employee, int endWeek, int endYear)
@@ -100,7 +97,6 @@ public class Softwarehuset {
 		for (int i = 0; i < getEmployeeList().size(); i++) {
 			id = getEmployeeList().get(i).getEmployeeID();
 			if (employeeId.equals(id)) {
-				System.out.println("Fundet");
 				e = getEmployeeList().get(i);
 			}
 		}
@@ -124,38 +120,17 @@ public class Softwarehuset {
 		return pm;
 	}
 
-//	public boolean employeeExists(String employeeId) {
-//		for (Employee emp : getEmployeeList()) {
-//			if (emp.getEmployeeID().equals(employeeId)) {
-//				employee = emp;
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
+	public void createAct(String activityName, String projectID, int expectedWorkload, String pmId, int startWeek, int endWeek, int startYear,
+			int endYear) throws Exception {
 
-	public void createAct(String activityName, String projectID, int expectedWorkload, String pmId, int startYear,
-			int endYear, int startweek, int endWeek) throws Exception {
-//		for (ProjectManager projectManager : getProjectManagerList()) {
-//			if(!projectManager.getIsEmployeePM()) {
-//				throw new OperationNotAllowedException("Invalid ID");
-//			}
-//		}
-		Calendar calendar = Calendar.getInstance();
-		int currentWeek = calendar.get(Calendar.WEEK_OF_YEAR);
-		int currentYear = calendar.get(Calendar.YEAR);
-		int weeksInYear = calendar.getActualMaximum(Calendar.WEEK_OF_YEAR);
+		int currentWeek = getDate().get(Calendar.WEEK_OF_YEAR);
+		int currentYear = getDate().get(Calendar.YEAR);
+		int weeksInYear = getDate().getActualMaximum(Calendar.WEEK_OF_YEAR);
 
 		if (searchForProjectById(projectID) == null)
 			throw new OperationNotAllowedException("A project with provided ID does not exist");
 
-//		if (endYear > searchForProjectById(projectID).getEndYear()
-//				|| endYear == searchForProjectById(projectID).getEndYear()
-//						&& endWeek > searchForProjectById(projectID).getEndWeek()) {
-//			throw new OperationNotAllowedException("Please choose an end week number that is before deadline");
-//		}
-
-		if ((startweek > searchForProjectById(projectID).getEndWeek())
+		if ((startWeek > searchForProjectById(projectID).getEndWeek())
 				&& (startYear >= searchForProjectById(projectID).getEndYear())) {
 			throw new OperationNotAllowedException("Please choose a start week number that is before deadline");
 		}
@@ -164,30 +139,15 @@ public class Softwarehuset {
 			throw new OperationNotAllowedException("Please choose an end week number that is before deadline");
 		}
 
-		checkTime(startYear, currentYear, endYear, startweek, endWeek, currentWeek, weeksInYear);
+		checkTime(startYear, currentYear, endYear, startWeek, endWeek, currentWeek, weeksInYear);
 		projectManager = new ProjectManager(pmId);
 		projectManager.createActivity(projectID, activityName, expectedWorkload, searchForProjectById(projectID), this,
-				projectManager.getEmployeeID(), startYear, endYear, startweek, endWeek);
+				projectManager.getEmployeeID(), startWeek, endWeek, startYear, endYear );
 	}
 
 	public ArrayList<Activity> getActivitiesFromActivityList(String projectId) {
 		return searchForProjectById(projectId).getActivities();
 	}
-
-//	public Activity searchForActivity(String activityName, String projectId) {
-//
-//		String name = null;
-//		Activity activity = null;
-//		for (int i = 0; i < getEmployeeList().size(); i++) {
-//			name = getActivitiesFromActivityList(projectId).get(i).getName();
-//			if (activityName.equals(name)) {
-//				activity = getActivitiesFromActivityList(projectId).get(i);
-//			}
-//		}
-//
-//		return activity;
-//
-//	}
 
 	public List<Employee> generateEmployees() {
 		// We assume there are 50 employees.
@@ -261,11 +221,24 @@ public class Softwarehuset {
 			throws OperationNotAllowedException {
 		double workingHoursD;
 
-		Calendar calendar = Calendar.getInstance();
-		int currentWeek = calendar.get(Calendar.WEEK_OF_YEAR);
-		int currentYear = calendar.get(Calendar.YEAR);
-		
+		int currentWeek = getDate().get(Calendar.WEEK_OF_YEAR);
+		int currentYear = getDate().get(Calendar.YEAR);
+
+		if (!getEmployeeList().contains(employee)) {
+			throw new OperationNotAllowedException("Invalid ID");
+		}
+
 		if (workingHours == null) {
+			throw new OperationNotAllowedException("Invalid working hours");
+		}
+
+		try {
+			workingHoursD = Double.parseDouble(workingHours);
+		} catch (Exception e) {
+			throw new OperationNotAllowedException("Not a number. Please provide a number value");
+		}
+
+		if (workingHoursD <= 0.0) {
 			throw new OperationNotAllowedException("Invalid working hours");
 		}
 
@@ -274,26 +247,17 @@ public class Softwarehuset {
 			for (int j = 0; j < p.getActivities().size(); j++) {
 				Activity act = p.getActivities().get(j);
 				if (act.getName() == activityName) {
-					if (act.getEndWeek() > currentWeek && act.getEndYear() >= currentYear) {
-						throw new OperationNotAllowedException("Activity deadline is exceeded. You cannot register time on this activity");
+					if ((act.getEndYear() < currentYear)
+							|| (act.getEndWeek() < currentWeek && act.getEndYear() == currentYear)) {
+						throw new OperationNotAllowedException(
+								"Activity deadline is exceeded. You cannot register time on this activity");
 					}
-				}
-				
+				} 
+
 				if (!act.getName().equals(activityName)) {
 					throw new OperationNotAllowedException("Unknown activity name");
-				} 
+				}
 			}
-		}
-					
-
-		try {
-			workingHoursD = Double.parseDouble(workingHours);
-		} catch (Exception e) {
-			throw new OperationNotAllowedException("Not a number. Please provide a number value");
-		}
-
-		if (!getEmployeeList().contains(employee)) {
-			throw new OperationNotAllowedException("Invalid ID");
 		}
 
 		employee.registerWorkingHours(activityName, workingHoursD);
@@ -302,7 +266,7 @@ public class Softwarehuset {
 	public void setDateServer(DateServer dateServer) {
 		this.dateServer = dateServer;
 	}
-	
+
 	public Calendar getDate() {
 		return dateServer.getDate();
 	}
@@ -327,7 +291,7 @@ public class Softwarehuset {
 	}
 
 	public static void main(String[] args) {
-		
+
 	}
 
 }
