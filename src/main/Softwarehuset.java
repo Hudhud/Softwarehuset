@@ -120,8 +120,8 @@ public class Softwarehuset {
 		return pm;
 	}
 
-	public void createAct(String activityName, String projectID, int expectedWorkload, String pmId, int startWeek, int endWeek, int startYear,
-			int endYear) throws Exception {
+	public void createAct(String activityName, String projectID, int expectedWorkload, String pmId, int startWeek,
+			int endWeek, int startYear, int endYear) throws Exception {
 
 		int currentWeek = getDate().get(Calendar.WEEK_OF_YEAR);
 		int currentYear = getDate().get(Calendar.YEAR);
@@ -140,9 +140,19 @@ public class Softwarehuset {
 		}
 
 		checkTime(startYear, currentYear, endYear, startWeek, endWeek, currentWeek, weeksInYear);
-		projectManager = new ProjectManager(pmId);
+		projectManager = searchForPMById(pmId);
 		projectManager.createActivity(projectID, activityName, expectedWorkload, searchForProjectById(projectID), this,
-				projectManager.getEmployeeID(), startWeek, endWeek, startYear, endYear );
+				projectManager.getEmployeeID(), startWeek, endWeek, startYear, endYear);
+
+		if (getActivitiesFromActivityList(projectID).size() == 1) {
+			searchForProjectById(projectID).setStartWeek(startWeek);
+			searchForProjectById(projectID).setStartYear(startYear);
+		} else if ((startYear < searchForProjectById(projectID).getStartYear())
+				|| (startYear == searchForProjectById(projectID).getStartYear()
+						&& startWeek < searchForProjectById(projectID).getStartWeek())) {
+			searchForProjectById(projectID).setStartWeek(startWeek);
+			searchForProjectById(projectID).setStartYear(startYear);
+		}
 	}
 
 	public ArrayList<Activity> getActivitiesFromActivityList(String projectId) {
@@ -252,7 +262,7 @@ public class Softwarehuset {
 						throw new OperationNotAllowedException(
 								"Activity deadline is exceeded. You cannot register time on this activity");
 					}
-				} 
+				}
 
 				if (!act.getName().equals(activityName)) {
 					throw new OperationNotAllowedException("Unknown activity name");

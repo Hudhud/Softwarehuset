@@ -9,16 +9,19 @@ import employee.Employee;
 import exceptions.ErrorMessageHolder;
 import exceptions.OperationNotAllowedException;
 import main.Softwarehuset;
+import time.MockWeekHolder;
 
 public class ProjectManagerSteps {
 	private Softwarehuset softwarehuset;
 	private ErrorMessageHolder errorMessageHolder;
 	private String activityName, projectId, pmId;
-	private int startYear, startWeek, endYear, endWeek;
+	private int startYear, startWeek, endYear, endWeek, projectStartWeekBefore, projectStartYearBefore;
 	private Employee employee, employee2;
 	private int expectedWorkload;
+	private MockWeekHolder mockWeekHolder;
 
-	public ProjectManagerSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder) throws Exception {
+	public ProjectManagerSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder,
+			MockWeekHolder mockWeekHolder) throws Exception {
 		this.softwarehuset = softwarehuset;
 		this.errorMessageHolder = errorMessageHolder;
 		softwarehuset.generateEmployees();
@@ -27,6 +30,7 @@ public class ProjectManagerSteps {
 		softwarehuset.addProjectToProjectList("TestProject2", employee, 50, 2019);
 		softwarehuset.choosePM(employee.getEmployeeID(), "ceo",
 				softwarehuset.getProjectsFromProjectList().get(0).getId());
+		this.mockWeekHolder = mockWeekHolder;
 	}
 
 	// from create-a-new-activity.feature
@@ -35,6 +39,9 @@ public class ProjectManagerSteps {
 	public void thatTheProjectManagerProvidesTheIDForAProject(String string) {
 		this.pmId = employee.getEmployeeID();
 		projectId = softwarehuset.getProjectsFromProjectList().get(0).getId();
+		projectStartWeekBefore = softwarehuset.searchForProjectById(projectId).getStartWeek();
+		projectStartYearBefore = softwarehuset.searchForProjectById(projectId).getStartYear();
+
 	}
 
 	@Given("provides a name {string} for the activity")
@@ -63,17 +70,37 @@ public class ProjectManagerSteps {
 	public void the_project_manager_creates_an_activity() throws Exception {
 
 		try {
-			softwarehuset.createAct(activityName, projectId, expectedWorkload, pmId, startWeek,
-					endWeek, startYear, endYear);
+			softwarehuset.createAct(activityName, projectId, expectedWorkload, pmId, startWeek, endWeek, startYear,
+					endYear);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 	}
 
 	@Then("the system creates an activity with a consecutive number")
-	public void the_system_creates_an_activity_with_a_consecutive_number() {
+	public void theSystemCreatesAnActivityWithAConsecutiveNumber() {
 		assertTrue(softwarehuset.getActivitiesFromActivityList(projectId).size() > 0);
 
+	}
+
+	@Then("sets the start time for the project")
+	public void setsTheStartTimeForTheProject() {
+		assertTrue(softwarehuset.searchForProjectById(projectId).getStartYear() != projectStartYearBefore
+				|| softwarehuset.searchForProjectById(projectId).getStartWeek() != projectStartWeekBefore);
+
+	}
+
+	@Then("updates the start time for the project if the new activity's start time is earlier than the existing")
+	public void updatesTheStartTimeForTheProjectIfTheNewActivitySStartTimeIsEarlierThanTheExisting() throws Exception {
+
+		projectStartWeekBefore = softwarehuset.searchForProjectById(projectId).getStartWeek();
+		projectStartYearBefore = softwarehuset.searchForProjectById(projectId).getStartYear();
+
+		softwarehuset.createAct("test2", projectId, expectedWorkload, pmId, 37, endWeek, startYear, endYear);
+
+		assertTrue(softwarehuset.searchForProjectById(projectId).getStartWeek() != projectStartWeekBefore
+				|| softwarehuset.searchForProjectById(projectId).getStartWeek() == projectStartWeekBefore
+						&& softwarehuset.searchForProjectById(projectId).getStartYear() != projectStartYearBefore);
 	}
 
 	@Given("that the project manager provides the ID {string} for a project, which has not been created")
@@ -96,6 +123,12 @@ public class ProjectManagerSteps {
 	@Given("provides no the expected workload in hours for the activity")
 	public void providesNoTheExpectedWorkloadInHoursForTheActivity() {
 		expectedWorkload = 0;
+	}
+
+	@Given("that an employee without a valid ID {string} provides the ID {string} for a project")
+	public void thatAnEmployeeWithoutAValidIDProvidesTheIDForAProject(String employeeId, String string) {
+		projectId = softwarehuset.getProjectsFromProjectList().get(0).getId();
+		this.pmId = employeeId;
 	}
 
 	// from assign_an_employee_to_activity.feature
