@@ -1,17 +1,14 @@
 package employee;
 
-import java.time.YearMonth;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import exceptions.OperationNotAllowedException;
+import main.Softwarehuset;
 import project.Project;
 
 public class Employee {
 
 	private String employeeID;
-	private boolean isEmployeePM;
+	private boolean isEmployeePM = false;
 	//private boolean vacant;
 	private ArrayList<PermanentActivity> permanentActivityList = new ArrayList<PermanentActivity>();
 	private int activityCounter;
@@ -50,8 +47,8 @@ public class Employee {
 //		return vacant;
 //	}
 
-	public Project createProj(String name, String id) throws Exception {
-		Project p = new Project(name, id);
+	public Project createProj(String name, String id, int endWeek, int endYear, Softwarehuset softwarehuset) throws Exception {
+		Project p = new Project(name, id, endWeek, endYear, softwarehuset);
 		return p;
 	}
 
@@ -74,8 +71,8 @@ public class Employee {
 		return activityCounter;
 	}
 	
-	public void registerWorkingHours(String activityID, double workingHours) throws OperationNotAllowedException {
-		ActivityWorkingHours awh = new ActivityWorkingHours(activityID, workingHours);
+	public void registerWorkingHours(String activityName, double workingHours) throws OperationNotAllowedException {
+		ActivityWorkingHours awh = new ActivityWorkingHours(activityName, workingHours);
 		getActivityWorkingHoursList().add(awh);
 	}
 

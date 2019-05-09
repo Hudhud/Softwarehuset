@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
+
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -11,6 +12,7 @@ import employee.Employee;
 import exceptions.ErrorMessageHolder;
 import exceptions.OperationNotAllowedException;
 import main.Softwarehuset;
+import time.MockWeekHolder;
 
 public class EmployeeSteps {
 	private Softwarehuset softwarehuset;
@@ -18,16 +20,18 @@ public class EmployeeSteps {
 	private ErrorMessageHolder errorMessageHolder;
 	private List<Employee> employeeList;
 	private Employee employee;
-	private int startWeek, endWeek, startYear, endYear;
+	private int startWeek, endWeek, endWeek2, endWeek3, startYear, endYear, endYear2, endYear3;
+	private MockWeekHolder mockWeekHolder;
 
-	public EmployeeSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder) throws Exception {
+	public EmployeeSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder, MockWeekHolder mockWeekHolder) throws Exception {
 		this.softwarehuset = softwarehuset;
 		this.errorMessageHolder = errorMessageHolder;
 		this.employeeList = softwarehuset.generateEmployees();
 		employee = softwarehuset.getEmployeeList().get(0);
-		softwarehuset.addProjectToProjectList("TestProject2", employee);
-		softwarehuset.choosePM(employee.getEmployeeID(), "ceo",
-				softwarehuset.getProjectsFromProjectList().get(0).getId());
+		softwarehuset.addProjectToProjectList("TestProject2", employee, 50, 2019);
+//		softwarehuset.choosePM(employee.getEmployeeID(), "ceo",
+//		softwarehuset.getProjectsFromProjectList().get(0).getId());
+		this.mockWeekHolder = mockWeekHolder;
 	}
 
 	// from create-a-new-project.feature
@@ -37,10 +41,29 @@ public class EmployeeSteps {
 		this.projectName = projectName;
 	}
 
+	@Given("provides end week {int} of {int} for the deadline")
+	public void providesEndWeekOfForTheDeadline(Integer endWeek, Integer endYear) {
+		
+		
+	    this.endWeek = endWeek;
+	    this.endYear = endYear;
+	}
+	
+	@Given("provides end week {int} of {int} for the deadline of the first project, end week {int} of {int} for the deadline of the second project, end week {int} of {int} for the deadline of the third project")
+	public void providesEndWeekOfForTheDeadlineOfTheFirstProjectEndWeekOfForTheDeadlineOfTheSecondProjectEndWeekOfForTheDeadlineOfTheThirdProject(Integer endWeek1, Integer endYear1, Integer endWeek2, Integer endYear2, Integer endWeek3, Integer endYear3) {
+	    this.endWeek = endWeek1;
+	    this.endWeek2 = endWeek2;
+	    this.endWeek3 = endWeek3;
+	    this.endYear = endYear1;
+	    this.endYear2 = endYear2;
+	    this.endYear3 = endYear3;
+
+	}
+	
 	@When("a new project is created")
 	public void a_new_project_is_created() throws Exception {
 		try {
-			softwarehuset.addProjectToProjectList(projectName, employeeList.get(0));
+			softwarehuset.addProjectToProjectList(projectName, employeeList.get(0), endWeek, endYear);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -58,7 +81,7 @@ public class EmployeeSteps {
 	}
 
 	@Then("the system provides an error message {string}")
-	public void theSystemProvidesAnErrorMessage(String errorMessage) throws Exception {
+	public void theSystemProvidesAnErrorMessage(String errorMessage) {
 		assertEquals(errorMessage, errorMessageHolder.getErrorMessage());
 	}
 
@@ -72,9 +95,9 @@ public class EmployeeSteps {
 	@When("three new projects are created")
 	public void threeNewProjectsAreCreated() throws Exception {
 		try {
-			softwarehuset.addProjectToProjectList(projectName, employeeList.get(0));
-			softwarehuset.addProjectToProjectList(projectName_1, employeeList.get(0));
-			softwarehuset.addProjectToProjectList(projectName_2, employeeList.get(0));
+			softwarehuset.addProjectToProjectList(projectName, employeeList.get(0), endWeek, endYear);
+			softwarehuset.addProjectToProjectList(projectName_1, employeeList.get(0), endWeek2, endYear2);
+			softwarehuset.addProjectToProjectList(projectName_2, employeeList.get(0), endWeek3, endYear3);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -83,6 +106,7 @@ public class EmployeeSteps {
 	@Then("the system creates three projects with the provided names {string} {string} {string} and  consecutive numbers")
 	public void theSystemCreatesThreeProjectsWithTheProvidedNamesAndConsecutiveNumbers(String projectName,
 			String projectName_1, String projectName_2) {
+		
 		assertTrue(
 				softwarehuset.getProjectsFromProjectList().contains(softwarehuset.searchForProjectByName(projectName)));
 		assertTrue(softwarehuset.getProjectsFromProjectList()
@@ -92,23 +116,24 @@ public class EmployeeSteps {
 	}
 
 //	//from create-a-permanent-activity.feature
-
-	@Given("that an employee  provides his ID {string}")
-	public void thatAnEmployeeProvidesHisID(String ID) {
-
+	
+	@Given("that an employee provides a start week {int} of {int} for the permanent activity")
+	public void thatAnEmployeeProvidesAStartWeekOfForThePermanentActivity(Integer startWeek, Integer startYear) {
+		this.startWeek = startWeek;
+		this.startYear = startYear;
 		employee = softwarehuset.getEmployeeList().get(0);
-		ID = employee.getEmployeeID();
-		assertTrue(softwarehuset.getEmployeeList().contains(softwarehuset.searchForEmployeeById(ID)));
+		assertTrue(softwarehuset.getEmployeeList().contains(softwarehuset.searchForEmployeeById(employee.getEmployeeID())));
 	}
-
-	@Given("provides a start date week {int} of {int} for the permanent activity")
-	public void provides_a_start_date_week_of_for_the_permanent_activity(Integer startWeek, Integer startYear) {
+	
+	@Given("provides a start week {int} of {int} for the permanent activity")
+	public void providesAStartWeekOfForThePermanentActivity(Integer startWeek, Integer startYear) {
 		this.startWeek = startWeek;
 		this.startYear = startYear;
 	}
 
-	@Given("provides an end date week {int} of {int} for the permanent activity")
-	public void provides_an_end_date_week_of_for_the_permanent_activity(Integer endWeek, Integer endYear) {
+
+	@Given("provides an end week {int} of {int} for the permanent activity")
+	public void provides_an_end_week_of_for_the_permanent_activity(Integer endWeek, Integer endYear) {
 		this.endWeek = endWeek;
 		this.endYear = endYear;
 	}
@@ -128,12 +153,17 @@ public class EmployeeSteps {
 	}
 
 	// Register working time
+	
+	@Given("that an employee provides his ID {string}")
+	public void thatAnEmployeeProvidesHisID(String id) {
+	    // employee is already generated
+	}
 
-	@Given("the employee provides the activity with a name")
-	public void theEmployeeProvidesTheActivityWithAName() throws Exception {
+	@Given("that the employee provides the activity with a name")
+	public void thatAnEmployeeProvidesTheNameOfTheActivity() throws Exception {
 		try {
 			softwarehuset.createAct("activity1", "2019000001", 1,
-					softwarehuset.getProjectManagerList().get(0).getEmployeeID());
+					softwarehuset.getProjectManagerList().get(0).getEmployeeID(), 42, 45, 2019, 2019);
 			activityName = softwarehuset.getActivitiesFromActivityList("2019000001").get(0).getName();
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
@@ -164,7 +194,7 @@ public class EmployeeSteps {
 		try {
 			employee = new Employee(employeeID);
 			softwarehuset.createAct("activity1", "2019000001", 1,
-					softwarehuset.getProjectManagerList().get(0).getEmployeeID());
+					softwarehuset.getProjectManagerList().get(0).getEmployeeID(), 42, 45, 2019, 2019);
 			activityName = softwarehuset.getActivitiesFromActivityList("2019000001").get(0).getName();
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
@@ -175,20 +205,27 @@ public class EmployeeSteps {
 	public void theEmployeeDoesNotProvideHisWorkingTime() {
 	}
 
-	@Given("the employee provides wrong activity name {string}")
-	public void theEmployeeProvidesWrongActivityID(String activityID) throws Exception {
+	@Given("that an employee provides a wrong activity name {string}")
+	public void thatAnEmployeeProvidesAWrongActivityName(String activityName) throws Exception {
 		try {
-			this.activityName = activityID;
-			softwarehuset.createAct("activity1", "2019000001", 1,
-					softwarehuset.getProjectManagerList().get(0).getEmployeeID());
+			this.activityName = activityName;
+			softwarehuset.createAct("activity1", "2019000001", 5,
+					softwarehuset.getProjectManagerList().get(0).getEmployeeID(), 42, 45, 2019, 2019);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 	}
 
-	@Given("the employee does not enter an activity name")
-	public void theEmployeeDoesNotEnterAnActivityID() {
+	@Given("that the employee does not enter an activity name")
+	public void thatTheEmployeeDoesNotEnterAnActivityName() {
 
 	}
+	
+	@Given("the activity's deadline is exceeded")
+	public void theActivitySDeadlineIsExceeded() {		
+	    mockWeekHolder.advancedDateByWeeks(30);
+	}
+	
+	
 
 }

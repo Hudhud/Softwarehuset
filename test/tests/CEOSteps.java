@@ -10,6 +10,7 @@ import employee.Employee;
 import exceptions.ErrorMessageHolder;
 import exceptions.OperationNotAllowedException;
 import main.Softwarehuset;
+import time.MockWeekHolder;
 
 public class CEOSteps {
 	private String ceoId;
@@ -18,27 +19,26 @@ public class CEOSteps {
 	private List<Employee> employeeList;
 	private Employee employee;
 	private String empId;
+	private String projectId;
+	private MockWeekHolder mockWeekHolder;
 
-	public CEOSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder) {
+	public CEOSteps(Softwarehuset softwarehuset, ErrorMessageHolder errorMessageHolder, MockWeekHolder mockWeekHolder) {
 		this.softwarehuset = softwarehuset;
 		this.errorMessageHolder = errorMessageHolder;
 		employeeList = softwarehuset.generateEmployees();
+		this.mockWeekHolder = mockWeekHolder;
 	}
 
-	@Given("the CEO provides his id {string}")
-	public void theCEOProvidesHisId(String ceoId) {
-		employee = employeeList.get(0);
-		this.ceoId = ceoId;
-	}
-
-	@Given("provides the project id {string} along with the project name {string}")
+	@Given("the CEO provides the project id {string} along with the project name {string}")
 	public void providesTheProjectIdAlongWithTheProjectName(String projectId, String projectName) throws Exception {
-
-		softwarehuset.addProjectToProjectList(projectName, employee);
+		this.ceoId = "ceo"; 
+		softwarehuset.addProjectToProjectList(projectName, employeeList.get(1), 50, 2019);
+		this.projectId = projectId;
 	}
 
 	@Given("the employee with the ID {string} exists")
 	public void theEmployeeWithTheIDExists(String employeeId) {
+		employee = employeeList.get(0);
 		empId = employee.getEmployeeID();
 		assertTrue(employeeList.contains(softwarehuset.searchForEmployeeById(empId)));
 	}
@@ -48,8 +48,8 @@ public class CEOSteps {
 			String projectId) throws Exception {
 
 		try {
-			softwarehuset.choosePM(empId, ceoId, projectId);
-		} catch (OperationNotAllowedException e) {
+			softwarehuset.choosePM(empId, ceoId, this.projectId);
+		} catch (Exception e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 
@@ -71,5 +71,20 @@ public class CEOSteps {
 		employee = employeeList.get(0);
 		ceoId = id;
 	}
+	
+	@Given("the fake CEO provides the project id {string} along with the project name {string}")
+	public void theFakeCEOProvidesTheProjectIdAlongWithTheProjectName(String projectId, String projectName) throws Exception { 
+		softwarehuset.addProjectToProjectList(projectName, employeeList.get(1), 50, 2019);
+		this.projectId = projectId;
+	}
+	
+	@Given("the CEO provides the project id {string} along with the project name {string} whose deadline has passed")
+	public void theCEOProvidesTheProjectIdAlongWithTheProjectNameWhoseDeadlineHasPassed(String projectId, String projectName) throws Exception {
+		this.ceoId = "ceo"; 
+		softwarehuset.addProjectToProjectList(projectName, employeeList.get(1), 30, 2019);
+		this.projectId = projectId;
+		mockWeekHolder.advancedDateByWeeks(30);
+	}
 
+	
 }
