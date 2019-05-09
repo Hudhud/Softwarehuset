@@ -177,6 +177,12 @@ public class ProjectManagerSteps {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 	}
+	
+	@When("the project manager wants to add an employee to an activity with deadline exceeded")
+	public void theProjectManagerWantsToAddAnEmployeeToAnActivityWithDeadlineExceeded() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
 
 	// from control_porject_time.feature
 

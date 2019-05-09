@@ -29,8 +29,8 @@ public class EmployeeSteps {
 		this.employeeList = softwarehuset.generateEmployees();
 		employee = softwarehuset.getEmployeeList().get(0);
 		softwarehuset.addProjectToProjectList("TestProject2", employee, 50, 2019);
-		softwarehuset.choosePM(employee.getEmployeeID(), "ceo",
-				softwarehuset.getProjectsFromProjectList().get(0).getId());
+//		softwarehuset.choosePM(employee.getEmployeeID(), "ceo",
+//		softwarehuset.getProjectsFromProjectList().get(0).getId());
 		this.mockWeekHolder = mockWeekHolder;
 	}
 
@@ -81,7 +81,7 @@ public class EmployeeSteps {
 	}
 
 	@Then("the system provides an error message {string}")
-	public void theSystemProvidesAnErrorMessage(String errorMessage) throws Exception {
+	public void theSystemProvidesAnErrorMessage(String errorMessage) {
 		assertEquals(errorMessage, errorMessageHolder.getErrorMessage());
 	}
 

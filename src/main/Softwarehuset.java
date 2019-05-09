@@ -189,13 +189,23 @@ public class Softwarehuset {
 		return projectManagerList;
 	}
 
-	public void choosePM(String employeeId, String ceoId, String projectId) throws OperationNotAllowedException {
+	public void choosePM(String employeeId, String ceoId, String projectId) throws Exception {
+
+		int currentWeek = getDate().get(Calendar.WEEK_OF_YEAR);
+		int currentYear = getDate().get(Calendar.YEAR);
+		int projectEndYear = searchForProjectById(projectId).getEndYear();
+		int projectEndWeek = searchForProjectById(projectId).getEndWeek();
+
+		if ((currentYear > projectEndYear) || (currentYear == projectEndYear && currentWeek > projectEndWeek)) {
+			throw new Exception("The deadline for this project has passed");
+		}
 
 		if (ceoId.equals("ceo") && searchForEmployeeById(employeeId) != null) {
 
 			CEO ceo = new CEO(ceoId);
 			ceo.choosePM(employeeId, projectId, this);
 			getProjectManagerList().add(new ProjectManager(employeeId));
+
 			// getEmployeeList().remove(getEmployeeList().indexOf(searchForEmployeeById(employeeId)));
 
 		} else if (!ceoId.equals("ceo")) {
@@ -212,9 +222,16 @@ public class Softwarehuset {
 
 	public void createPermanentActivity(int startWeek, int endWeek, int startYear, int endYear, Employee employee)
 			throws OperationNotAllowedException {
+
+		int currentWeek = getDate().get(Calendar.WEEK_OF_YEAR);
+		int currentYear = getDate().get(Calendar.YEAR);
+		int weeksInYear = getDate().getActualMaximum(Calendar.WEEK_OF_YEAR);
+
 		if (!getEmployeeList().contains(employee)) {
 			throw new OperationNotAllowedException("Invalid ID");
 		}
+
+		checkTime(startYear, currentYear, endYear, startWeek, endWeek, currentWeek, weeksInYear);
 		employee.createPermanentActivity(startWeek, endWeek, startYear, endYear);
 	}
 
@@ -281,7 +298,7 @@ public class Softwarehuset {
 		return dateServer.getDate();
 	}
 
-	public void checkTime(int startYear, int currentYear, int endYear, int startweek, int endWeek, int currentWeek,
+	public void checkTime(int startYear, int currentYear, int endYear, int startWeek, int endWeek, int currentWeek,
 			int weeksInYear) throws OperationNotAllowedException {
 		if (startYear < currentYear) {
 			throw new OperationNotAllowedException("Invalid time. The time can not be in the past");
@@ -289,13 +306,13 @@ public class Softwarehuset {
 		if (endYear < startYear) {
 			throw new OperationNotAllowedException("End year must be after start year");
 		}
-		if ((startYear == endYear) && (startweek > endWeek)) {
+		if ((startYear == endYear) && (startWeek > endWeek)) {
 			throw new OperationNotAllowedException("Start week must be before end week");
 		}
-		if ((startYear == endYear) && (startweek < currentWeek)) {
+		if ((startYear == endYear) && (startWeek < currentWeek)) {
 			throw new OperationNotAllowedException("Start week can't be in the past");
 		}
-		if ((startweek > weeksInYear) || (endWeek > weeksInYear)) {
+		if ((startWeek > weeksInYear) || (endWeek > weeksInYear)) {
 			throw new OperationNotAllowedException("Invalid week of year");
 		}
 	}
