@@ -776,6 +776,81 @@ formatter.match({
 formatter.result({
   "status": "passed"
 });
+formatter.scenario({
+  "name": "create an activity for a project in the past",
+  "description": "",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "name": "that the project manager provides the ID \"2019000001\" for a project",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.thatTheProjectManagerProvidesTheIDForAProject(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides a name \"firstAct\" for the activity",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.provides_a_name_for_the_activity(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides start week 10 of 2019",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.providesStartWeekOf(Integer,Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides end week 45 of 2019",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.providesEndWeekOf(Integer,Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides 5 hours as the expected workload for the activity",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.providesHoursAsTheExpectedWorkloadForTheActivity(Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the project manager creates an activity",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.the_project_manager_creates_an_activity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the system provides an error message \"Start week can\u0027t be in the past\"",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
+});
+formatter.result({
+  "status": "passed"
+});
 formatter.uri("use_cases\\create_a_new_project.feature");
 formatter.feature({
   "name": "Create a new project",
@@ -1328,6 +1403,51 @@ formatter.match({
 formatter.result({
   "status": "passed"
 });
+formatter.scenario({
+  "name": "Employee wants to create a permanent activity in the past",
+  "description": "",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "name": "that an employee provides a start week 10 of 2019 for the permanent activity",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "EmployeeSteps.thatAnEmployeeProvidesAStartWeekOfForThePermanentActivity(Integer,Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides an end week 42 of 2019 for the permanent activity",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "EmployeeSteps.provides_an_end_week_of_for_the_permanent_activity(Integer,Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee creates a permanent activity",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "EmployeeSteps.the_employee_creates_a_permanent_activity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the system provides an error message \"Start week can\u0027t be in the past\"",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
+});
+formatter.result({
+  "status": "passed"
+});
 formatter.uri("use_cases\\register_working_time.feature");
 formatter.feature({
   "name": "Register working time",
@@ -1385,6 +1505,61 @@ formatter.step({
 });
 formatter.match({
   "location": "EmployeeSteps.theEmployeeHasRegisteredHisWorkingTime()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Register working time for an activity",
+  "description": "",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "name": "that an employee provides wrong ID \"abcd\"",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "EmployeeSteps.thatAnEmployeeProvidesWrongID(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "that the employee provides the activity with a name",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "EmployeeSteps.thatAnEmployeeProvidesTheNameOfTheActivity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee provides his working time \"2.0\" hours",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "EmployeeSteps.theEmployeeProvidesHisWorkingTimeHours(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee wants to register his working time for the activity",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "EmployeeSteps.theEmployeeWantsToRegisterHisWorkingTimeForTheActivity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the system provides an error message \"Invalid ID\"",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
 });
 formatter.result({
   "status": "passed"
@@ -1525,8 +1700,8 @@ formatter.result({
   "status": "passed"
 });
 formatter.scenario({
-  "name": "Employee enters an illegal value (a String) for working time for an activity",
-  "description": "",
+  "name": "",
+  "description": "Employee enters an illegal value (a String) for working time for an activity ",
   "keyword": "Scenario"
 });
 formatter.step({
@@ -1570,8 +1745,8 @@ formatter.result({
   "status": "passed"
 });
 formatter.scenario({
-  "name": "Employee enters a value, which is equal to or less than 0.0 for working time for an activity",
-  "description": "",
+  "name": "",
+  "description": "Employee enters a value, which is equal to or less than 0.0 for working time for an activity ",
   "keyword": "Scenario"
 });
 formatter.step({
@@ -1615,8 +1790,8 @@ formatter.result({
   "status": "passed"
 });
 formatter.scenario({
-  "name": "Employee wants to register working time for an activity with deadline exceeded",
-  "description": "",
+  "name": "",
+  "description": "Employee wants to register working time for an activity with deadline exceeded ",
   "keyword": "Scenario"
 });
 formatter.step({

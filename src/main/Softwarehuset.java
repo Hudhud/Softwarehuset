@@ -232,7 +232,9 @@ public class Softwarehuset {
 		}
 
 		checkTime(startYear, currentYear, endYear, startWeek, endWeek, currentWeek, weeksInYear);
+		
 		employee.createPermanentActivity(startWeek, endWeek, startYear, endYear);
+		
 	}
 
 	public ArrayList<PermanentActivity> getEmployeePermanentActivities(Employee employee) {

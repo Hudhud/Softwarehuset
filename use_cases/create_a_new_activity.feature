@@ -86,3 +86,12 @@ Scenario: Employee without valid project manager ID wants to create a new activi
 	When the project manager creates an activity     
 	Then the system provides an error message "Please enter a valid project manager ID"
 	
+Scenario: create an activity for a project in the past 
+	Given that the project manager provides the ID "2019000001" for a project 
+	And provides a name "firstAct" for the activity 
+	And provides start week 10 of 2019
+	And provides end week 45 of 2019
+	And provides 5 hours as the expected workload for the activity 
+	When the project manager creates an activity 
+	Then the system provides an error message "Start week can't be in the past"
+
