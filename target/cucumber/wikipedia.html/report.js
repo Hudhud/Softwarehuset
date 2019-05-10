@@ -5,16 +5,117 @@ formatter.feature({
   "keyword": "Feature"
 });
 formatter.scenario({
+  "name": "Assign employee, who is vacant, to an activity",
+  "description": "",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "name": "that a project manager provides the employee with ID \"abcd\", who is vacant",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.thatAProjectManagerProvidesTheEmployeeWithIDWhoIsVacant(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "that provides the name of the activity",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.thatProvidesTheNameOfTheActivity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the project manager wants to add an employee to an activity",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.the_project_manager_wants_to_add_an_employee_to_an_activity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the system assigns the employee to the activity",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.the_system_assigns_the_employee_to_the_activity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Assign employee, who is not vacant, to an activity",
+  "description": "",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "name": "that a project manager provides the employee with ID \"abcd\", who is not vacant",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.thatAProjectManagerProvidesTheEmployeeWithIDWhoIsNotVacant(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "that provides the name of the activity",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.thatProvidesTheNameOfTheActivity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the project manager wants to add an employee to an activity",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.the_project_manager_wants_to_add_an_employee_to_an_activity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the system provides an error message \"Employee is not vacant\"",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
+});
+formatter.result({
+  "error_message": "java.lang.AssertionError: expected:\u003cEmployee is not vacant\u003e but was:\u003cnull\u003e\r\n\tat org.junit.Assert.fail(Assert.java:88)\r\n\tat org.junit.Assert.failNotEquals(Assert.java:834)\r\n\tat org.junit.Assert.assertEquals(Assert.java:118)\r\n\tat org.junit.Assert.assertEquals(Assert.java:144)\r\n\tat tests.EmployeeSteps.theSystemProvidesAnErrorMessage(EmployeeSteps.java:85)\r\n\tat ✽.the system provides an error message \"Employee is not vacant\"(use_cases\\assign_an_employee_to_activity.feature:16)\r\n",
+  "status": "failed"
+});
+formatter.scenario({
   "name": "Employee without valid project manager ID wants to assign an employee to an activity",
   "description": "",
   "keyword": "Scenario"
 });
 formatter.step({
-  "name": "that the employee with ID \"abcd\" is vacant",
+  "name": "that a project manager provides the employee with ID \"abcd\", who is vacant",
   "keyword": "Given "
 });
 formatter.match({
-  "location": "ProjectManagerSteps.that_the_employee_with_ID_is_vacant(String)"
+  "location": "ProjectManagerSteps.thatAProjectManagerProvidesTheEmployeeWithIDWhoIsVacant(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "that provides the name of the activity",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.thatProvidesTheNameOfTheActivity()"
 });
 formatter.result({
   "status": "passed"
@@ -45,11 +146,21 @@ formatter.scenario({
   "keyword": "Scenario"
 });
 formatter.step({
-  "name": "that the employee with ID \"abcd\" is vacant",
+  "name": "that a project manager provides the employee with ID \"abcd\", who is vacant",
   "keyword": "Given "
 });
 formatter.match({
-  "location": "ProjectManagerSteps.that_the_employee_with_ID_is_vacant(String)"
+  "location": "ProjectManagerSteps.thatAProjectManagerProvidesTheEmployeeWithIDWhoIsVacant(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "that provides the name of the activity",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.thatProvidesTheNameOfTheActivity()"
 });
 formatter.result({
   "status": "passed"
@@ -62,7 +173,7 @@ formatter.match({
   "location": "ProjectManagerSteps.theProjectManagerWantsToAddAnEmployeeToAnActivityWithDeadlineExceeded()"
 });
 formatter.result({
-  "error_message": "cucumber.api.PendingException: TODO: implement me\r\n\tat tests.ProjectManagerSteps.theProjectManagerWantsToAddAnEmployeeToAnActivityWithDeadlineExceeded(ProjectManagerSteps.java:184)\r\n\tat ✽.the project manager wants to add an employee to an activity with deadline exceeded(use_cases\\assign_an_employee_to_activity.feature:27)\r\n",
+  "error_message": "cucumber.api.PendingException: TODO: implement me\r\n\tat tests.ProjectManagerSteps.theProjectManagerWantsToAddAnEmployeeToAnActivityWithDeadlineExceeded(ProjectManagerSteps.java:191)\r\n\tat ✽.the project manager wants to add an employee to an activity with deadline exceeded(use_cases\\assign_an_employee_to_activity.feature:32)\r\n",
   "status": "pending"
 });
 formatter.step({
@@ -1224,8 +1335,8 @@ formatter.result({
   "status": "passed"
 });
 formatter.scenario({
-  "name": "Employee provides a start week that occurs after the end week for the permanent activity",
-  "description": "",
+  "name": "",
+  "description": "Employee provides a start week that occurs after the end week for the permanent activity ",
   "keyword": "Scenario"
 });
 formatter.step({
@@ -1447,6 +1558,49 @@ formatter.match({
 });
 formatter.result({
   "status": "passed"
+});
+formatter.scenario({
+  "name": "",
+  "description": "Employee wants to create a permanent activiy while being assigned to an activity ",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "name": "that an employee provides a start week 40 of 2019 for the permanent activity",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "EmployeeSteps.thatAnEmployeeProvidesAStartWeekOfForThePermanentActivity(Integer,Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides an end week 42 of 2019 for the permanent activity",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "EmployeeSteps.provides_an_end_week_of_for_the_permanent_activity(Integer,Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee creates a permanent activity, which overlaps with an activty he is assigned to",
+  "keyword": "When "
+});
+formatter.match({});
+formatter.result({
+  "status": "undefined"
+});
+formatter.step({
+  "name": "the system provides an error message \"You are already assigned to an activity in the given period\"",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
+});
+formatter.result({
+  "status": "skipped"
 });
 formatter.uri("use_cases\\register_working_time.feature");
 formatter.feature({

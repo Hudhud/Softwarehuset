@@ -3,6 +3,7 @@ package employee;
 import java.util.ArrayList;
 import exceptions.OperationNotAllowedException;
 import main.Softwarehuset;
+import project.Activity;
 import project.Project;
 
 public class Employee {
@@ -13,6 +14,7 @@ public class Employee {
 	private ArrayList<PermanentActivity> permanentActivityList = new ArrayList<PermanentActivity>();
 	private int activityCounter;
 	private ArrayList<ActivityWorkingHours> activityWorkingHoursList = new ArrayList<>();
+	private ArrayList<Activity> activityList = new ArrayList<>();
 
 	// This empty constructor is necessary, because sometimes we need it in some
 	// methods.
@@ -61,6 +63,14 @@ public class Employee {
 	public ArrayList<PermanentActivity> getPermanentActivityList() {
 		return permanentActivityList;
 	}
+	
+	public void addActivitytoActivityList(Activity activity) {
+		activityList.add(activity);
+	}
+	
+	public ArrayList<Activity> getActivityList() {
+		return activityList;
+	} 
 
 	public void increaseActivityAmount() {
 		activityCounter++;

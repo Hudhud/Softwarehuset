@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import org.w3c.dom.ranges.Range;
+
 import ceo.CEO;
 import employee.Employee;
 import employee.PermanentActivity;
@@ -241,9 +246,26 @@ public class Softwarehuset {
 		return employee.getPermanentActivityList();
 	}
 
-	public void assignEmployeeToActivity(Employee employee, ProjectManager pm) throws OperationNotAllowedException {
-
-		pm.assignEmpToActivity(employee);
+	public void assignEmployeeToActivity(Employee employee, ProjectManager pm, String activityName) throws OperationNotAllowedException {
+		
+		Activity act = null;
+		for (Project project : getProjectsFromProjectList()) {
+			for (Activity activity : project.getActivities()) {
+				if (activityName.equals(activity.getName())) {
+					act = activity;
+				}
+			}
+		}
+		
+	
+		
+		for (PermanentActivity pActivity : employee.getPermanentActivityList()) {
+			if ((act.getStartYear() >= pActivity.getStartYear()  && act.getEndYear() <= pActivity.getEndYear()) ) {
+				throw new OperationNotAllowedException("Employee is not vacant");
+			}
+		}
+		
+		pm.assignEmpToActivity(employee, act);
 	}
 
 	public void registerWorkingTime(String activityName, String workingHours, Employee employee)
