@@ -16,7 +16,7 @@ public class ProjectManagerSteps {
 	private ErrorMessageHolder errorMessageHolder;
 	private String activityName, projectId, pmId;
 	private int startYear, startWeek, endYear, endWeek, projectStartWeekBefore, projectStartYearBefore;
-	private Employee employee, employee2;
+	private Employee chosenEmployee, employee;
 	private int expectedWorkload;
 	private MockWeekHolder mockWeekHolder;
 
@@ -25,10 +25,10 @@ public class ProjectManagerSteps {
 		this.softwarehuset = softwarehuset;
 		this.errorMessageHolder = errorMessageHolder;
 		softwarehuset.generateEmployees();
-		employee = softwarehuset.getEmployeeList().get(0);
-		employee2 = softwarehuset.getEmployeeList().get(1);
-		softwarehuset.addProjectToProjectList("TestProject2", employee, 50, 2019);
-		softwarehuset.choosePM(employee.getEmployeeID(), "ceo",
+		chosenEmployee = softwarehuset.getEmployeeList().get(0);
+		employee = softwarehuset.getEmployeeList().get(1);
+		softwarehuset.addProjectToProjectList("TestProject2", chosenEmployee, 50, 2019);
+		softwarehuset.choosePM(chosenEmployee.getEmployeeID(), "ceo",
 				softwarehuset.getProjectsFromProjectList().get(0).getId());
 		this.mockWeekHolder = mockWeekHolder;
 	}
@@ -37,7 +37,7 @@ public class ProjectManagerSteps {
 
 	@Given("that the project manager provides the ID {string} for a project")
 	public void thatTheProjectManagerProvidesTheIDForAProject(String string) {
-		this.pmId = employee.getEmployeeID();
+		this.pmId = chosenEmployee.getEmployeeID();
 		projectId = softwarehuset.getProjectsFromProjectList().get(0).getId();
 		projectStartWeekBefore = softwarehuset.searchForProjectById(projectId).getStartWeek();
 		projectStartYearBefore = softwarehuset.searchForProjectById(projectId).getStartYear();
@@ -105,7 +105,7 @@ public class ProjectManagerSteps {
 
 	@Given("that the project manager provides the ID {string} for a project, which has not been created")
 	public void thatTheProjectManagerProvidesTheIDForAProjectWhichHasNotBeenCreated(String projectId) {
-		this.pmId = employee.getEmployeeID();
+		this.pmId = chosenEmployee.getEmployeeID();
 		this.projectId = projectId;
 	}
 
@@ -133,43 +133,51 @@ public class ProjectManagerSteps {
 
 	// from assign_an_employee_to_activity.feature
 
-	@Given("that a project manager provides the employee with ID {string}, who is vacant")
-	public void thatAProjectManagerProvidesTheEmployeeWithIDWhoIsVacant(String string) {
-	    // employee already initialized
-	}
-	
-	@Given("that provides the name of the activity")
-	public void thatProvidesTheNameOfTheActivity() throws Exception {
-		String projectId = softwarehuset.getProjectsFromProjectList().get(0).getId();
-		softwarehuset.createAct("test1", projectId, 1, employee.getEmployeeID(), 42, 43, 2019, 2019);
-		this.activityName = "test1";
-	}
+//	@Given("that a project manager provides the employee with ID {string}, who is vacant")
+//	public void thatAProjectManagerProvidesTheEmployeeWithIDWhoIsVacant(String string) {
+//		// employee already initialized
+//	}
+//
+//	@Given("that provides the name of the activity")
+//	public void thatProvidesTheNameOfTheActivity() throws Exception {
+//		String projectId = softwarehuset.getProjectsFromProjectList().get(0).getId();
+//		softwarehuset.createAct("test1", projectId, 1, chosenEmployee.getEmployeeID(), 35, 43, 2019, 2019);
+//		this.activityName = "test1";
+//	}
 
-	@When("the project manager wants to add an employee to an activity")
-	public void the_project_manager_wants_to_add_an_employee_to_an_activity() throws OperationNotAllowedException {
-		this.pmId = employee.getEmployeeID();
-		softwarehuset.assignEmployeeToActivity(employee2, softwarehuset.searchForPMById(pmId), activityName);
-	}
+//	@When("the project manager wants to add an employee to an activity")
+//	public void the_project_manager_wants_to_add_an_employee_to_an_activity() throws OperationNotAllowedException {
+//		this.pmId = chosenEmployee.getEmployeeID();
+//		try {
+//			softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(pmId), activityName);
+//		} catch (OperationNotAllowedException e) {
+//			errorMessageHolder.setErrorMessage(e.getMessage());
+//		}
+//	}
 
-	@Then("the system assigns the employee to the activity")
-	public void the_system_assigns_the_employee_to_the_activity() {
-		assertTrue(softwarehuset.searchForEmployeeById(employee2.getEmployeeID()).getActivityAmount() > 0);
-	}
+//	@Then("the system assigns the employee to the activity")
+//	public void the_system_assigns_the_employee_to_the_activity() {
+//		assertTrue(softwarehuset.searchForEmployeeById(employee.getEmployeeID()).getActivityList().size() > 0);
+//	}
 
 	@Given("that the employee with ID {string} is already assigned to {int} activities")
 	public void thatTheEmployeeWithIDIsAlreadyAssignedToActivities(String string, Integer activitiesAmount)
-			throws OperationNotAllowedException {
-		this.pmId = employee.getEmployeeID();
-		for (int i = 0; i < 20; i++) {
-			softwarehuset.assignEmployeeToActivity(employee2, softwarehuset.searchForPMById(pmId), activityName);
-		}
+			throws Exception {
+		this.projectId = softwarehuset.getProjectsFromProjectList().get(0).getId();
+		this.pmId = chosenEmployee.getEmployeeID();
 
+		for (int i = 0; i < 20; i++) {
+			softwarehuset.createAct("tester" + i, projectId, 30, pmId, 35, 40, 2019, 2019);
+			
+			softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(pmId), "tester" + i);
+		}
 	}
 
 	@When("the project manager wants to assign the employee to another activity")
-	public void theProjectManagerWantsToAssignTheEmployeeToAnotherActivity() throws OperationNotAllowedException {
+	public void theProjectManagerWantsToAssignTheEmployeeToAnotherActivity() throws Exception {
+		softwarehuset.createAct("testerss", projectId, 30, pmId, 35, 40, 2019, 2019);
 		try {
-			softwarehuset.assignEmployeeToActivity(employee2, softwarehuset.searchForPMById(pmId), activityName);
+			softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(pmId), "testerss");
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
@@ -179,24 +187,25 @@ public class ProjectManagerSteps {
 	public void anEmployeeWithoutAProjectManagerIDWantsToAssignTheEmployeeToAnotherActivity()
 			throws OperationNotAllowedException {
 		try {
-			softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(employee2.getEmployeeID()), activityName);
+			softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(employee.getEmployeeID()),
+					activityName);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 	}
-	
+
 	@When("the project manager wants to add an employee to an activity with deadline exceeded")
 	public void theProjectManagerWantsToAddAnEmployeeToAnActivityWithDeadlineExceeded() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
-	}
-	
-	@Given("that a project manager provides the employee with ID {string}, who is not vacant")
-	public void thatAProjectManagerProvidesTheEmployeeWithIDWhoIsNotVacant(String string) throws OperationNotAllowedException {
-	    // employee already initialized
-		employee.createPermanentActivity(40, 45, 2019, 2019);
+		// Write code here that turns the phrase above into concrete actions
+		throw new cucumber.api.PendingException();
 	}
 
+	@Given("that a project manager provides the employee with ID {string}, who is not vacant")
+	public void thatAProjectManagerProvidesTheEmployeeWithIDWhoIsNotVacant(String string)
+			throws OperationNotAllowedException {
+		// employee already initialized
+		chosenEmployee.createPermanentActivity(40, 45, 2019, 2019);
+	}
 
 	// from control_porject_time.feature
 

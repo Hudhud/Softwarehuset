@@ -4,17 +4,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import org.w3c.dom.ranges.Range;
-
 import ceo.CEO;
 import employee.Employee;
 import employee.PermanentActivity;
 import employee.ProjectManager;
 import exceptions.OperationNotAllowedException;
 import project.Activity;
+import project.ActivityMaxChecker;
 import project.Project;
 import time.DateServer;
 
@@ -23,6 +19,7 @@ public class Softwarehuset {
 	private DateServer dateServer;
 	private static Employee employee;
 	private static ProjectManager projectManager;
+	private ActivityMaxChecker activityMaxChecker = new ActivityMaxChecker();
 	private static ArrayList<Employee> employeeList = new ArrayList<Employee>();
 	private static ArrayList<ProjectManager> projectManagerList = new ArrayList<ProjectManager>();
 
@@ -237,35 +234,40 @@ public class Softwarehuset {
 		}
 
 		checkTime(startYear, currentYear, endYear, startWeek, endWeek, currentWeek, weeksInYear);
-		
+
 		employee.createPermanentActivity(startWeek, endWeek, startYear, endYear);
-		
+
 	}
 
 	public ArrayList<PermanentActivity> getEmployeePermanentActivities(Employee employee) {
 		return employee.getPermanentActivityList();
 	}
 
-	public void assignEmployeeToActivity(Employee employee, ProjectManager pm, String activityName) throws OperationNotAllowedException {
-		
+	public void assignEmployeeToActivity(Employee employee, ProjectManager pm, String activityName)
+			throws OperationNotAllowedException {
+
 		Activity act = null;
 		for (Project project : getProjectsFromProjectList()) {
 			for (Activity activity : project.getActivities()) {
 				if (activityName.equals(activity.getName())) {
 					act = activity;
 				}
+
 			}
 		}
-		
-	
-		
-		for (PermanentActivity pActivity : employee.getPermanentActivityList()) {
-			if ((act.getStartYear() >= pActivity.getStartYear()  && act.getEndYear() <= pActivity.getEndYear()) ) {
-				throw new OperationNotAllowedException("Employee is not vacant");
-			}
-		}
-		
+
 		pm.assignEmpToActivity(employee, act);
+
+		if (activityMaxChecker.checker(employee.getActivityList()) == true) {
+//			employee.getActivityList().remove(act);
+			throw new OperationNotAllowedException("The employee is already assigned to 20 activities");
+		}
+
+//		for (PermanentActivity pActivity : employee.getPermanentActivityList()) {
+//			if ((act.getStartYear() >= pActivity.getStartYear() && act.getEndYear() <= pActivity.getEndYear())) {
+//				throw new OperationNotAllowedException("Employee is not vacant");
+//			}
+//		}
 	}
 
 	public void registerWorkingTime(String activityName, String workingHours, Employee employee)

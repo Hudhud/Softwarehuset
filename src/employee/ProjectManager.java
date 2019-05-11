@@ -18,11 +18,8 @@ public class ProjectManager extends Employee{
 	
 	
 	public void assignEmpToActivity(Employee emp, Activity act) throws OperationNotAllowedException {
-		if (emp.getActivityAmount() > 20) {
-			throw new OperationNotAllowedException("The employee is already assigned to 20 activities");
-		}
-		
+	
 		emp.addActivitytoActivityList(act);
-		emp.increaseActivityAmount();
+	//	emp.increaseActivityAmount();
 	}
 }
