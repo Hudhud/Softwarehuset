@@ -12,7 +12,6 @@ public class Employee {
 	private boolean isEmployeePM = false;
 	//private boolean vacant;
 	private ArrayList<PermanentActivity> permanentActivityList = new ArrayList<PermanentActivity>();
-	private int activityCounter;
 	private ArrayList<ActivityWorkingHours> activityWorkingHoursList = new ArrayList<>();
 	private ArrayList<Activity> activityList = new ArrayList<>();
 
@@ -71,15 +70,6 @@ public class Employee {
 	public ArrayList<Activity> getActivityList() {
 		return activityList;
 	} 
-
-	public void increaseActivityAmount() {
-		activityCounter++;
-	}
-
-	public int getActivityAmount() {
-//		System.out.println(activityCounter);
-		return activityCounter;
-	}
 	
 	public void registerWorkingHours(String activityName, double workingHours) throws OperationNotAllowedException {
 		ActivityWorkingHours awh = new ActivityWorkingHours(activityName, workingHours);

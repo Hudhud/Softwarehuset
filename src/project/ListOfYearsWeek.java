@@ -1,11 +1,9 @@
 package project;
 
 public class ListOfYearsWeek {
-	
-	private  int[] weeklist = new int [53];
-	private   int givenYear;
 
-//	ArrayList<Integer> weeklist
+	private int[] weeklist = new int[53];
+	private int givenYear;
 
 	public ListOfYearsWeek(int givenYear, int[] weeklist) {
 
@@ -13,19 +11,19 @@ public class ListOfYearsWeek {
 		this.weeklist = weeklist;
 	}
 
-	public  int[] getWeeklist() {
+	public int[] getWeeklist() {
 		return weeklist;
 	}
 
 	public void setWeeklist(int[] weeklist) {
-	      this.weeklist = weeklist;	      
+		this.weeklist = weeklist;
 	}
 
-	public  int getGivenYear() {
+	public int getGivenYear() {
 		return givenYear;
 	}
 
-	public  void setGivenYear(int givenYear) {
+	public void setGivenYear(int givenYear) {
 		this.givenYear = givenYear;
 	}
 

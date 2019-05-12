@@ -20,6 +20,5 @@ public class ProjectManager extends Employee{
 	public void assignEmpToActivity(Employee emp, Activity act) throws OperationNotAllowedException {
 	
 		emp.addActivitytoActivityList(act);
-	//	emp.increaseActivityAmount();
 	}
 }

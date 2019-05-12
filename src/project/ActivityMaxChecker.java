@@ -10,7 +10,7 @@ public class ActivityMaxChecker {
 
 	private static ArrayList<ListOfYearsWeek> yearsWeekList = new ArrayList<ListOfYearsWeek>();
 
-	public void sortAll( ArrayList<Activity> activityList) {
+	public void sortAll(ArrayList<Activity> activityList) {
 
 		for (int g = 0; g < activityList.size(); g++) {
 
@@ -114,7 +114,7 @@ public class ActivityMaxChecker {
 //			System.out.println("------------------------");
 		}
 
-		//printer();
+		// printer();
 
 	}
 
@@ -127,7 +127,7 @@ public class ActivityMaxChecker {
 		}
 	}
 
-	public static int numberOfActivitys(int[] array) {
+	public static int numberOfActivities(int[] array) {
 
 		int max = 0;
 
@@ -145,22 +145,14 @@ public class ActivityMaxChecker {
 	public boolean checker(ArrayList<Activity> activityList) {
 
 		boolean flag = false;
-		
+
 		sortAll(activityList);
-		//System.out.println(activityList.size());
-
-		for (Activity activity : activityList) {
-			System.out.println(activity.getName());
-		}
 		
-		System.out.println("SIZE "+ activityList.size());
-		if (activityList.size() == 2) {
-			System.out.println("OVERSKREDET");
-		}
-
+		int currentNrActivity;
 		for (ListOfYearsWeek loy : yearsWeekList) {
+			System.out.println(loy);
+			currentNrActivity = numberOfActivities(loy.getWeeklist());
 
-			int currentNrActivity = numberOfActivitys(loy.getWeeklist());
 			if (currentNrActivity > maxActPerWeek) {
 
 				flag = true;
@@ -168,6 +160,7 @@ public class ActivityMaxChecker {
 
 		}
 
+		yearsWeekList.clear();
 		return flag;
 
 	}

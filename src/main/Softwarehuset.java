@@ -257,11 +257,12 @@ public class Softwarehuset {
 		}
 
 		pm.assignEmpToActivity(employee, act);
-
-		if (activityMaxChecker.checker(employee.getActivityList()) == true) {
-//			employee.getActivityList().remove(act);
+				
+		if (activityMaxChecker.checker(employee.getActivityList())) {
+			employee.getActivityList().remove(act);
 			throw new OperationNotAllowedException("The employee is already assigned to 20 activities");
 		}
+
 
 //		for (PermanentActivity pActivity : employee.getPermanentActivityList()) {
 //			if ((act.getStartYear() >= pActivity.getStartYear() && act.getEndYear() <= pActivity.getEndYear())) {

@@ -121,7 +121,7 @@ public class EmployeeSteps {
 	public void thatAnEmployeeProvidesAStartWeekOfForThePermanentActivity(Integer startWeek, Integer startYear) {
 		this.startWeek = startWeek;
 		this.startYear = startYear;
-		employee = softwarehuset.getEmployeeList().get(0);
+//		employee = softwarehuset.getEmployeeList().get(0);
 		assertTrue(softwarehuset.getEmployeeList().contains(softwarehuset.searchForEmployeeById(employee.getEmployeeID())));
 	}
 	
@@ -192,7 +192,6 @@ public class EmployeeSteps {
 	@Given("that an employee provides wrong ID {string}")
 	public void thatAnEmployeeProvidesWrongID(String employeeID) throws Exception {
 		try {
-			employee = new Employee(employeeID);
 			softwarehuset.createAct("activity1", "2019000001", 1,
 					softwarehuset.getProjectManagerList().get(0).getEmployeeID(), 42, 45, 2019, 2019);
 			activityName = softwarehuset.getActivitiesFromActivityList("2019000001").get(0).getName();
