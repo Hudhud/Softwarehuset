@@ -24,7 +24,6 @@ public class ActivityMaxChecker {
 
 				if (yearsWeekList.isEmpty() == true) {
 
-//					System.out.println(act.getStartYear() + " added");
 					yearsWeekList.add(new ListOfYearsWeek(act.getStartYear(), weeksPyears));
 
 				} else {
@@ -33,12 +32,10 @@ public class ActivityMaxChecker {
 
 						if ((yearsWeekList.get(i).getGivenYear() == act.getStartYear())) {
 
-//							System.out.println(act.getStartYear() + " increased");
 							for (int j = 0; j <= 52; j++)
 								yearsWeekList.get(i).getWeeklist()[j] += weeksPyears[j];
 						} else {
 
-//							System.out.println(act.getStartYear() + " added");
 							yearsWeekList.add(new ListOfYearsWeek(act.getStartYear(), weeksPyears));
 
 						}
@@ -52,8 +49,6 @@ public class ActivityMaxChecker {
 
 				if (yearsWeekList.isEmpty() == true) {
 
-//					System.out.println(act.getEndYear() + " added");
-
 					yearsWeekList.add(new ListOfYearsWeek(act.getEndYear(), weeksPyears));
 
 				} else {
@@ -62,13 +57,11 @@ public class ActivityMaxChecker {
 
 						if (yearsWeekList.get(i).getGivenYear() == act.getEndYear()) {
 
-//							System.out.println(act.getEndYear() + " increased");
 							for (int j = 0; j <= 52; j++) {
 								yearsWeekList.get(i).getWeeklist()[j] += weeksPyears[j];
 							}
 						} else if (i == yearsWeekList.size() - 1) {
 
-//							System.out.println(act.getEndYear() + " added");
 							yearsWeekList.add(new ListOfYearsWeek(act.getEndYear(), weeksPyears));
 							break;
 
@@ -78,7 +71,7 @@ public class ActivityMaxChecker {
 				}
 			}
 
-			//
+			
 
 			if (act.getStartYear() == act.getEndYear()) {
 
@@ -88,7 +81,6 @@ public class ActivityMaxChecker {
 
 				if (yearsWeekList.isEmpty() == true) {
 
-//					System.out.println(act.getStartYear() + " added");
 					yearsWeekList.add(new ListOfYearsWeek(act.getStartYear(), weeksPyears));
 
 				} else {
@@ -96,13 +88,10 @@ public class ActivityMaxChecker {
 					for (int i = 0; i < yearsWeekList.size(); i++) {
 
 						if (yearsWeekList.get(i).getGivenYear() == act.getStartYear()) {
-
-							System.out.println(act.getStartYear() + " increased");
 							for (int j = 0; j <= 52; j++) {
 								yearsWeekList.get(i).getWeeklist()[j] += weeksPyears[j];
 							}
 						} else if (i == yearsWeekList.size() - 1) {
-//							System.out.println(act.getStartYear() + "added");
 							yearsWeekList.add(new ListOfYearsWeek(act.getStartYear(), weeksPyears));
 						}
 					}
@@ -111,21 +100,11 @@ public class ActivityMaxChecker {
 
 			}
 
-//			System.out.println("------------------------");
 		}
-
-		// printer();
 
 	}
 
-	public static void printer() {
-
-		for (ListOfYearsWeek loy : yearsWeekList) {
-			System.out.println(" \n" + " size: " + yearsWeekList.size());
-			System.out.println(loy.getGivenYear());
-			System.out.println(Arrays.toString(loy.getWeeklist()));
-		}
-	}
+	
 
 	public static int numberOfActivities(int[] array) {
 
@@ -150,7 +129,6 @@ public class ActivityMaxChecker {
 		
 		int currentNrActivity;
 		for (ListOfYearsWeek loy : yearsWeekList) {
-			System.out.println(loy);
 			currentNrActivity = numberOfActivities(loy.getWeeklist());
 
 			if (currentNrActivity > maxActPerWeek) {

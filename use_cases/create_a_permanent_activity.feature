@@ -9,14 +9,13 @@ Scenario: Employee wants to create a permanent activity
 	Then the system creates the permanent activity 
 	
 Scenario: Employee enters wrong ID 
-	Given that an employee provides wrong ID "abcd" 
+	Given that an employee provides a wrong ID "abcd" 
 	And provides a start week 42 of 2019 for the permanent activity 
 	And provides an end week 43 of 2019 for the permanent activity 
 	When the employee creates a permanent activity 
 	Then the system provides an error message "Invalid ID" 
 	
-Scenario:
-Employee provides a start week that occurs after the end week for the permanent activity 
+Scenario: Employee provides a start week that occurs after the end week for the permanent activity 
 	Given that an employee provides a start week 3 of 2019 for the permanent activity 
 	And provides an end week 1 of 2019 for the permanent activity 
 	When the employee creates a permanent activity 
@@ -46,8 +45,7 @@ Scenario: Employee wants to create a permanent activity in the past
 	When the employee creates a permanent activity 
 	Then the system provides an error message "Start week can't be in the past" 
 	
-Scenario:
-Employee wants to create a permanent activiy while being assigned to an activity 
+Scenario: Employee wants to create a permanent activiy while being assigned to an activity 
 	Given that an employee provides a start week 40 of 2019 for the permanent activity 
 	And provides an end week 42 of 2019 for the permanent activity 
 	When the employee creates a permanent activity, which overlaps with an activty he is assigned to

@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import ceo.CEO;
+import cucumber.api.java.ca.Cal;
 import employee.Employee;
 import employee.PermanentActivity;
 import employee.ProjectManager;
@@ -234,7 +235,14 @@ public class Softwarehuset {
 		}
 
 		checkTime(startYear, currentYear, endYear, startWeek, endWeek, currentWeek, weeksInYear);
+		
+		for (Activity act : employee.getActivityList()) {
 
+			availabilityCheck(startYear, endYear, startWeek, 
+					endWeek, act.getStartYear(), act.getEndYear(), 
+					act.getStartWeek(), act.getEndWeek(), "The deadline for this activity has passed. You cannot assign an employee to it" );
+		}
+		
 		employee.createPermanentActivity(startWeek, endWeek, startYear, endYear);
 
 	}
@@ -256,19 +264,26 @@ public class Softwarehuset {
 			}
 		}
 
+		if ((act.getEndYear() == getDate().get(Calendar.YEAR)
+				&& act.getEndWeek() < getDate().get(Calendar.WEEK_OF_YEAR))
+				|| act.getEndYear() < getDate().get(Calendar.YEAR)) {
+			throw new OperationNotAllowedException(
+					"The deadline for this activity has passed. You cannot assign an employee to it");
+		}
+
 		pm.assignEmpToActivity(employee, act);
-				
+
 		if (activityMaxChecker.checker(employee.getActivityList())) {
 			employee.getActivityList().remove(act);
 			throw new OperationNotAllowedException("The employee is already assigned to 20 activities");
 		}
 
+		for (PermanentActivity pActivity : employee.getPermanentActivityList()) {
 
-//		for (PermanentActivity pActivity : employee.getPermanentActivityList()) {
-//			if ((act.getStartYear() >= pActivity.getStartYear() && act.getEndYear() <= pActivity.getEndYear())) {
-//				throw new OperationNotAllowedException("Employee is not vacant");
-//			}
-//		}
+			availabilityCheck(act.getStartYear(), act.getEndYear(), act.getStartWeek(), 
+					act.getEndWeek(), pActivity.getStartYear(), pActivity.getEndYear(), 
+					pActivity.getStartWeek(), pActivity.getEndWeek(), "Employee is not vacant");
+		}
 	}
 
 	public void registerWorkingTime(String activityName, String workingHours, Employee employee)
@@ -341,6 +356,17 @@ public class Softwarehuset {
 		}
 		if ((startWeek > weeksInYear) || (endWeek > weeksInYear)) {
 			throw new OperationNotAllowedException("Invalid week of year");
+		}
+	}
+
+	public void availabilityCheck(int startYear1, int endYear1, int startWeek1, int endWeek1, int startYear2, int endYear2, int startWeek2, int endWeek2, String errorMessage) throws OperationNotAllowedException {
+				
+		if (startYear1 < endYear2 && endYear1 > endYear2) {
+			
+			throw new OperationNotAllowedException(errorMessage);
+		} else if ((startYear1 == endYear2 && endYear1 == endYear2)
+				&& (startWeek1 <= endWeek2 && endWeek1 >= startWeek2)) {
+			throw new OperationNotAllowedException(errorMessage);
 		}
 	}
 
