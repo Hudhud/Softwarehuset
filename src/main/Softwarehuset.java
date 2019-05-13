@@ -319,8 +319,4 @@ public class Softwarehuset {
 		}
 	}
 
-	public static void main(String[] args) {
-
-	}
-
 }
