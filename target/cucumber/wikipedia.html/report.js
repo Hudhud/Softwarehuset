@@ -2083,4 +2083,49 @@ formatter.match({
 formatter.result({
   "status": "passed"
 });
+formatter.scenario({
+  "name": "Choose an employee to be a project manager for non-existing project",
+  "description": "",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "name": "the CEO provides the project id \"abcd\" along with the project name \"TestProject1\"",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "CEOSteps.providesTheProjectIdAlongWithTheProjectName(String,String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee with the ID \"abcd\" exists",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "CEOSteps.theEmployeeWithTheIDExists(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the CEO chooses an employee with an ID \"abcd\" to be a project manager for the project with the ID \"2019000001\"",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "CEOSteps.theCEOChoosesAnEmployeeWithAnIDToBeAProjectManagerForTheProjectWithTheID(String,String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the system provides an error message \"This project does not exist\"",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
+});
+formatter.result({
+  "status": "passed"
+});
 });

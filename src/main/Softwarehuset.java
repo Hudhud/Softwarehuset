@@ -193,11 +193,16 @@ public class Softwarehuset {
 
 		int currentWeek = getDate().get(Calendar.WEEK_OF_YEAR);
 		int currentYear = getDate().get(Calendar.YEAR);
+
+		if (searchForProjectById(projectId) == null) {
+			throw new OperationNotAllowedException("This project does not exist");
+		}
+
 		int projectEndYear = searchForProjectById(projectId).getEndYear();
 		int projectEndWeek = searchForProjectById(projectId).getEndWeek();
 
 		if ((currentYear > projectEndYear) || (currentYear == projectEndYear && currentWeek > projectEndWeek)) {
-			throw new Exception("The deadline for this project has passed");
+			throw new OperationNotAllowedException("The deadline for this project has passed");
 		}
 
 		if (ceoId.equals("ceo") && searchForEmployeeById(employeeId) != null) {
@@ -232,9 +237,9 @@ public class Softwarehuset {
 		}
 
 		checkTime(startYear, currentYear, endYear, startWeek, endWeek, currentWeek, weeksInYear);
-		
+
 		employee.createPermanentActivity(startWeek, endWeek, startYear, endYear);
-		
+
 	}
 
 	public ArrayList<PermanentActivity> getEmployeePermanentActivities(Employee employee) {
