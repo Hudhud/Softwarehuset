@@ -184,6 +184,51 @@ formatter.match({
 formatter.result({
   "status": "passed"
 });
+formatter.scenario({
+  "name": "Assign employee, who is vacant, to an activity, which he is already assigned to",
+  "description": "",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "name": "that a project manager provides the employee with ID \"abcd\", who is vacant",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.thatAProjectManagerProvidesTheEmployeeWithIDWhoIsVacant(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "that provides the name of the activity",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.thatProvidesTheNameOfTheActivity()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the project manager wants to add an employee to an activity, which he is already assigned to",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "ProjectManagerSteps.theProjectManagerWantsToAddAnEmployeeToAnActivityWhichHeIsAlreadyAssignedTo()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the system provides an error message \"Employee is already assigned to this activity\"",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
+});
+formatter.result({
+  "status": "passed"
+});
 formatter.uri("use_cases\\create_a_new_activity.feature");
 formatter.feature({
   "name": "Create a new activity",
@@ -2131,6 +2176,51 @@ formatter.result({
 });
 formatter.step({
   "name": "the system provides an error message \"This operation can only be performed by the CEO\"",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Choose an employee to be a project manager for non-existing project",
+  "description": "",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "name": "the CEO provides the project id \"abcd\" along with the project name \"TestProject1\"",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "CEOSteps.providesTheProjectIdAlongWithTheProjectName(String,String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee with the ID \"abcd\" exists",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "CEOSteps.theEmployeeWithTheIDExists(String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the CEO chooses an employee with an ID \"abcd\" to be a project manager for the project with the ID \"2019000001\"",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "CEOSteps.theCEOChoosesAnEmployeeWithAnIDToBeAProjectManagerForTheProjectWithTheID(String,String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the system provides an error message \"This project does not exist\"",
   "keyword": "Then "
 });
 formatter.match({

@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import ceo.CEO;
@@ -196,6 +197,10 @@ public class Softwarehuset {
 
 		int currentWeek = getDate().get(Calendar.WEEK_OF_YEAR);
 		int currentYear = getDate().get(Calendar.YEAR);
+
+		if (searchForProjectById(projectId) == null) {
+			throw new OperationNotAllowedException("This project does not exist");
+		}
 		int projectEndYear = searchForProjectById(projectId).getEndYear();
 		int projectEndWeek = searchForProjectById(projectId).getEndWeek();
 
@@ -204,13 +209,17 @@ public class Softwarehuset {
 		}
 
 		if (ceoId.equals("ceo") && searchForEmployeeById(employeeId) != null) {
+			
+//			for (ProjectManager pm : getProjectManagerList()) {
+//				if (pm.getProjectList().contains(projectId)) {
+//					 throw new OperationNotAllowedException("This project is already assigned to a project manager");
+//				}
+//			}
 
 			CEO ceo = new CEO(ceoId);
 			ceo.choosePM(employeeId, projectId, this);
 			getProjectManagerList().add(new ProjectManager(employeeId));
-
-			// getEmployeeList().remove(getEmployeeList().indexOf(searchForEmployeeById(employeeId)));
-
+			getProjectManagerList().get(getProjectManagerList().indexOf(searchForPMById(employeeId))).addProjectToList(projectId);
 		} else if (!ceoId.equals("ceo")) {
 			throw new OperationNotAllowedException("This operation can only be performed by the CEO");
 		} else {
@@ -235,7 +244,7 @@ public class Softwarehuset {
 		}
 
 		checkTime(startYear, currentYear, endYear, startWeek, endWeek, currentWeek, weeksInYear);
-			
+
 		employee.createPermanentActivity(startWeek, endWeek, startYear, endYear);
 
 	}
@@ -253,7 +262,12 @@ public class Softwarehuset {
 				if (activityName.equals(activity.getName())) {
 					act = activity;
 				}
+			}
+		}
 
+		for (Activity activity : employee.getActivityList()) {
+			if (activity.getName().equals(activityName)) {
+				throw new OperationNotAllowedException("Employee is already assigned to this activity");
 			}
 		}
 
@@ -273,9 +287,9 @@ public class Softwarehuset {
 
 		for (PermanentActivity pActivity : employee.getPermanentActivityList()) {
 
-			availabilityCheck(act.getStartYear(), act.getEndYear(), act.getStartWeek(), 
-					act.getEndWeek(), pActivity.getStartYear(), pActivity.getEndYear(), 
-					pActivity.getStartWeek(), pActivity.getEndWeek(), "Employee is not vacant");
+			availabilityCheck(act.getStartYear(), act.getEndYear(), act.getStartWeek(), act.getEndWeek(),
+					pActivity.getStartYear(), pActivity.getEndYear(), pActivity.getStartWeek(), pActivity.getEndWeek(),
+					"Employee is not vacant");
 		}
 	}
 
@@ -352,19 +366,16 @@ public class Softwarehuset {
 		}
 	}
 
-	public void availabilityCheck(int startYear1, int endYear1, int startWeek1, int endWeek1, int startYear2, int endYear2, int startWeek2, int endWeek2, String errorMessage) throws OperationNotAllowedException {
-				
+	public void availabilityCheck(int startYear1, int endYear1, int startWeek1, int endWeek1, int startYear2,
+			int endYear2, int startWeek2, int endWeek2, String errorMessage) throws OperationNotAllowedException {
+
 		if (startYear1 < endYear2 && endYear1 > endYear2) {
-			
+
 			throw new OperationNotAllowedException(errorMessage);
 		} else if ((startYear1 == endYear2 && endYear1 == endYear2)
 				&& (startWeek1 <= endWeek2 && endWeek1 >= startWeek2)) {
 			throw new OperationNotAllowedException(errorMessage);
 		}
-	}
-
-	public static void main(String[] args) {
-
 	}
 
 }

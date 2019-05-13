@@ -137,6 +137,7 @@ public class ProjectManagerSteps {
 	@Given("that a project manager provides the employee with ID {string}, who is vacant")
 	public void thatAProjectManagerProvidesTheEmployeeWithIDWhoIsVacant(String string) {
 		employee = softwarehuset.getEmployeeList().get(1);
+		employee.getPermanentActivityList().clear();
 	}
 
 	@Given("that provides the name of the activity")
@@ -160,11 +161,23 @@ public class ProjectManagerSteps {
 	public void the_system_assigns_the_employee_to_the_activity() {
 		assertTrue(employee.getActivityList().size() > 0);
 	}
+	
+	@When("the project manager wants to add an employee to an activity, which he is already assigned to")
+	public void theProjectManagerWantsToAddAnEmployeeToAnActivityWhichHeIsAlreadyAssignedTo() {
+		this.pmId = chosenEmployee.getEmployeeID();
+		try {
+			softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(pmId), activityName);
+			softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(pmId), activityName);
+		} catch (OperationNotAllowedException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
 
 	@Given("that a project manager provides the employee with ID {string}, who is not vacant")
 	public void thatAProjectManagerProvidesTheEmployeeWithIDWhoIsNotVacant(String string)
 			throws OperationNotAllowedException {
 		employee = softwarehuset.getEmployeeList().get(1);
+		employee.getActivityList().clear();
 		employee.createPermanentActivity(40, 45, 2019, 2019);
 	}
 
@@ -211,7 +224,7 @@ public class ProjectManagerSteps {
 
 	@When("the project manager wants to add an employee to an activity with deadline exceeded")
 	public void theProjectManagerWantsToAddAnEmployeeToAnActivityWithDeadlineExceeded() throws Exception {
-				
+		employee.getActivityList().clear();
 		mockWeekHolder.advancedDateByWeeks(30);
 						
 		try {

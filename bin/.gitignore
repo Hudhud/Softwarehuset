@@ -1,4 +1,17 @@
+<<<<<<< HEAD
 /project/
+=======
+/whiteBox1.class
+/whiteBox3.class
+/whiteBox4.class
+>>>>>>> refs/remotes/origin/whiteBox
 /main/
 /employee/
+<<<<<<< HEAD
 /tests/
+=======
+/project/
+/tests/
+/whiteBox2.class
+/whiteBoxTests/
+>>>>>>> refs/remotes/origin/whiteBox

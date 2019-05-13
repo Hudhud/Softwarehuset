@@ -31,7 +31,7 @@ public class CEOSteps {
 
 	@Given("the CEO provides the project id {string} along with the project name {string}")
 	public void providesTheProjectIdAlongWithTheProjectName(String projectId, String projectName) throws Exception {
-		this.ceoId = "ceo"; 
+		this.ceoId = "ceo";
 		softwarehuset.addProjectToProjectList(projectName, employeeList.get(1), 50, 2019);
 		this.projectId = projectId;
 	}
@@ -71,20 +71,34 @@ public class CEOSteps {
 		employee = employeeList.get(0);
 		ceoId = id;
 	}
-	
+
 	@Given("the fake CEO provides the project id {string} along with the project name {string}")
-	public void theFakeCEOProvidesTheProjectIdAlongWithTheProjectName(String projectId, String projectName) throws Exception { 
+	public void theFakeCEOProvidesTheProjectIdAlongWithTheProjectName(String projectId, String projectName)
+			throws Exception {
 		softwarehuset.addProjectToProjectList(projectName, employeeList.get(1), 50, 2019);
 		this.projectId = projectId;
 	}
-	
+
 	@Given("the CEO provides the project id {string} along with the project name {string} whose deadline has passed")
-	public void theCEOProvidesTheProjectIdAlongWithTheProjectNameWhoseDeadlineHasPassed(String projectId, String projectName) throws Exception {
-		this.ceoId = "ceo"; 
+	public void theCEOProvidesTheProjectIdAlongWithTheProjectNameWhoseDeadlineHasPassed(String projectId,
+			String projectName) throws Exception {
+		this.ceoId = "ceo";
 		softwarehuset.addProjectToProjectList(projectName, employeeList.get(1), 30, 2019);
 		this.projectId = projectId;
 		mockWeekHolder.advancedDateByWeeks(30);
 	}
 
-	
+	@When("the CEO chooses an employee with an ID {string} to be a project manager for the project with the ID {string}, for a project which has a PM")
+	public void the_CEO_chooses_an_employee_with_an_ID_to_be_a_project_manager_for_the_project_with_the_ID_for_a_project_which_has_a_PM(
+			String string, String string2) throws Exception {
+		
+		softwarehuset.choosePM(empId, ceoId, this.projectId);
+
+		try {
+			softwarehuset.choosePM(empId, ceoId, this.projectId);
+		} catch (Exception e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
+	}
+
 }
