@@ -95,51 +95,6 @@ formatter.result({
   "status": "passed"
 });
 formatter.scenario({
-  "name": "Project manager wants to assign an employee, who is already assigned to 20 activities, to an activity",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that a project manager provides the employee with ID \"abcd\", who is vacant",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "ProjectManagerSteps.thatAProjectManagerProvidesTheEmployeeWithIDWhoIsVacant(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "that the employee with ID \"abcd\" is already assigned to 20 activities",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "ProjectManagerSteps.thatTheEmployeeWithIDIsAlreadyAssignedToActivities(String,Integer)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the project manager wants to assign the employee to another activity",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "ProjectManagerSteps.theProjectManagerWantsToAssignTheEmployeeToAnotherActivity()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system provides an error message \"The employee is already assigned to 20 activities\"",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.scenario({
   "name": "Employee without valid project manager ID wants to assign an employee to an activity",
   "description": "",
   "keyword": "Scenario"
@@ -1601,52 +1556,6 @@ formatter.match({
 });
 formatter.result({
   "status": "passed"
-});
-formatter.scenario({
-  "name": "Employee wants to create a permanent activiy while being assigned to an activity",
-  "description": "",
-  "keyword": "Scenario"
-});
-formatter.step({
-  "name": "that an employee provides a start week 40 of 2019 for the permanent activity",
-  "keyword": "Given "
-});
-formatter.match({
-  "location": "EmployeeSteps.thatAnEmployeeProvidesAStartWeekOfForThePermanentActivity(Integer,Integer)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "provides an end week 42 of 2019 for the permanent activity",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "EmployeeSteps.provides_an_end_week_of_for_the_permanent_activity(Integer,Integer)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the employee creates a permanent activity, which overlaps with an activty he is assigned to",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "EmployeeSteps.theEmployeeCreatesAPermanentActivityWhichOverlapsWithAnActivtyHeIsAssignedTo()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "the system provides an error message \"You are already assigned to an activity in the given period\"",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
-});
-formatter.result({
-  "error_message": "org.junit.ComparisonFailure: expected:\u003c[You are already assigned to an activity in the given period]\u003e but was:\u003c[The deadline for this activity has passed. You cannot assign an employee to it]\u003e\r\n\tat org.junit.Assert.assertEquals(Assert.java:115)\r\n\tat org.junit.Assert.assertEquals(Assert.java:144)\r\n\tat tests.EmployeeSteps.theSystemProvidesAnErrorMessage(EmployeeSteps.java:85)\r\n\tat ✽.the system provides an error message \"You are already assigned to an activity in the given period\"(use_cases\\create_a_permanent_activity.feature:52)\r\n",
-  "status": "failed"
 });
 formatter.uri("use_cases\\register_working_time.feature");
 formatter.feature({

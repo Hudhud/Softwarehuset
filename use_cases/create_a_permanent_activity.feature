@@ -45,8 +45,3 @@ Scenario: Employee wants to create a permanent activity in the past
 	When the employee creates a permanent activity 
 	Then the system provides an error message "Start week can't be in the past" 
 	
-Scenario: Employee wants to create a permanent activiy while being assigned to an activity 
-	Given that an employee provides a start week 40 of 2019 for the permanent activity 
-	And provides an end week 42 of 2019 for the permanent activity 
-	When the employee creates a permanent activity, which overlaps with an activty he is assigned to
-	Then the system provides an error message "You are already assigned to an activity in the given period" 

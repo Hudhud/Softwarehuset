@@ -235,14 +235,7 @@ public class Softwarehuset {
 		}
 
 		checkTime(startYear, currentYear, endYear, startWeek, endWeek, currentWeek, weeksInYear);
-		
-		for (Activity act : employee.getActivityList()) {
-
-			availabilityCheck(startYear, endYear, startWeek, 
-					endWeek, act.getStartYear(), act.getEndYear(), 
-					act.getStartWeek(), act.getEndWeek(), "The deadline for this activity has passed. You cannot assign an employee to it" );
-		}
-		
+			
 		employee.createPermanentActivity(startWeek, endWeek, startYear, endYear);
 
 	}

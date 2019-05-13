@@ -15,16 +15,10 @@ public class ListOfYearsWeek {
 		return weeklist;
 	}
 
-	public void setWeeklist(int[] weeklist) {
-		this.weeklist = weeklist;
-	}
+
 
 	public int getGivenYear() {
 		return givenYear;
-	}
-
-	public void setGivenYear(int givenYear) {
-		this.givenYear = givenYear;
 	}
 
 }

@@ -177,10 +177,14 @@ public class ProjectManagerSteps {
 
 		employee = softwarehuset.getEmployeeList().get(1);
 
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 19; i++) {
 			softwarehuset.createAct("tester" + i, projectId, 30, pmId, 35, 39, 2019, 2019);
 			softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(pmId), "tester" + i);
 		}
+		
+		softwarehuset.createAct("tester19", projectId, 30, pmId, 35, 39, 2019, 2020);
+		softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(pmId), "tester20");
+
 
 		assertTrue(employee.getActivityList().size() == activitiesAmount);
 	}
