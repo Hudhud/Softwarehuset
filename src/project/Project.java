@@ -1,5 +1,7 @@
 package project;
 
+// Amal
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -81,25 +83,6 @@ public class Project {
 		return a;
 	}
 
-//	private String generateActivityID(String projectID) {
-//
-//		int id;
-//		String lastId;
-//		String idStringFormat = null;
-//
-//		if (getActivities().size() == 0) {
-//			id = 1;
-//			idStringFormat = String.format("%02d", id);
-//		} else {
-//			lastId = getActivities().get(getActivities().size() - 1).getId();
-//			int idIntFormat = Integer.parseInt(lastId) + 1;
-//			idStringFormat = String.format("%02d", idIntFormat);
-//		}
-//		String activityID = projectID + idStringFormat;
-//
-//		return activityID;
-//	}
-
 	public void addActivityToActivityList(String activityName, int expectedWorkload, String projectID, int startWeek,
 			int endWeek, int startYear, int endYear) throws Exception {
 		Activity a = createActivity(activityName, expectedWorkload, projectID, startWeek, endWeek, startYear, endYear);
@@ -110,38 +93,14 @@ public class Project {
 		return activityList;
 	}
 
-//	public Activity searchForActivity(String activityName) {
-//		Activity a = null;
-//		for (Activity activity : getActivities()) {
-//			if (activity.getName().equals(activityName)) {
-//				a = activity;
-//			}
-//			
-//		}
-//		return a;		
-//	}
-
 	public void setPM(String pmId) {
 		this.pmId = pmId;
 	}
 
-//	public void setId(String id) {
-//		this.id = id;
-//	}
-
-//	public void setStartWeek(int startWeek) {
-//		this.startWeek = startWeek;
-//	}
-//	
 	public int getEndWeek() {
 		return endWeek;
 	}
 
-//	
-//	public void setStartYear(int startYear) {
-//		this.startYear = startYear;
-//	}
-//	
 	public int getEndYear() {
 		return endYear;
 	}

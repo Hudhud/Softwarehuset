@@ -1,12 +1,12 @@
 package main;
 
+// Tala
+
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import ceo.CEO;
-import cucumber.api.java.ca.Cal;
 import employee.Employee;
 import employee.PermanentActivity;
 import employee.ProjectManager;
@@ -210,16 +210,9 @@ public class Softwarehuset {
 
 		if (ceoId.equals("ceo") && searchForEmployeeById(employeeId) != null) {
 			
-//			for (ProjectManager pm : getProjectManagerList()) {
-//				if (pm.getProjectList().contains(projectId)) {
-//					 throw new OperationNotAllowedException("This project is already assigned to a project manager");
-//				}
-//			}
-
 			CEO ceo = new CEO(ceoId);
 			ceo.choosePM(employeeId, projectId, this);
 			getProjectManagerList().add(new ProjectManager(employeeId));
-			getProjectManagerList().get(getProjectManagerList().indexOf(searchForPMById(employeeId))).addProjectToList(projectId);
 		} else if (!ceoId.equals("ceo")) {
 			throw new OperationNotAllowedException("This operation can only be performed by the CEO");
 		} else {

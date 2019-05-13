@@ -6,6 +6,10 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import main.Softwarehuset;
 
+// Hadi
+
+// Inspired by Hubert
+
 public class MockWeekHolder {
 
 	DateServer dateServer = mock(DateServer.class);

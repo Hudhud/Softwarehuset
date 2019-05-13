@@ -1,18 +1,15 @@
 Feature: Choose an employee to be a project manager
 
+# Author: Amal
+
   #Description: The CEO chooses an employee to be a project manager
   #Actors: CEO
+  
   Scenario: Choose an employee to be a project manager
     Given the CEO provides the project id "2019000001" along with the project name "TestProject1"
     And the employee with the ID "abcd" exists
     When the CEO chooses an employee with an ID "abcd" to be a project manager for the project with the ID "2019000001"
     Then the system makes the employee a project manager
-
-  #Scenario: Choose an employee to be a project manager for a project, which has a project manager
-    #Given the CEO provides the project id "2019000001" along with the project name "TestProject1"
-    #And the employee with the ID "abcd" exists
-    #When the CEO chooses an employee to be a project manager for occupied project
-    #Then the system provides an error message "This project is already assigned to a project manager"
 
   Scenario: Choose an employee to be a project manager when the employee does not exist
     Given the CEO provides the project id "2019000001" along with the project name "TestProject1"

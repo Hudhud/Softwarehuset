@@ -1,7 +1,10 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
+// Hadi
+
 import static org.junit.Assert.assertTrue;
+
+import java.util.Calendar;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -10,7 +13,7 @@ import employee.Employee;
 import exceptions.ErrorMessageHolder;
 import exceptions.OperationNotAllowedException;
 import main.Softwarehuset;
-import project.Activity;
+import time.DateServer;
 import time.MockWeekHolder;
 
 public class ProjectManagerSteps {
@@ -161,7 +164,7 @@ public class ProjectManagerSteps {
 	public void the_system_assigns_the_employee_to_the_activity() {
 		assertTrue(employee.getActivityList().size() > 0);
 	}
-	
+
 	@When("the project manager wants to add an employee to an activity, which he is already assigned to")
 	public void theProjectManagerWantsToAddAnEmployeeToAnActivityWhichHeIsAlreadyAssignedTo() {
 		this.pmId = chosenEmployee.getEmployeeID();
@@ -186,18 +189,20 @@ public class ProjectManagerSteps {
 			throws Exception {
 		this.projectId = softwarehuset.getProjectsFromProjectList().get(0).getId();
 		this.pmId = chosenEmployee.getEmployeeID();
-		employee.getActivityList().clear();
-
 		employee = softwarehuset.getEmployeeList().get(1);
 
-		for (int i = 0; i < 19; i++) {
+		employee.getActivityList().clear();
+
+		softwarehuset.createAct("tester32", projectId, 30, pmId, 35, 39, 2019, 2020);
+		softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(pmId), "tester32");
+
+		for (int i = 0; i < 18; i++) {
 			softwarehuset.createAct("tester" + i, projectId, 30, pmId, 35, 39, 2019, 2019);
 			softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(pmId), "tester" + i);
 		}
-		
-		softwarehuset.createAct("tester19", projectId, 30, pmId, 35, 39, 2019, 2020);
-		softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(pmId), "tester20");
 
+		softwarehuset.createAct("tester40", projectId, 30, pmId, 35, 39, 2019, 2020);
+		softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(pmId), "tester40");
 
 		assertTrue(employee.getActivityList().size() == activitiesAmount);
 	}
@@ -225,8 +230,13 @@ public class ProjectManagerSteps {
 	@When("the project manager wants to add an employee to an activity with deadline exceeded")
 	public void theProjectManagerWantsToAddAnEmployeeToAnActivityWithDeadlineExceeded() throws Exception {
 		employee.getActivityList().clear();
+
+		int currentWeek = new DateServer().getDate().get(Calendar.WEEK_OF_YEAR);
+
 		mockWeekHolder.advancedDateByWeeks(30);
-						
+
+		assertTrue(currentWeek != softwarehuset.getDate().get(Calendar.WEEK_OF_YEAR));
+
 		try {
 			softwarehuset.assignEmployeeToActivity(employee,
 					softwarehuset.searchForPMById(chosenEmployee.getEmployeeID()), activityName);

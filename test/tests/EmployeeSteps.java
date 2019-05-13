@@ -1,5 +1,7 @@
 package tests;
 
+// Amjed
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -185,7 +187,7 @@ public class EmployeeSteps {
 		}
 	}
 
-	// Register working time
+	// Register working time feature
 
 	@Given("that an employee provides his ID {string}")
 	public void thatAnEmployeeProvidesHisID(String id) throws Exception {

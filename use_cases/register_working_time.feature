@@ -1,5 +1,7 @@
 Feature: Register working time
 
+# Author: Tala
+
   #    Description: An employee registers his/her working time
   #    Actors: Employee
   Scenario: Register working time for an activity

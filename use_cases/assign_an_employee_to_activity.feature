@@ -1,6 +1,8 @@
 Feature: Assign an employee to activity
 
-  # Description: The project manager assigns an employee to activity
+# Author: Tala
+
+   # Description: The project manager assigns an employee to activity
   # Actors: Project manager
   Scenario: Assign employee, who is vacant, to an activity
     Given that a project manager provides the employee with ID "abcd", who is vacant
@@ -13,6 +15,12 @@ Feature: Assign an employee to activity
     And that provides the name of the activity
     When the project manager wants to add an employee to an activity
     Then the system provides an error message "Employee is not vacant"
+
+Scenario: Project manager wants to assign an employee, who is already assigned to 20 activities, to an activity
+  Given that the employee with ID "abcd" is already assigned to 20 activities
+  When the project manager wants to assign the employee to another activity
+  Then the system provides an error message "The employee is already assigned to 20 activities"
+  
 
   Scenario: Employee without valid project manager ID wants to assign an employee to an activity
     Given that a project manager provides the employee with ID "abcd", who is vacant

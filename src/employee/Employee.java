@@ -1,5 +1,7 @@
 package employee;
 
+// Hadi
+
 import java.util.ArrayList;
 import exceptions.OperationNotAllowedException;
 import main.Softwarehuset;
@@ -10,7 +12,6 @@ public class Employee {
 
 	private String employeeID;
 	private boolean isEmployeePM = false;
-	//private boolean vacant;
 	private ArrayList<PermanentActivity> permanentActivityList = new ArrayList<PermanentActivity>();
 	private ArrayList<ActivityWorkingHours> activityWorkingHoursList = new ArrayList<>();
 	private ArrayList<Activity> activityList = new ArrayList<>();
@@ -39,14 +40,6 @@ public class Employee {
 	public void setIsEmployeePM(boolean isEmployeePM) {
 		this.isEmployeePM = isEmployeePM;
 	}
-
-//	public void setIsEmployeeVacant(boolean vacant) {
-//		this.vacant = vacant;
-//	}
-//
-//	public boolean isEmployeeVacant() {
-//		return vacant;
-//	}
 
 	public Project createProj(String name, String id, int endWeek, int endYear, Softwarehuset softwarehuset) throws Exception {
 		Project p = new Project(name, id, endWeek, endYear, softwarehuset);

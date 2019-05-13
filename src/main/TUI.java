@@ -1,11 +1,11 @@
 package main;
 
+// Amal
+
 import java.util.Scanner;
 
 import employee.Employee;
-import employee.ProjectManager;
 import exceptions.OperationNotAllowedException;
-import main.Softwarehuset;
 import time.MockWeekHolder;
 
 public class TUI {
@@ -38,7 +38,7 @@ public class TUI {
 		System.out.println();
 		System.out.println("1 Create a new project" + "\n" + "2 Choose employee to be a project manager" + "\n"
 				+ "3 Create a new activity" + "\n" + "4 Create a permanent activity" + "\n"
-				+ "5 Assign an employee to an activity" + "\n" + "6 Register wokring time" + "\n");
+				+ "5 Assign an employee to an activity" + "\n" + "6 Register working time" + "\n");
 		scanner = new Scanner(System.in);
 		System.out.println("Choose the number of the wanted function from the menu");
 

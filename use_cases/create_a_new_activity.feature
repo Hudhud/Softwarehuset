@@ -1,5 +1,6 @@
 Feature: Create a new activity 
-#
+# Author: Amal
+
 #Description: The project manager creates an activity for a project
 #Actors: Project manager
 

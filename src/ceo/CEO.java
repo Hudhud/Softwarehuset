@@ -1,13 +1,13 @@
 package ceo;
 
+// Amal
+
 import employee.Employee;
 import main.Softwarehuset;
 
 public class CEO {
-	//private String id = "ceo";
 
 	public CEO(String id) {
-		//this.id = id;
 	}
 	
 	public void choosePM(String employeeId, String projectId,Softwarehuset softwarehuset)  {	

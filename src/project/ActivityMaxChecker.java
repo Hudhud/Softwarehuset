@@ -1,5 +1,7 @@
 package project;
 
+// Hadi
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -16,17 +18,37 @@ public class ActivityMaxChecker {
 
 			Activity act = activityList.get(g);
 
-			if (act.getStartYear() != act.getEndYear()) {
+			if (yearsWeekList.isEmpty() == true) {
 
-				weeksPyears = new int[53];
-				for (int i = act.getStartWeek(); i <= 52; ++i)
-					weeksPyears[i] += 1;
+				if (act.getStartYear() != act.getEndYear()) {
 
-				if (yearsWeekList.isEmpty() == true) {
-
+					weeksPyears = new int[53];
+					for (int i = act.getStartWeek(); i <= 52; ++i) {
+						weeksPyears[i] += 1;
+					}
 					yearsWeekList.add(new ListOfYearsWeek(act.getStartYear(), weeksPyears));
 
+					weeksPyears = new int[53];
+
+					for (int i = 1; i <= act.getEndWeek(); ++i) {
+						weeksPyears[i] += 1;
+					}
+					yearsWeekList.add(new ListOfYearsWeek(act.getEndWeek(), weeksPyears));
 				} else {
+					weeksPyears = new int[53];
+					for (int i = act.getStartWeek(); i <= act.getEndWeek(); ++i) {
+						weeksPyears[i] += 1;
+					}
+					yearsWeekList.add(new ListOfYearsWeek(act.getEndWeek(), weeksPyears));
+				}
+
+			} else {
+
+				if (act.getStartYear() != act.getEndYear()) {
+
+					weeksPyears = new int[53];
+					for (int i = act.getStartWeek(); i <= 52; ++i)
+						weeksPyears[i] += 1;
 
 					for (int i = 0; i < yearsWeekList.size(); i++) {
 
@@ -39,28 +61,17 @@ public class ActivityMaxChecker {
 							yearsWeekList.add(new ListOfYearsWeek(act.getStartYear(), weeksPyears));
 
 						}
+
 					}
-				}
 
-				weeksPyears = new int[53];
+					weeksPyears = new int[53];
 
-				for (int i = 1; i <= act.getEndWeek(); ++i)
-					weeksPyears[i] += 1;
-
-				if (yearsWeekList.isEmpty() == true) {
-
-					yearsWeekList.add(new ListOfYearsWeek(act.getEndYear(), weeksPyears));
-
-				} else {
+					for (int i = 1; i <= act.getEndWeek(); ++i)
+						weeksPyears[i] += 1;
 
 					for (int i = 0; i < yearsWeekList.size(); i++) {
 
-						if (yearsWeekList.get(i).getGivenYear() == act.getEndYear()) {
-
-							for (int j = 0; j <= 52; j++) {
-								yearsWeekList.get(i).getWeeklist()[j] += weeksPyears[j];
-							}
-						} else if (i == yearsWeekList.size() - 1) {
+						if (i == yearsWeekList.size() - 1) {
 
 							yearsWeekList.add(new ListOfYearsWeek(act.getEndYear(), weeksPyears));
 							break;
@@ -69,21 +80,12 @@ public class ActivityMaxChecker {
 
 					}
 				}
-			}
 
-			
+				if (act.getStartYear() == act.getEndYear()) {
 
-			if (act.getStartYear() == act.getEndYear()) {
-
-				weeksPyears = new int[53];
-				for (int i = act.getStartWeek(); i <= act.getEndWeek(); ++i)
-					weeksPyears[i] += 1;
-
-				if (yearsWeekList.isEmpty() == true) {
-
-					yearsWeekList.add(new ListOfYearsWeek(act.getStartYear(), weeksPyears));
-
-				} else {
+					weeksPyears = new int[53];
+					for (int i = act.getStartWeek(); i <= act.getEndWeek(); ++i)
+						weeksPyears[i] += 1;
 
 					for (int i = 0; i < yearsWeekList.size(); i++) {
 
@@ -99,12 +101,11 @@ public class ActivityMaxChecker {
 				}
 
 			}
+//			}
 
 		}
 
 	}
-
-	
 
 	public static int numberOfActivities(int[] array) {
 
@@ -126,7 +127,7 @@ public class ActivityMaxChecker {
 		boolean flag = false;
 
 		sortAll(activityList);
-		
+
 		int currentNrActivity;
 		for (ListOfYearsWeek loy : yearsWeekList) {
 			currentNrActivity = numberOfActivities(loy.getWeeklist());
@@ -142,5 +143,4 @@ public class ActivityMaxChecker {
 		return flag;
 
 	}
-
 }

@@ -1,4 +1,6 @@
 Feature: Create a new project 
+# Author: Amjed
+
 # Description: the project manager or employee creates a new project
 # Actors: Employee or project manager
 

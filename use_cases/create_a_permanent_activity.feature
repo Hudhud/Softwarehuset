@@ -1,4 +1,7 @@
 Feature: Create permanent activity 
+
+# Author: Hadi
+
 # Description: The employee creates a permanent activity
 # Actors: Employee
 
