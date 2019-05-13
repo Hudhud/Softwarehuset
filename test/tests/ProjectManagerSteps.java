@@ -1,5 +1,6 @@
 package tests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import cucumber.api.java.en.Given;
@@ -9,6 +10,7 @@ import employee.Employee;
 import exceptions.ErrorMessageHolder;
 import exceptions.OperationNotAllowedException;
 import main.Softwarehuset;
+import project.Activity;
 import time.MockWeekHolder;
 
 public class ProjectManagerSteps {
@@ -16,7 +18,7 @@ public class ProjectManagerSteps {
 	private ErrorMessageHolder errorMessageHolder;
 	private String activityName, projectId, pmId;
 	private int startYear, startWeek, endYear, endWeek, projectStartWeekBefore, projectStartYearBefore;
-	private Employee employee, employee2;
+	private Employee chosenEmployee, employee;
 	private int expectedWorkload;
 	private MockWeekHolder mockWeekHolder;
 
@@ -25,10 +27,9 @@ public class ProjectManagerSteps {
 		this.softwarehuset = softwarehuset;
 		this.errorMessageHolder = errorMessageHolder;
 		softwarehuset.generateEmployees();
-		employee = softwarehuset.getEmployeeList().get(0);
-		employee2 = softwarehuset.getEmployeeList().get(1);
-		softwarehuset.addProjectToProjectList("TestProject2", employee, 50, 2019);
-		softwarehuset.choosePM(employee.getEmployeeID(), "ceo",
+		chosenEmployee = softwarehuset.getEmployeeList().get(0);
+		softwarehuset.addProjectToProjectList("TestProject5", chosenEmployee, 50, 2019);
+		softwarehuset.choosePM(chosenEmployee.getEmployeeID(), "ceo",
 				softwarehuset.getProjectsFromProjectList().get(0).getId());
 		this.mockWeekHolder = mockWeekHolder;
 	}
@@ -37,7 +38,7 @@ public class ProjectManagerSteps {
 
 	@Given("that the project manager provides the ID {string} for a project")
 	public void thatTheProjectManagerProvidesTheIDForAProject(String string) {
-		this.pmId = employee.getEmployeeID();
+		this.pmId = chosenEmployee.getEmployeeID();
 		projectId = softwarehuset.getProjectsFromProjectList().get(0).getId();
 		projectStartWeekBefore = softwarehuset.searchForProjectById(projectId).getStartWeek();
 		projectStartYearBefore = softwarehuset.searchForProjectById(projectId).getStartYear();
@@ -105,7 +106,7 @@ public class ProjectManagerSteps {
 
 	@Given("that the project manager provides the ID {string} for a project, which has not been created")
 	public void thatTheProjectManagerProvidesTheIDForAProjectWhichHasNotBeenCreated(String projectId) {
-		this.pmId = employee.getEmployeeID();
+		this.pmId = chosenEmployee.getEmployeeID();
 		this.projectId = projectId;
 	}
 
@@ -133,105 +134,91 @@ public class ProjectManagerSteps {
 
 	// from assign_an_employee_to_activity.feature
 
-	@Given("that the employee with ID {string} is vacant")
-	public void that_the_employee_with_ID_is_vacant(String string) {
-		// the employee is already initialized
+	@Given("that a project manager provides the employee with ID {string}, who is vacant")
+	public void thatAProjectManagerProvidesTheEmployeeWithIDWhoIsVacant(String string) {
+		employee = softwarehuset.getEmployeeList().get(1);
+	}
+
+	@Given("that provides the name of the activity")
+	public void thatProvidesTheNameOfTheActivity() throws Exception {
+		String projectId = softwarehuset.getProjectsFromProjectList().get(0).getId();
+		softwarehuset.createAct("test1", projectId, 1, chosenEmployee.getEmployeeID(), 35, 43, 2019, 2019);
+		this.activityName = "test1";
 	}
 
 	@When("the project manager wants to add an employee to an activity")
 	public void the_project_manager_wants_to_add_an_employee_to_an_activity() throws OperationNotAllowedException {
-		this.pmId = employee.getEmployeeID();
-		softwarehuset.assignEmployeeToActivity(employee2, softwarehuset.searchForPMById(pmId));
+		this.pmId = chosenEmployee.getEmployeeID();
+		try {
+			softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(pmId), activityName);
+		} catch (OperationNotAllowedException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
 	}
 
 	@Then("the system assigns the employee to the activity")
 	public void the_system_assigns_the_employee_to_the_activity() {
-		assertTrue(softwarehuset.searchForEmployeeById(employee2.getEmployeeID()).getActivityAmount() > 0);
+		assertTrue(employee.getActivityList().size() > 0);
+	}
+
+	@Given("that a project manager provides the employee with ID {string}, who is not vacant")
+	public void thatAProjectManagerProvidesTheEmployeeWithIDWhoIsNotVacant(String string)
+			throws OperationNotAllowedException {
+		employee = softwarehuset.getEmployeeList().get(1);
+		employee.createPermanentActivity(40, 45, 2019, 2019);
 	}
 
 	@Given("that the employee with ID {string} is already assigned to {int} activities")
 	public void thatTheEmployeeWithIDIsAlreadyAssignedToActivities(String string, Integer activitiesAmount)
-			throws OperationNotAllowedException {
-		this.pmId = employee.getEmployeeID();
-		for (int i = 0; i < 20; i++) {
-			softwarehuset.assignEmployeeToActivity(employee2, softwarehuset.searchForPMById(pmId));
-		}
+			throws Exception {
+		this.projectId = softwarehuset.getProjectsFromProjectList().get(0).getId();
+		this.pmId = chosenEmployee.getEmployeeID();
+		employee.getActivityList().clear();
 
+		employee = softwarehuset.getEmployeeList().get(1);
+
+		for (int i = 0; i < 19; i++) {
+			softwarehuset.createAct("tester" + i, projectId, 30, pmId, 35, 39, 2019, 2019);
+			softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(pmId), "tester" + i);
+		}
+		
+		softwarehuset.createAct("tester19", projectId, 30, pmId, 35, 39, 2019, 2020);
+		softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(pmId), "tester20");
+
+
+		assertTrue(employee.getActivityList().size() == activitiesAmount);
 	}
 
 	@When("the project manager wants to assign the employee to another activity")
-	public void theProjectManagerWantsToAssignTheEmployeeToAnotherActivity() throws OperationNotAllowedException {
+	public void theProjectManagerWantsToAssignTheEmployeeToAnotherActivity() throws Exception {
+		softwarehuset.createAct("testerss", projectId, 30, pmId, 35, 39, 2019, 2019);
 		try {
-			softwarehuset.assignEmployeeToActivity(employee2, softwarehuset.searchForPMById(pmId));
+			softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(pmId), "testerss");
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 	}
 
 	@When("an employee without a project manager ID wants to assign the employee to another activity")
-	public void anEmployeeWithoutAProjectManagerIDWantsToAssignTheEmployeeToAnotherActivity()
-			throws OperationNotAllowedException {
+	public void anEmployeeWithoutAProjectManagerIDWantsToAssignTheEmployeeToAnotherActivity() throws Exception {
 		try {
-			softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(employee2.getEmployeeID()));
+			softwarehuset.assignEmployeeToActivity(employee, softwarehuset.searchForPMById(employee.getEmployeeID()),
+					activityName);
 		} catch (OperationNotAllowedException e) {
 			errorMessageHolder.setErrorMessage(e.getMessage());
 		}
 	}
-	
+
 	@When("the project manager wants to add an employee to an activity with deadline exceeded")
-	public void theProjectManagerWantsToAddAnEmployeeToAnActivityWithDeadlineExceeded() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new cucumber.api.PendingException();
+	public void theProjectManagerWantsToAddAnEmployeeToAnActivityWithDeadlineExceeded() throws Exception {
+				
+		mockWeekHolder.advancedDateByWeeks(30);
+						
+		try {
+			softwarehuset.assignEmployeeToActivity(employee,
+					softwarehuset.searchForPMById(chosenEmployee.getEmployeeID()), activityName);
+		} catch (OperationNotAllowedException e) {
+			errorMessageHolder.setErrorMessage(e.getMessage());
+		}
 	}
-
-	// from control_porject_time.feature
-
-//	@Given("that the project manager provides expected start time week {int} of {int} for an activity")
-//	public void thatTheProjectManagerProvidesExpectedStartTimeWeekOfForAnActivity(Integer int1, Integer int2) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-//
-//	@Given("that the project manager provides expected end time week {int} of {int} for an activity")
-//	public void thatTheProjectManagerProvidesExpectedEndTimeWeekOfForAnActivity(Integer int1, Integer int2) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-//
-//	@When("the project manager sets the start week and end week for an activity")
-//	public void theProjectManagerSetsTheStartWeekAndEndWeekForAnActivity() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-//
-//	@Then("the system assigns the start week and end week to that activity")
-//	public void theSystemAssignsTheStartWeekAndEndWeekToThatActivity() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-//
-//	@Given("that a project manager provides wrong ID {string}")
-//	public void thatAProjectManagerProvidesWrongID(String string) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-//
-//	@When("the project manager sets the start week and end week for the activity")
-//	public void theProjectManagerSetsTheStartWeekAndEndWeekForTheActivity() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-//
-//	@Given("that a project manager provides a start date week {int} of {int} for the activity")
-//	public void thatAProjectManagerProvidesAStartDateWeekOfForTheActivity(Integer int1, Integer int2) {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-//
-//	@When("the project manager creates a activity")
-//	public void theProjectManagerCreatesAActivity() {
-//	    // Write code here that turns the phrase above into concrete actions
-//	    throw new cucumber.api.PendingException();
-//	}
-
 }

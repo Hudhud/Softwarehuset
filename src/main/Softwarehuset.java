@@ -5,11 +5,13 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import ceo.CEO;
+import cucumber.api.java.ca.Cal;
 import employee.Employee;
 import employee.PermanentActivity;
 import employee.ProjectManager;
 import exceptions.OperationNotAllowedException;
 import project.Activity;
+import project.ActivityMaxChecker;
 import project.Project;
 import time.DateServer;
 
@@ -18,6 +20,7 @@ public class Softwarehuset {
 	private DateServer dateServer;
 	private static Employee employee;
 	private static ProjectManager projectManager;
+	private ActivityMaxChecker activityMaxChecker = new ActivityMaxChecker();
 	private static ArrayList<Employee> employeeList = new ArrayList<Employee>();
 	private static ArrayList<ProjectManager> projectManagerList = new ArrayList<ProjectManager>();
 
@@ -232,18 +235,48 @@ public class Softwarehuset {
 		}
 
 		checkTime(startYear, currentYear, endYear, startWeek, endWeek, currentWeek, weeksInYear);
-		
+			
 		employee.createPermanentActivity(startWeek, endWeek, startYear, endYear);
-		
+
 	}
 
 	public ArrayList<PermanentActivity> getEmployeePermanentActivities(Employee employee) {
 		return employee.getPermanentActivityList();
 	}
 
-	public void assignEmployeeToActivity(Employee employee, ProjectManager pm) throws OperationNotAllowedException {
+	public void assignEmployeeToActivity(Employee employee, ProjectManager pm, String activityName)
+			throws OperationNotAllowedException {
 
-		pm.assignEmpToActivity(employee);
+		Activity act = null;
+		for (Project project : getProjectsFromProjectList()) {
+			for (Activity activity : project.getActivities()) {
+				if (activityName.equals(activity.getName())) {
+					act = activity;
+				}
+
+			}
+		}
+
+		if ((act.getEndYear() == getDate().get(Calendar.YEAR)
+				&& act.getEndWeek() < getDate().get(Calendar.WEEK_OF_YEAR))
+				|| act.getEndYear() < getDate().get(Calendar.YEAR)) {
+			throw new OperationNotAllowedException(
+					"The deadline for this activity has passed. You cannot assign an employee to it");
+		}
+
+		pm.assignEmpToActivity(employee, act);
+
+		if (activityMaxChecker.checker(employee.getActivityList())) {
+			employee.getActivityList().remove(act);
+			throw new OperationNotAllowedException("The employee is already assigned to 20 activities");
+		}
+
+		for (PermanentActivity pActivity : employee.getPermanentActivityList()) {
+
+			availabilityCheck(act.getStartYear(), act.getEndYear(), act.getStartWeek(), 
+					act.getEndWeek(), pActivity.getStartYear(), pActivity.getEndYear(), 
+					pActivity.getStartWeek(), pActivity.getEndWeek(), "Employee is not vacant");
+		}
 	}
 
 	public void registerWorkingTime(String activityName, String workingHours, Employee employee)
@@ -316,6 +349,17 @@ public class Softwarehuset {
 		}
 		if ((startWeek > weeksInYear) || (endWeek > weeksInYear)) {
 			throw new OperationNotAllowedException("Invalid week of year");
+		}
+	}
+
+	public void availabilityCheck(int startYear1, int endYear1, int startWeek1, int endWeek1, int startYear2, int endYear2, int startWeek2, int endWeek2, String errorMessage) throws OperationNotAllowedException {
+				
+		if (startYear1 < endYear2 && endYear1 > endYear2) {
+			
+			throw new OperationNotAllowedException(errorMessage);
+		} else if ((startYear1 == endYear2 && endYear1 == endYear2)
+				&& (startWeek1 <= endWeek2 && endWeek1 >= startWeek2)) {
+			throw new OperationNotAllowedException(errorMessage);
 		}
 	}
 

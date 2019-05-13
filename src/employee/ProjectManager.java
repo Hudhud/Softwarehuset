@@ -2,6 +2,7 @@ package employee;
 
 import exceptions.OperationNotAllowedException;
 import main.Softwarehuset;
+import project.Activity;
 import project.Project;
 
 public class ProjectManager extends Employee{
@@ -16,10 +17,8 @@ public class ProjectManager extends Employee{
 	}
 	
 	
-	public void assignEmpToActivity(Employee emp) throws OperationNotAllowedException {
-		if (emp.getActivityAmount() > 20) {
-			throw new OperationNotAllowedException("The employee is already assigned to 20 activities");
-		}
-		emp.increaseActivityAmount();
+	public void assignEmpToActivity(Employee emp, Activity act) throws OperationNotAllowedException {
+	
+		emp.addActivitytoActivityList(act);
 	}
 }

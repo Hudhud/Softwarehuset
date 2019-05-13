@@ -5,7 +5,7 @@ import exceptions.OperationNotAllowedException;
 
 public class Activity   {
 	private String activityName;
-	private int endWeek, endYear;
+	private int startWeek, startYear, endWeek, endYear;
 	
 
 	public Activity(String activityName, int expectedWorkload, int startWeek, int endWeek, int startYear, int endYear) throws Exception {
@@ -17,11 +17,21 @@ public class Activity   {
 		this.activityName = activityName;
 		this.endWeek = endWeek;
 		this.endYear = endYear;
+		this.startWeek = startWeek;
+		this.startYear = startYear;
 		
 	}
 	
 	public String getName() {
 		return activityName;
+	}
+	
+	public int getStartWeek() {
+		return startWeek;
+	}
+	
+	public int getStartYear() {
+		return startYear;
 	}
 	
 	public int getEndWeek() {
