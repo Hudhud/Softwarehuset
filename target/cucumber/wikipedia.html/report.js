@@ -1224,8 +1224,8 @@ formatter.result({
   "status": "passed"
 });
 formatter.scenario({
-  "name": "Employee provides a start week that occurs after the end week for the permanent activity",
-  "description": "",
+  "name": "",
+  "description": "Employee provides a start week that occurs after the end week for the permanent activity ",
   "keyword": "Scenario"
 });
 formatter.step({
@@ -1447,6 +1447,49 @@ formatter.match({
 });
 formatter.result({
   "status": "passed"
+});
+formatter.scenario({
+  "name": "",
+  "description": "Employee wants to create a permanent activiy while being assigned to an activity ",
+  "keyword": "Scenario"
+});
+formatter.step({
+  "name": "that an employee provides a start week 40 of 2019 for the permanent activity",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "EmployeeSteps.thatAnEmployeeProvidesAStartWeekOfForThePermanentActivity(Integer,Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "provides an end week 42 of 2019 for the permanent activity",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "EmployeeSteps.provides_an_end_week_of_for_the_permanent_activity(Integer,Integer)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee creates a permanent activity, which overlaps with an activty he is assigned to",
+  "keyword": "When "
+});
+formatter.match({});
+formatter.result({
+  "status": "undefined"
+});
+formatter.step({
+  "name": "the system provides an error message \"You are already assigned to an activity in the given period\"",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "EmployeeSteps.theSystemProvidesAnErrorMessage(String)"
+});
+formatter.result({
+  "status": "skipped"
 });
 formatter.uri("use_cases\\register_working_time.feature");
 formatter.feature({

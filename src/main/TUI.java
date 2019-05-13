@@ -20,6 +20,9 @@ public class TUI {
 		mainMenu();
 	}
 	public static void mainMenu() throws Exception {
+		sw.generateEmployees();
+		System.out.println(sw.getEmployeeList().get(0).getEmployeeID() +"\n"+ sw.getEmployeeList().get(1).getEmployeeID());
+
 		System.out.println("1 Create a new project" + "\n" 
 		+ "2 Choose employee to be a project manager" + "\n"
 		+ "3 Create a new activity" + "\n"
@@ -56,9 +59,7 @@ public class TUI {
 			
 	public static void caseCreateProject() throws Exception {
 		scanner = new Scanner(System.in);  		
-		sw.generateEmployees();
 		
-		System.out.println(sw.getEmployeeList().get(0).getEmployeeID() +"\n"+ sw.getEmployeeList().get(1).getEmployeeID());
 		System.out.println("Choose one employee");
 		String inputEmployeeId = scanner.nextLine();
 		
